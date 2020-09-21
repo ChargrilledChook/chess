@@ -1,3 +1,4 @@
+# Holds piece objects
 class Board
   attr_reader :grid
 
