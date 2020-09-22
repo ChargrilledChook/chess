@@ -5,7 +5,7 @@ require_relative "lib/game"
 
 #pp Board.new.grid
 
-game = Game.new([:white, :black])
+game = Game.new(players: [:white, :black])
 
 puts game.players
 game.swap_players

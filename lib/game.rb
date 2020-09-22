@@ -7,6 +7,6 @@ class Game
   end
 
   def swap_players
-    @players.rotate
+    @players.rotate!
   end
 end
