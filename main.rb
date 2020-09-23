@@ -1,3 +1,4 @@
+require_relative "lib/save_manager"
 require_relative "lib/piece_icons"
 require_relative "lib/board"
 require_relative "lib/piece"
