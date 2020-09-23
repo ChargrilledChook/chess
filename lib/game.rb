@@ -9,6 +9,9 @@ class Game
   def new_game
     # TODO
     # Can decide here whether to inject a fresh round or load one
+    # @round = load_save || Round.new
+    # play
+    # play_again
   end
 
   def play
