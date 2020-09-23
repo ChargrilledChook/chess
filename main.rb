@@ -4,4 +4,6 @@ require_relative "lib/piece"
 require_relative "lib/game"
 require_relative "lib/king"
 
-Game.new.play
+puts "Welcome message here + rules etc"
+
+Game.new.new_game
