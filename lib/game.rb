@@ -1,23 +1,17 @@
 # Controls gameplay flow
 class Game
-  attr_reader :players, :round
+  attr_reader :round
 
-  def initialize(players: nil, round: nil)
-    @players = players
+  def initialize(round: nil)
     @round = round
   end
 
   def new_game
     # TODO
+    # Can decide here whether to inject a fresh round or load one
   end
 
   def play
-    # TODO
-    # round.play until round.gameover?
-    # puts round.winner
-  end
-
-  def swap_players
-    @players.rotate!
+    round.play until round.gameover?
   end
 end
