@@ -2,7 +2,12 @@
 class Round
   attr_reader :players, :board, :ref
 
-  def initialize(players: nil, board: nil, ref: nil)
+  def initialize(
+    players: nil, # [Player.new(:white), Player.new(:black)]
+    board: nil,   # Board.new
+    ref: nil      # Ref.new
+  )
+
     @players = players
     @board = board
     @ref = ref
