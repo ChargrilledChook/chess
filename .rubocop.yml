@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - 'lib/colour_patch.rb'
     - 'Gemfile'
     - 'spec/spec_helper.rb'
   NewCops: enable
