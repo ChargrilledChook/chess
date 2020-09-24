@@ -18,6 +18,13 @@ class Board
   end
 
   def render_proto
-    print " #{white_pawn} ".bg_blue + " #{white_pawn} ".bg_black + " #{black_pawn} ".bg_blue + " #{black_pawn} ".bg_black
+    print "\n"
+    print %(   1  2  3  4)
+    print "\n"
+    print "A " + "#{white_pawn}".bg_blue + "#{white_pawn}".bg_black + "#{black_pawn}".bg_blue + "#{black_pawn}".bg_black + " A" + "\n"
+    print "B " + "#{white_pawn}".bg_black + "#{black_pawn}".bg_blue + "#{black_pawn}".bg_black + "#{white_pawn}".bg_blue + " B"
+    print "\n"
+    print %(   1  2  3  4)
+    print "\n"
   end
 end
