@@ -18,4 +18,8 @@ class King
      [1, 0],
      [1, 1]]
   end
+
+  def to_s
+    colour == :white ? white_king : black_king
+  end
 end
