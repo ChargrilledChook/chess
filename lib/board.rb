@@ -8,23 +8,31 @@ class Board
     @grid = Array.new(8) { Array.new(8, "   ") }
   end
 
-  def to_s
-    (1..8).each { |num| print " #{num} " }
-    print "\n"
-    grid.each do |line|
-      line.each { |cell| print cell.bg_cyan }
-      print "\n"
-    end
+  def render_board
+    puts %(    A  B  C  D  E  F  G  H).green
+    draw_grid
+    puts %(    A  B  C  D  E  F  G  H).green
   end
 
-  def render_proto
-    print "\n"
-    print %(   1  2  3  4)
-    print "\n"
-    print "A " + "#{white_pawn}".bg_blue + "#{white_pawn}".bg_black + "#{black_pawn}".bg_blue + "#{black_pawn}".bg_black + " A" + "\n"
-    print "B " + "#{white_pawn}".bg_black + "#{black_pawn}".bg_blue + "#{black_pawn}".bg_black + "#{white_pawn}".bg_blue + " B"
-    print "\n"
-    print %(   1  2  3  4)
-    print "\n"
+  private
+
+  def draw_grid
+    black_cell = false
+    counter = 8
+    @grid.each do |line|
+      print " #{counter} ".green
+      line.each do |cell|
+        if black_cell
+          print cell.to_s.bg_black
+        else
+          print cell.to_s.bg_blue
+        end
+        black_cell = !black_cell
+      end
+      print " #{counter} ".green
+      counter -= 1
+      black_cell = !black_cell
+      print "\n"
+    end
   end
 end
