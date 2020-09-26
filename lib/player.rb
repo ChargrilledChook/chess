@@ -1,5 +1,7 @@
 # Responsible for user input
 class Player
+  include Display
+
   attr_reader :colour
 
   def initialize(colour:)
@@ -8,5 +10,7 @@ class Player
 
   def input_move
     # TODO
+    puts move_prompt_msg
+    gets.chomp.chars
   end
 end
