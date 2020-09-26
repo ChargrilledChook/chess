@@ -1,11 +1,13 @@
 # Holds piece objects
 class Board
-  include PieceIcons # Currently for testing
+  include PieceIcons # Currently for testing. Move to actual pieces
 
-  attr_accessor :grid # Change to reader
+  EMPTY_CELL = "   ".freeze
+
+  attr_accessor :grid # Change to reader - currently for testing.
 
   def initialize
-    @grid = Array.new(8) { Array.new(8, "   ") }
+    @grid = Array.new(8) { Array.new(8, EMPTY_CELL) }
   end
 
   def render_board
