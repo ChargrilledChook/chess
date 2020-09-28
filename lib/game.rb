@@ -2,7 +2,7 @@
 class Game
   attr_reader :round
 
-  def initialize(round: nil)
+  def initialize(round: Round.new)
     @round = round
   end
 
@@ -15,6 +15,7 @@ class Game
   end
 
   def play
-    round.play until round.gameover?
+    round.draw_console
+    round.play until round.game_over?
   end
 end
