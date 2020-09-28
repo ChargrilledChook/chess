@@ -1,4 +1,5 @@
 # Placeholder / documentation for unicode chess piece icons
+# May make more sense to just declare this in each to_s
 module PieceIcons
   def black_pawn
     " \u2659 "
