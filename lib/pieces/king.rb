@@ -1,11 +1,10 @@
 class King
   include PieceIcons
 
-  attr_reader :colour, :icon
+  attr_reader :colour
 
   def initialize(colour: :white)
     @colour = colour
-    @icon = white_king # testing only
   end
 
   def moves
