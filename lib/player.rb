@@ -10,7 +10,7 @@ class Player
 
   def input_move
     # TODO
-    puts move_prompt_msg
+    print move_prompt_msg
     gets.chomp.chars
   end
 end
