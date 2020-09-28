@@ -10,6 +10,10 @@ class Board
     @grid = Array.new(8) { Array.new(8, EMPTY_CELL) }
   end
 
+  def place_move(coords)
+
+  end
+
   def render_board
     puts %(    A  B  C  D  E  F  G  H).green
     draw_grid
