@@ -1,17 +1,18 @@
 # Holds piece objects
 class Board
-  include PieceIcons # Currently for testing. Move to actual pieces
-
   EMPTY_CELL = "   ".freeze
 
-  attr_accessor :grid # Change to reader - currently for testing.
+  attr_reader :grid # Change to reader - currently for testing.
 
   def initialize
     @grid = Array.new(8) { Array.new(8, EMPTY_CELL) }
+    place_default_pawns
   end
 
-  def place_move(coords)
-
+  def place_move(co_ords)
+    co_ords = format_input(co_ords)
+    @grid[co_ords[2]][co_ords[3]] = @grid[co_ords[0]][co_ords[1]]
+    @grid[co_ords[0]][co_ords[1]] = EMPTY_CELL
   end
 
   def render_board
@@ -22,6 +23,16 @@ class Board
 
   private
 
+  def format_input(co_ords)
+    co_ords.map(&:to_i)
+  end
+
+  def place_default_pawns
+    @grid[1].each_index { |cell| @grid[1][cell] = Pawn.new(colour: :black) }
+    @grid[6].each_index { |cell| @grid[6][cell] = Pawn.new(colour: :white) }
+  end
+
+  # HACK: Refactor
   def draw_grid
     black_cell = false
     counter = 8
