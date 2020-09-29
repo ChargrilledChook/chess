@@ -12,7 +12,9 @@ class Player
     # Add an argument to pass in type of prompt - default is normal,
     # Otherwise error message / failure - ie empty square, not your piece etc
     print move_prompt_msg
-    gets.chomp.downcase
-    # Needs to reprompt until in proper notation
+    move = gets.chomp.downcase
+    return move if move.match?(/[a-h][1-8][a-h][1-8]/)
+
+    input_move
   end
 end
