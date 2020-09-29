@@ -12,7 +12,7 @@ class Player
     # Add an argument to pass in type of prompt - default is normal,
     # Otherwise error message / failure - ie empty square, not your piece etc
     print move_prompt_msg
-    gets.chomp.chars
+    gets.chomp.downcase
     # Needs to reprompt until in proper notation
   end
 end
