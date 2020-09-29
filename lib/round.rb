@@ -14,7 +14,7 @@ class Round
   end
 
   def play
-    # TODO
+    # TODO: In progress
     move = players.first.input_move
     move = ref.convert_notation(move)
     board.place_move(move)
