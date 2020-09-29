@@ -3,6 +3,12 @@ class Referee
     # TODO
   end
 
+  def check_move(move, board, player)
+    # move = convert_notation(move)
+    # Check starting move isn't empty cell
+    # Check colour of piece matches colour of player
+  end
+
   def convert_notation(notation)
     result = notation.each_char.map.with_index do |elt, idx|
       idx.even? ? convert_column(elt) : convert_row(elt)
