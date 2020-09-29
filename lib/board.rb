@@ -30,10 +30,6 @@ class Board
 
   private
 
-  def format_input(co_ords)
-    co_ords.map(&:to_i)
-  end
-
   # HACK: Refactor
   def draw_grid
     black_cell = false
