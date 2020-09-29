@@ -9,10 +9,17 @@ class Board
     place_default_pieces
   end
 
+  # def place_move(co_ords)
+  #   co_ords = format_input(co_ords)
+  #   @grid[co_ords[2]][co_ords[3]] = @grid[co_ords[0]][co_ords[1]]
+  #   @grid[co_ords[0]][co_ords[1]] = EMPTY_CELL
+  # end
+
   def place_move(co_ords)
-    co_ords = format_input(co_ords)
-    @grid[co_ords[2]][co_ords[3]] = @grid[co_ords[0]][co_ords[1]]
-    @grid[co_ords[0]][co_ords[1]] = EMPTY_CELL
+    starting = co_ords.first
+    ending = co_ords.last
+    @grid[ending.first][ending.last] = @grid[starting.first][starting.last]
+    @grid[starting.first][starting.last] = EMPTY_CELL
   end
 
   def render_board
@@ -25,11 +32,6 @@ class Board
 
   def format_input(co_ords)
     co_ords.map(&:to_i)
-  end
-
-  # Prototype. It probably belongs in ref, not board, but it can live here for now
-  def convert_input(notation)
-
   end
 
   # HACK: Refactor
