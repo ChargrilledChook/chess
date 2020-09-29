@@ -27,6 +27,11 @@ class Board
     co_ords.map(&:to_i)
   end
 
+  # Prototype. It probably belongs in ref, not board, but it can live here for now
+  def convert_input(notation)
+
+  end
+
   # HACK: Refactor
   def draw_grid
     black_cell = false

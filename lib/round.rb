@@ -28,7 +28,7 @@ class Round
   end
 
   def draw_console
-    # TODO: Add move history, taken pieces etc
+    # TODO: Add move history, taken pieces, menu etc
     board.render_board
   end
 
