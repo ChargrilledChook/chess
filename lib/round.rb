@@ -5,7 +5,7 @@ class Round
   def initialize(
     players: [Player.new(colour: :white), Player.new(colour: :black)],
     board: Board.new,
-    ref: nil # Ref.new
+    ref: Referee.new
   )
 
     @players = players
@@ -16,6 +16,7 @@ class Round
   def play
     # TODO
     move = players.first.input_move
+    move = ref.convert_notation(move)
     board.place_move(move)
     clear_console
     draw_console
