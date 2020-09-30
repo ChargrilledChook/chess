@@ -1,5 +1,3 @@
-require 'pry'
-
 class Referee
   def initialize
     # TODO
@@ -7,10 +5,10 @@ class Referee
 
   def valid_move?(move, board, player)
     starting = move.first
-    #ending = move.last
-    return true unless empty_cell?(starting, board) || !own_piece?(starting, board, player)
-    # Check starting move isn't empty cell
-    # Check colour of piece matches colour of player
+    ending = move.last
+    return true unless empty_cell?(starting, board) ||
+                       !own_piece?(starting, board, player) ||
+                       own_piece_collision?(starting, ending, board)
   end
 
   def convert_notation(notation)
@@ -39,5 +37,13 @@ class Referee
   def own_piece?(starting, board, player)
     piece = board.grid[starting.first][starting.last]
     piece.colour == player.colour
+  end
+
+  def own_piece_collision?(starting, ending, board)
+    starting_piece = board.grid[starting.first][starting.last]
+    ending_piece = board.grid[ending.first][ending.last]
+    return false if ending_piece == board.empty_cell
+
+    starting_piece.colour == ending_piece.colour
   end
 end
