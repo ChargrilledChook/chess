@@ -1,10 +1,14 @@
+require 'pry'
+
 class Referee
   def initialize
     # TODO
   end
 
-  def check_move(move, board, player)
-    # move = convert_notation(move)
+  def valid_move?(move, board, player)
+    starting = move.first
+    #ending = move.last
+    return true unless empty_cell?(starting, board) || !own_piece?(starting, board, player)
     # Check starting move isn't empty cell
     # Check colour of piece matches colour of player
   end
@@ -24,5 +28,16 @@ class Referee
 
   def convert_row(digit)
     (digit.to_i - 8).abs
+  end
+
+  private
+
+  def empty_cell?(starting, board)
+    board.grid[starting.first][starting.last] == board.empty_cell
+  end
+
+  def own_piece?(starting, board, player)
+    piece = board.grid[starting.first][starting.last]
+    piece.colour == player.colour
   end
 end

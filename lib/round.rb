@@ -15,8 +15,7 @@ class Round
 
   def play
     # TODO: In progress
-    move = players.first.input_move
-    move = ref.convert_notation(move)
+    move = check_move
     board.place_move(move)
     clear_console
     draw_console
@@ -38,6 +37,15 @@ class Round
   end
 
   private
+
+  # shit name
+  def check_move
+    move = players.first.input_move
+    move = ref.convert_notation(move)
+    return move if ref.valid_move?(move, board, players.first)
+
+    check_move
+  end
 
   def clear_console
     puts "\e[H\e[2J"
