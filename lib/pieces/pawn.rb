@@ -8,7 +8,7 @@ class Pawn
   end
 
   def moves
-    # TODO
+    colour.white ? [0, 1] : [0, -1]
   end
 
   def to_s
