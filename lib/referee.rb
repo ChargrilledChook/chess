@@ -8,7 +8,8 @@ class Referee
     ending = move.last
     return true unless empty_cell?(starting, board) ||
                        !own_piece?(starting, board, player) ||
-                       own_piece_collision?(starting, ending, board)
+                       own_piece_collision?(starting, ending, board) ||
+                       !allowed_moves(starting, board).include?(ending)
   end
 
   def convert_notation(notation)
@@ -45,5 +46,9 @@ class Referee
     return false if ending_piece == board.empty_cell
 
     starting_piece.colour == ending_piece.colour
+  end
+
+  def allowed_moves(piece, board)
+    board.grid[piece.first][piece.last].moves.map { |rank, file| [piece.first + rank, piece.last + file] }
   end
 end
