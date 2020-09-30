@@ -1,25 +1,24 @@
 # Holds piece objects
 class Board
-  EMPTY_CELL = "   ".freeze
-
-  attr_reader :grid
+  attr_reader :grid, :empty_cell
 
   def initialize
-    @grid = Array.new(8) { Array.new(8, EMPTY_CELL) }
+    @empty_cell = "   ".freeze
+    @grid = Array.new(8) { Array.new(8, empty_cell) }
     place_default_pieces
   end
 
   # def place_move(co_ords)
   #   co_ords = format_input(co_ords)
   #   @grid[co_ords[2]][co_ords[3]] = @grid[co_ords[0]][co_ords[1]]
-  #   @grid[co_ords[0]][co_ords[1]] = EMPTY_CELL
+  #   @grid[co_ords[0]][co_ords[1]] = empty_cell
   # end
 
   def place_move(co_ords)
     starting = co_ords.first
     ending = co_ords.last
     @grid[ending.first][ending.last] = @grid[starting.first][starting.last]
-    @grid[starting.first][starting.last] = EMPTY_CELL
+    @grid[starting.first][starting.last] = empty_cell
   end
 
   def render_board
