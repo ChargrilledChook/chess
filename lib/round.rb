@@ -16,7 +16,6 @@ class Round
   end
 
   def play
-    # TODO: In progress
     move = check_move
     board.place_move(move)
     clear_console
