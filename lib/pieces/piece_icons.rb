@@ -1,51 +1,51 @@
 # Placeholder / documentation for unicode chess piece icons
 # May make more sense to just declare this in each to_s
 module PieceIcons
-  def black_pawn
+  def white_pawn
     " \u2659 "
   end
 
-  def white_pawn
+  def black_pawn
     " \u265F "
   end
 
-  def black_rook
+  def white_rook
     " \u2656 "
   end
 
-  def white_rook
+  def black_rook
     " \u265C "
   end
 
-  def black_bishop
+  def white_bishop
     " \u2657 "
   end
 
-  def white_bishop
+  def black_bishop
     " \u265D "
   end
 
-  def black_knight
+  def white_knight
     " \u2658 "
   end
 
-  def white_knight
+  def black_knight
     " \u265E "
   end
 
-  def black_queen
+  def white_queen
     " \u2655 "
   end
 
-  def white_queen
+  def black_queen
     " \u265B "
   end
 
-  def black_king
+  def white_king
     " \u2654 "
   end
 
-  def white_king
+  def black_king
     " \u265A "
   end
 end
