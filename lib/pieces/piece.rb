@@ -2,17 +2,13 @@
 class Piece
   include PieceIcons
 
-  attr_reader :colour, :type, :icon
+  attr_reader :colour
 
-  def initialize(colour:, type:, icon: black_rook)
+  def initialize(colour:)
     @colour = colour
-    @type = type
-    @icon = icon
   end
 
-  def move; end
-
-  def to_s
-    "A #{colour} #{type}"
+  def move
+    raise NotImplementedError
   end
 end
