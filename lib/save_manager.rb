@@ -1,3 +1,5 @@
+require "yaml"
+
 # Saves and loads games / serializes objects
 # This implementation is from an old project and could do with a pass for best practices
 module SaveManager
@@ -6,7 +8,7 @@ module SaveManager
   end
 
   def save_message
-    "game saved, exiting program"
+    "Game saved, exiting program"
   end
 
   def save_game(round)

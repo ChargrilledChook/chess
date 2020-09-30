@@ -1,17 +1,17 @@
 # Controls gameplay flow
 class Game
+  include SaveManager
+
   attr_reader :round
 
-  def initialize(round: Round.new)
-    @round = round
+  def initialize
+    @round = new_session
   end
 
-  def new_game
-    # TODO
-    # Can decide here whether to inject a fresh round or load one
-    # @round = load_save || Round.new
-    # play
-    # play_again
+  def new_session
+    puts "Welcome to Chess. Enter 1 for a new game or 2 to load your saved game."
+    selection = gets.chomp.downcase
+    selection == "2" ? load_save : Round.new
   end
 
   def play

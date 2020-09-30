@@ -1,5 +1,7 @@
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
+  include SaveManager
+
   attr_reader :players, :board, :ref
 
   def initialize(
@@ -41,6 +43,7 @@ class Round
   # shit name
   def check_move
     move = players.first.input_move
+    save_game(self) if move == "save"
     move = ref.convert_notation(move)
     return move if ref.valid_move?(move, board, players.first)
 
