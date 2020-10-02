@@ -1,5 +1,5 @@
 # Controls gameplay flow
-class Game
+class GameLoop
   include SaveManager
 
   attr_reader :round
