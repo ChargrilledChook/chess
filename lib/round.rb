@@ -42,7 +42,7 @@ class Round
   # shit name
   def check_move
     move = players.first.input_move
-    save_game(self) if move == "save"
+    SaveManager.save_game(self) if move == "save"
     move = ref.convert_notation(move)
     return move if ref.valid_move?(move, board, players.first)
 
