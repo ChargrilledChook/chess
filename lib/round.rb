@@ -44,7 +44,7 @@ class Round
   def check_move
     move = players.first.input_move
     SaveManager.save_game(self) if move == "save"
-    move = NotationConverter.convert_notation(move) # Should this be a class or instance level method?
+    move = Move.new(move) # Should this be a class or instance level method?
     return move if ref.valid_move?(move, board, players.first)
 
     check_move

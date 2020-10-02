@@ -4,8 +4,8 @@ class Referee
   end
 
   def valid_move?(move, board, player)
-    starting = move.first
-    ending = move.last
+    starting = move.starting
+    ending = move.ending
     return true unless empty_cell?(starting, board) ||
                        !own_piece?(starting, board, player) ||
                        own_piece_collision?(starting, ending, board) ||

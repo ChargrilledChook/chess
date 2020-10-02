@@ -15,8 +15,8 @@ class Board
   # end
 
   def place_move(co_ords)
-    starting = co_ords.first
-    ending = co_ords.last
+    starting = co_ords.starting
+    ending = co_ords.ending
     @grid[ending.first][ending.last] = @grid[starting.first][starting.last]
     @grid[starting.first][starting.last] = empty_cell
   end
