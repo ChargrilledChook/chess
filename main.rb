@@ -15,4 +15,12 @@ require_relative "lib/pieces/bishop"
 require_relative "lib/pieces/knight"
 require_relative "lib/pieces/pawn"
 
-GameLoop.new.play
+def new_session
+  # TODO: Extract string to display and polish implementation
+  puts "Welcome to Chess. Enter 1 for a new game or 2 to load your saved game."
+  selection = gets.chomp.downcase
+  selection = selection == "2" ? SaveManager.load_save : Round.new # HACK ?
+  GameLoop.new(selection).play
+end
+
+new_session
