@@ -14,8 +14,12 @@ class Player
   def input_move
     print move_prompt_msg
     move = gets.chomp.downcase
-    return move if move.match?(/^[a-h][1-8][a-h][1-8]$/) || move == "save"
+    return move if valid_input?(move)
 
     input_move
+  end
+
+  def valid_input?(input)
+    input.downcase.match?(/^[a-h][1-8][a-h][1-8]$/) || input.downcase == "save"
   end
 end
