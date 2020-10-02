@@ -1,6 +1,7 @@
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
   include SaveManager
+  include NotationConverter
 
   attr_reader :players, :board, :ref
 
@@ -43,7 +44,7 @@ class Round
   def check_move
     move = players.first.input_move
     SaveManager.save_game(self) if move == "save"
-    move = ref.convert_notation(move)
+    move = convert_notation(move) # Should this be a class or instance level method? See NotationConverter module
     return move if ref.valid_move?(move, board, players.first)
 
     check_move

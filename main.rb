@@ -1,4 +1,5 @@
 require_relative "lib/display"
+require_relative "lib/notation_converter"
 require_relative "lib/colour_patch"
 require_relative "lib/save_manager"
 require_relative "lib/board"
