@@ -4,6 +4,21 @@ require_relative "../lib/player"
 describe Player do
   subject(:player) { described_class.new(colour: :white) }
 
+  before do
+    allow(player).to receive(:print)
+  end
+
+  describe "#input_move" do
+    context "with invalid input" do
+      it "rejects words" do
+        invalid_input = "fooo"
+        valid_input = "d4d5"
+        allow(player).to receive(:gets).and_return(invalid_input, valid_input)
+        expect(player.input_move).to eq("d4d5")
+      end
+    end
+  end
+
   describe "#valid_move?" do
     context "with valid notation input" do
       it "is correct" do
