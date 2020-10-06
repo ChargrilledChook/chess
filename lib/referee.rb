@@ -3,13 +3,17 @@ class Referee
     # TODO
   end
 
+  # HACK: Refactor
   def valid_move?(move, board, player)
     starting = move.starting
     ending = move.ending
+    piece = board.grid[starting.first][starting.last]
+    #pp allowed_moves(piece, board, starting)
+    #gets
     return true unless empty_cell?(starting, board) ||
                        !own_piece?(starting, board, player) ||
                        own_piece_collision?(starting, ending, board) ||
-                       !allowed_moves(starting, board).include?(ending)
+                       !allowed_moves(piece, board, starting).include?(ending)
   end
 
   private
@@ -31,7 +35,11 @@ class Referee
     starting_piece.colour == ending_piece.colour
   end
 
-  def allowed_moves(piece, board)
-    board.grid[piece.first][piece.last].moves.map { |rank, file| [piece.first + rank, piece.last + file] }
+  def allowed_moves(piece, board, starting)
+    piece.move_list(board, starting)
   end
+
+  #def allowed_moves(piece, board)
+  #  board.grid[piece.first][piece.last].moves.map { |rank, file| [piece.first + rank, piece.last + file] }
+  #end
 end
