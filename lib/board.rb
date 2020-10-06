@@ -5,7 +5,11 @@ class Board
   def initialize
     @empty_cell = "   ".freeze
     @grid = Array.new(8) { Array.new(8, empty_cell) }
-    place_default_pieces
+    #place_default_pieces
+    @grid[2][4] = Rook.new(colour: :black)
+    @grid[3][4] = Bishop.new(colour: :black)
+    @grid[5][4] = Bishop.new(colour: :white)
+    @grid[7][4] = Rook.new(colour: :white)
   end
 
   # def place_move(co_ords)
