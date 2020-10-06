@@ -8,7 +8,7 @@ class Rook
   end
 
   def moves
-    # TODO
+    [[1, 0], [-1, 0], [0, 1], [0, -1]]
   end
 
   def to_s
