@@ -6,9 +6,15 @@ class Piece
 
   def initialize(colour:)
     @colour = colour
+    post_initialize
   end
 
-  # HACK: Inefficent. Needs tests to refactor safely
+  # This is a hook method that can be overridden by children. Currently only needed for pawns.
+  def post_initialize; end
+
+  # HACK: Inefficent. Needs tests to refactor safely. It's possible some of these calculations
+  # ie not being able to move through another piece don't belong here at all. This method may know too
+  # much about other objects
   def move_list(board, starting)
     res = []
     moves.each do |move|
