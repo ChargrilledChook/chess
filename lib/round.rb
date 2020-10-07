@@ -8,7 +8,7 @@ class Round
 
   def initialize(
     players: [Player.new(colour: :white), Player.new(colour: :black)],
-    board: Board.new(default_pieces),
+    board: Board.new(queens_test),
     ref: Referee.new
   )
 
