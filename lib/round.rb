@@ -2,12 +2,13 @@
 class Round
   include SaveManager
   include NotationConverter
+  include PieceCollections
 
   attr_reader :players, :board, :ref
 
   def initialize(
     players: [Player.new(colour: :white), Player.new(colour: :black)],
-    board: Board.new,
+    board: Board.new(default_pieces),
     ref: Referee.new
   )
 
