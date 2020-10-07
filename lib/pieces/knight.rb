@@ -11,6 +11,8 @@ class Knight < Piece
   end
 
   # OPTIMISE: Unused params to be compatible with other pieces. Probably a better way to do this
+  # This list currently adds impossible moves (off board) but they're impossible to actually select.
+  # Room for improvement but not crucial
   def move_list(_board, starting)
     moves.map { |move| [starting.first + move.first, starting.last + move.last] }
   end
