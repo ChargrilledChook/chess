@@ -10,8 +10,9 @@ class King < Piece
      [1, 1]]
   end
 
-  def move_list
-    moves
+  # OPTIMISE: See Knight
+  def move_list(_board, starting)
+    moves.map { |move| [starting.first + move.first, starting.last + move.last] }
   end
 
   def to_s
