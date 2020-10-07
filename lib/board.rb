@@ -8,12 +8,6 @@ class Board
     place_pieces(pieces_hash)
   end
 
-  # def place_move(co_ords)
-  #   co_ords = format_input(co_ords)
-  #   @grid[co_ords[2]][co_ords[3]] = @grid[co_ords[0]][co_ords[1]]
-  #   @grid[co_ords[0]][co_ords[1]] = empty_cell
-  # end
-
   def place_move(co_ords)
     starting = co_ords.starting
     ending = co_ords.ending
@@ -54,37 +48,8 @@ class Board
     end
   end
 
-  # Piece placement should possible be extracted to a module but it's fine here for now
-  def place_default_pieces
-    place_default_pawns
-    place_default_black_pieces
-    place_default_white_pieces
-  end
-
   def place_default_pawns
     @grid[1].each_index { |cell| @grid[1][cell] = Pawn.new(colour: :black) }
     @grid[6].each_index { |cell| @grid[6][cell] = Pawn.new(colour: :white) }
-  end
-
-  def place_default_black_pieces
-    @grid[0][0] = Rook.new(colour: :black)
-    @grid[0][1] = Bishop.new(colour: :black)
-    @grid[0][2] = Knight.new(colour: :black)
-    @grid[0][3] = Queen.new(colour: :black)
-    @grid[0][4] = King.new(colour: :black)
-    @grid[0][5] = Knight.new(colour: :black)
-    @grid[0][6] = Bishop.new(colour: :black)
-    @grid[0][7] = Rook.new(colour: :black)
-  end
-
-  def place_default_white_pieces
-    @grid[7][0] = Rook.new(colour: :white)
-    @grid[7][1] = Bishop.new(colour: :white)
-    @grid[7][2] = Knight.new(colour: :white)
-    @grid[7][3] = Queen.new(colour: :white)
-    @grid[7][4] = King.new(colour: :white)
-    @grid[7][5] = Knight.new(colour: :white)
-    @grid[7][6] = Bishop.new(colour: :white)
-    @grid[7][7] = Rook.new(colour: :white)
   end
 end
