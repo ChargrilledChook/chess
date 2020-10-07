@@ -10,8 +10,15 @@ class Knight < Piece
      [1, 2]]
   end
 
-  def move_list
-    moves
+  # OPTIMISE: Unused params to be compatible with other pieces. Probably a better way to do this
+  def move_list(_board, starting)
+    moves.map { |move|
+      begin
+        [starting.first + move.first, starting.last + move.last]
+      rescue NoMethodError
+        nil
+      end
+    }.compact
   end
 
   def to_s
