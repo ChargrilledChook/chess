@@ -47,9 +47,4 @@ class Board
       print "\n"
     end
   end
-
-  def place_default_pawns
-    @grid[1].each_index { |cell| @grid[1][cell] = Pawn.new(colour: :black) }
-    @grid[6].each_index { |cell| @grid[6][cell] = Pawn.new(colour: :white) }
-  end
 end
