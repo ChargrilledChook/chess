@@ -2,14 +2,10 @@
 class Board
   attr_reader :grid, :empty_cell
 
-  def initialize
+  def initialize(pieces_hash)
     @empty_cell = "   ".freeze
     @grid = Array.new(8) { Array.new(8, empty_cell) }
-    #place_default_pieces
-    @grid[2][4] = Rook.new(colour: :black)
-    @grid[3][4] = Bishop.new(colour: :black)
-    @grid[5][4] = Bishop.new(colour: :white)
-    @grid[7][4] = Rook.new(colour: :white)
+    place_pieces(pieces_hash)
   end
 
   # def place_move(co_ords)
@@ -23,6 +19,10 @@ class Board
     ending = co_ords.ending
     @grid[ending.first][ending.last] = @grid[starting.first][starting.last]
     @grid[starting.first][starting.last] = empty_cell
+  end
+
+  def place_pieces(hash)
+    hash.each { |pos, piece| @grid[pos.first][pos.last] = piece }
   end
 
   def render_board
