@@ -1,12 +1,4 @@
-class King
-  include PieceIcons
-
-  attr_reader :colour
-
-  def initialize(colour: :white)
-    @colour = colour
-  end
-
+class King < Piece
   def moves
     [[-1, -1],
      [-1, 0],
@@ -16,6 +8,10 @@ class King
      [1, -1],
      [1, 0],
      [1, 1]]
+  end
+
+  def move_list
+    moves
   end
 
   def to_s
