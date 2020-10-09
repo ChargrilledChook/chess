@@ -13,12 +13,12 @@ describe NotationConverter do
         result = NotationConverter.convert_notation(input)
         expect(result).to eq [[3, 2], [6, 5]]
       end
-      it "works with a another example" do
+      it "works with another example" do
         input = "a4b6"
         result = NotationConverter.convert_notation(input)
         expect(result).to eq [[4, 0], [2, 1]]
       end
-      it "works with a another example" do
+      it "works with another example" do
         input = "d3e1"
         result = NotationConverter.convert_notation(input)
         expect(result).to eq [[5, 3], [7, 4]]
