@@ -9,6 +9,37 @@ describe Player do
   end
 
   describe "#input_move" do
+    context "with valid notation input" do
+      it "is correct" do
+        valid_input = "a1h8"
+        allow(player).to receive(:gets).and_return(valid_input)
+        expect(player.input_move).to eq("a1h8")
+      end
+      it "is correct with different input" do
+        valid_input = "b2g7"
+        allow(player).to receive(:gets).and_return(valid_input)
+        expect(player.input_move).to eq("b2g7")
+      end
+      it "ignores case" do
+        valid_input = "C3F6"
+        allow(player).to receive(:gets).and_return(valid_input)
+        expect(player.input_move).to eq("c3f6")
+      end
+    end
+
+    context "with valid keyword input" do
+      it "is correct" do
+        valid_input = "save"
+        allow(player).to receive(:gets).and_return(valid_input)
+        expect(player.input_move).to eq("save")
+      end
+      it "ignores case" do
+        valid_input = "SAVE"
+        allow(player).to receive(:gets).and_return(valid_input)
+        expect(player.input_move).to eq("save")
+      end
+    end
+
     context "with invalid input" do
       it "rejects words" do
         invalid_input = "fooo"
@@ -16,71 +47,43 @@ describe Player do
         allow(player).to receive(:gets).and_return(invalid_input, valid_input)
         expect(player.input_move).to eq("d4d5")
       end
-    end
-  end
-
-  describe "#valid_move?" do
-    context "with valid notation input" do
-      it "is correct" do
-        valid_input = "a1h8"
-        result = player.valid_input?(valid_input)
-        expect(result).to be true
-      end
-      it "is correct with different input" do
-        valid_input = "b2g7"
-        result = player.valid_input?(valid_input)
-        expect(result).to be true
-      end
-      it "ignores case" do
-        valid_input = "C3F6"
-        result = player.valid_input?(valid_input)
-        expect(result).to be true
-      end
-    end
-
-    context "with valid keyword input" do
-      it "is correct" do
-        valid_input = "save"
-        result = player.valid_input?(valid_input)
-        expect(result).to be true
-      end
-      it "ignores case" do
-        valid_input = "SAVE"
-        result = player.valid_input?(valid_input)
-        expect(result).to be true
-      end
-    end
-
-    context "with invalid input" do
-      it "rejects words" do
-        invalid_input = "fooo"
-        result = player.valid_input?(invalid_input)
-        expect(result).to be false
-      end
       it "rejects numbers" do
         invalid_input = "1234"
-        result = player.valid_input?(invalid_input)
-        expect(result).to be false
+        valid_input = "h8b7"
+        allow(player).to receive(:gets).and_return(invalid_input, valid_input)
+        expect(player.input_move).to eq("h8b7")
       end
       it "rejects invalid notations" do
         invalid_input = "a1h9"
-        result = player.valid_input?(invalid_input)
-        expect(result).to be false
+        valid_input = "a5c7"
+        allow(player).to receive(:gets).and_return(invalid_input, valid_input)
+        expect(player.input_move).to eq("a5c7")
       end
       it "rejects correct notation that is more than 4 digits long" do
         invalid_input = "a1h8a1h8"
-        result = player.valid_input?(invalid_input)
-        expect(result).to be false
+        valid_input = "e3f2"
+        allow(player).to receive(:gets).and_return(invalid_input, valid_input)
+        expect(player.input_move).to eq("e3f2")
       end
       it "rejects keyword start" do
         invalid_input = "savec4d7"
-        result = player.valid_input?(invalid_input)
-        expect(result).to be false
+        valid_input = "d7c4"
+        allow(player).to receive(:gets).and_return(invalid_input, valid_input)
+        expect(player.input_move).to eq("d7c4")
       end
       it "rejects keyword end" do
         invalid_input = "h3b2save"
-        result = player.valid_input?(invalid_input)
-        expect(result).to be false
+        valid_input = "c4a6"
+        allow(player).to receive(:gets).and_return(invalid_input, valid_input)
+        expect(player.input_move).to eq("c4a6")
+      end
+      it "works after multiple invalid inputs" do
+        first_invalid = "hey"
+        second_invalid = "you, what's that"
+        third_invalid = "sound? everybody look"
+        valid_input = "f2b6"
+        allow(player).to receive(:gets).and_return(first_invalid, second_invalid, third_invalid, valid_input)
+        expect(player.input_move).to eq("f2b6")
       end
     end
   end
