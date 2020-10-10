@@ -21,4 +21,14 @@ class Pawn < Piece
   def to_s
     colour == :white ? white_pawn : black_pawn
   end
+
+  # TODO: This is currently not connected to anything. Need to figure out how to integrate with move list in super
+  def attack
+    case colour
+    when :white
+      [[-1, -1], [-1, 1]]
+    when :black
+      [[1, -1], [1, 1]]
+    end
+  end
 end
