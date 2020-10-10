@@ -1,18 +1,36 @@
 class Pawn < Piece
   attr_reader :first_move
 
-  def initialize(colour: :white)
-    @colour = colour
-  end
-
   def post_initialize
     @first_move = true
   end
 
+  # BUG: Unsuccessful move eats first move bonus
+  # BUG: Need to account for nil errors
+  # HACK: This code sucks refactor it
+  def move_list(board, starting)
+    res = []
+    moves.each do |move|
+      space = board.grid[starting.first + move.first][starting.last + move.last]
+      if space == board.empty_cell
+        res << [starting.first + move.first, starting.last + move.last]
+      end
+    end
+    attacks.each do |atk|
+      space = board.grid[starting.first + atk.first][starting.last + atk.last]
+      next if space == board.empty_cell
+
+      if space.colour == enemy_colour
+        res << [starting.first + atk.first, starting.last + atk.last]
+      end
+    end
+    @first_move = false
+    res
+  end
+
   def moves
     if first_move
-      colour == :white ? [[-1, 0], [-2, 0]] : [[1, 0], [2, 0]]
-      self.first_move = false
+      colour == :white ? [[-2, 0], [-1, 0]] : [[2, 0], [1, 0]]
     else
       colour == :white ? [[-1, 0]] : [[1, 0]]
     end
@@ -22,13 +40,17 @@ class Pawn < Piece
     colour == :white ? white_pawn : black_pawn
   end
 
-  # TODO: This is currently not connected to anything. Need to figure out how to integrate with move list in super
-  def attack
+  def attacks
     case colour
     when :white
       [[-1, -1], [-1, 1]]
     when :black
       [[1, -1], [1, 1]]
     end
+  end
+
+  # TODO: This probably belongs in super
+  def enemy_colour
+    colour == :white ? :black : :white
   end
 end
