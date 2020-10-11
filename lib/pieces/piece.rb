@@ -30,7 +30,7 @@ class Piece
           col += move.last
           current = board.grid[row][col] if valid?(row, col, current)
         end
-        res << [row, col] if board.grid[row][col].colour != colour
+        res << [row, col] if board.grid[row][col].colour == enemy_colour
       rescue NoMethodError
         next
       end
@@ -43,6 +43,10 @@ class Piece
   end
 
   private
+
+  def enemy_colour
+    colour == :white ? :black : :white
+  end
 
   # HACK: This currently knows too much about board but is fine for now
   def valid?(row, col, current)
