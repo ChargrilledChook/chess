@@ -3,11 +3,7 @@ Final assignment for the Ruby section of The Odin Project
 
 ## Current Focus
 
-* Complete tests for current functionality
-* Revert move object for now
-* Implement basic movement patterns for remaining pieces
-  * Rook
-  * Bishop
-  * Queen
-  * Pawn attack
-
+* Implement all missing tests (see project board)
+* Fix pawn bug (nil no method error near edge)
+* Refactor ugliest code once tests are in place
+* Move on to check / checkmate
