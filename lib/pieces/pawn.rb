@@ -12,13 +12,13 @@ class Pawn < Piece
     res = []
     moves.each do |move|
       space = board.grid[starting.first + move.first][starting.last + move.last]
-      if space == board.empty_cell
+      if space.colour == :none
         res << [starting.first + move.first, starting.last + move.last]
       end
     end
     attacks.each do |atk|
       space = board.grid[starting.first + atk.first][starting.last + atk.last]
-      next if space == board.empty_cell
+      next if space.colour == :none
 
       if space.colour == enemy_colour
         res << [starting.first + atk.first, starting.last + atk.last]

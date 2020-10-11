@@ -1,10 +1,10 @@
 # Holds piece objects
 class Board
-  attr_reader :grid, :empty_cell
+  attr_reader :grid
 
   def initialize(pieces_hash)
-    @empty_cell = "   ".freeze
-    @grid = Array.new(8) { Array.new(8, empty_cell) }
+    @empty_cell = EmptySquare.new
+    @grid = Array.new(8) { Array.new(8, @empty_cell) }
     place_pieces(pieces_hash)
   end
 
@@ -12,7 +12,7 @@ class Board
     starting = co_ords.starting
     ending = co_ords.ending
     @grid[ending.first][ending.last] = @grid[starting.first][starting.last]
-    @grid[starting.first][starting.last] = empty_cell
+    @grid[starting.first][starting.last] = @empty_cell
   end
 
   def place_pieces(hash)

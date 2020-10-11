@@ -19,7 +19,7 @@ class Referee
   private
 
   def empty_cell?(starting, board)
-    board.grid[starting.first][starting.last] == board.empty_cell
+    board.grid[starting.first][starting.last].colour == :none
   end
 
   def own_piece?(starting, board, player)
@@ -30,7 +30,7 @@ class Referee
   def own_piece_collision?(starting, ending, board)
     starting_piece = board.grid[starting.first][starting.last]
     ending_piece = board.grid[ending.first][ending.last]
-    return false if ending_piece == board.empty_cell
+    return false if ending_piece.colour == :none
 
     starting_piece.colour == ending_piece.colour
   end

@@ -46,6 +46,6 @@ class Piece
 
   # HACK: This currently knows too much about board but is fine for now
   def valid?(row, col, current)
-    row.between?(0, 7) && col.between?(0, 7) && current == "   "
+    row.between?(0, 7) && col.between?(0, 7) && current.colour == :none
   end
 end
