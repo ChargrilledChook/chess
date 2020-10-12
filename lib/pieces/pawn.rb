@@ -11,17 +11,26 @@ class Pawn < Piece
   def move_list(board, starting)
     res = []
     moves.each do |move|
-      space = board.grid[starting.first + move.first][starting.last + move.last]
-      if space.colour == :none
-        res << [starting.first + move.first, starting.last + move.last]
+      begin
+        space = board.grid[starting.first + move.first][starting.last + move.last]
+        if space.colour == :none
+          res << [starting.first + move.first, starting.last + move.last]
+        end
+      rescue NoMethodError
+        next
       end
     end
-    attacks.each do |atk|
-      space = board.grid[starting.first + atk.first][starting.last + atk.last]
-      next if space.colour == :none
 
-      if space.colour == enemy_colour
-        res << [starting.first + atk.first, starting.last + atk.last]
+    attacks.each do |atk|
+      begin
+        space = board.grid[starting.first + atk.first][starting.last + atk.last]
+        next if space.colour == :none
+
+        if space.colour == enemy_colour
+          res << [starting.first + atk.first, starting.last + atk.last]
+        end
+      rescue NoMethodError
+        next
       end
     end
     @first_move = false
