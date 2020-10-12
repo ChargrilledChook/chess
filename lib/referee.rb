@@ -10,17 +10,12 @@ class Referee
     piece = board.grid[starting.first][starting.last]
     #pp allowed_moves(piece, board, starting)
     #gets
-    return true unless empty_cell?(starting, board) ||
-                       !own_piece?(starting, board, player) ||
-                       own_piece_collision?(starting, ending, board) ||
+    return true unless !own_piece?(starting, board, player) ||
+                       own_piece_collision?(starting, ending, board) || # As is, currently belongs in move list
                        !allowed_moves(piece, board, starting).include?(ending)
   end
 
   private
-
-  def empty_cell?(starting, board)
-    board.grid[starting.first][starting.last].colour == :none
-  end
 
   def own_piece?(starting, board, player)
     piece = board.grid[starting.first][starting.last]
