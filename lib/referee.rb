@@ -17,19 +17,7 @@ class Referee
     piece.colour == player.colour
   end
 
-  def own_piece_collision?(starting, ending, board)
-    starting_piece = board.grid[starting.first][starting.last]
-    ending_piece = board.grid[ending.first][ending.last]
-    return false if ending_piece.colour == :none
-
-    starting_piece.colour == ending_piece.colour
-  end
-
   def allowed_moves(piece, board, starting)
     piece.move_list(board, starting)
   end
-
-  #def allowed_moves(piece, board)
-  #  board.grid[piece.first][piece.last].moves.map { |rank, file| [piece.first + rank, piece.last + file] }
-  #end
 end
