@@ -3,16 +3,11 @@ class Referee
     # TODO
   end
 
-  # HACK: Refactor
   def valid_move?(move, board, player)
     starting = move.starting
     ending = move.ending
     piece = board.grid[starting.first][starting.last]
-    #pp allowed_moves(piece, board, starting)
-    #gets
-    return true unless !own_piece?(starting, board, player) ||
-                       own_piece_collision?(starting, ending, board) || # As is, currently belongs in move list
-                       !allowed_moves(piece, board, starting).include?(ending)
+    own_piece?(starting, board, player) && allowed_moves(piece, board, starting).include?(ending)
   end
 
   private
