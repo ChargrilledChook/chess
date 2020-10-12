@@ -6,7 +6,7 @@ class Pawn < Piece
   end
 
   # BUG: Unsuccessful move eats first move bonus
-  # BUG: Need to account for nil errors
+  # BUG: Double move can jump
   # HACK: This code sucks refactor it
   def move_list(board, starting)
     res = []
