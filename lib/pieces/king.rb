@@ -11,8 +11,15 @@ class King < Piece
   end
 
   # OPTIMISE: See Knight
-  def move_list(_board, starting)
-    moves.map { |move| [starting.first + move.first, starting.last + move.last] }
+  def move_list(board, starting)
+    list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
+    list.reject do |move|
+      begin
+        board.grid[move.first][move.last].colour == colour
+      rescue NoMethodError
+        true
+      end
+    end
   end
 
   def to_s
