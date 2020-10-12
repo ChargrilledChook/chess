@@ -48,9 +48,4 @@ class Pawn < Piece
       [[1, -1], [1, 1]]
     end
   end
-
-  # TODO: This probably belongs in super
-  def enemy_colour
-    colour == :white ? :black : :white
-  end
 end
