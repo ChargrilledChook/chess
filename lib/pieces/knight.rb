@@ -10,11 +10,16 @@ class Knight < Piece
      [1, 2]]
   end
 
-  # OPTIMISE: Unused params to be compatible with other pieces. Probably a better way to do this
-  # This list currently adds impossible moves (off board) but they're impossible to actually select.
-  # Room for improvement but not crucial
-  def move_list(_board, starting)
-    moves.map { |move| [starting.first + move.first, starting.last + move.last] }
+  # OPTIMISE: This code is currently duplicated in King. Probably a better way to deal with nil ranks
+  def move_list(board, starting)
+    list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
+    list.reject do |move|
+      begin
+        board.grid[move.first][move.last].colour == colour
+      rescue NoMethodError
+        true
+      end
+    end
   end
 
   def to_s
