@@ -1,6 +1,5 @@
 # Hashes of piece setups for the board class
 module PieceCollections
-  # OPTIMIZE: Should probably break this up into smaller chunks
   def default_pieces
     black = big_black_pieces.merge(black_pawns)
     white = big_white_pieces.merge(white_pawns)
