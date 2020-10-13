@@ -7,11 +7,11 @@ AllCops:
 
 Metrics/BlockLength:
   Exclude:
-    - 'spec/*'
+    - 'spec/*/*'
 
 Layout/LineLength:
   Exclude:
-    - 'spec/*'
+    - 'spec/*/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
