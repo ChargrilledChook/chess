@@ -1,6 +1,6 @@
-require_relative "../lib/pieces/piece_icons"
-require_relative "../lib/pieces/piece"
-require_relative "../lib/pieces/INSERT HERE"
+require_relative "../../lib/pieces/piece_icons"
+require_relative "../../lib/pieces/piece"
+require_relative "../../lib/pieces/INSERT HERE"
 
 # Temporary file to help with boilerplate for piece tests
 
