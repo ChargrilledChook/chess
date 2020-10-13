@@ -6,14 +6,14 @@ class Referee
   def valid_move?(move, board, player)
     starting = move.starting
     ending = move.ending
-    piece = board.grid[starting.first][starting.last]
+    piece = board[starting.first][starting.last]
     own_piece?(starting, board, player) && allowed_moves(piece, board, starting).include?(ending)
   end
 
   private
 
   def own_piece?(starting, board, player)
-    piece = board.grid[starting.first][starting.last]
+    piece = board[starting.first][starting.last]
     piece.colour == player.colour
   end
 

@@ -15,7 +15,7 @@ class Knight < Piece
     list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
     list.reject do |move|
       begin
-        board.grid[move.first][move.last].colour == colour
+        board[move.first][move.last].colour == colour
       rescue NoMethodError
         true
       end

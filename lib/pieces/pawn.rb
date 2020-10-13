@@ -12,7 +12,7 @@ class Pawn < Piece
     res = []
     moves.each do |move|
       begin
-        space = board.grid[starting.first + move.first][starting.last + move.last]
+        space = board[starting.first + move.first][starting.last + move.last]
         if space.colour == :none
           res << [starting.first + move.first, starting.last + move.last]
         end
@@ -23,7 +23,7 @@ class Pawn < Piece
 
     attacks.each do |atk|
       begin
-        space = board.grid[starting.first + atk.first][starting.last + atk.last]
+        space = board[starting.first + atk.first][starting.last + atk.last]
         next if space.colour == :none
 
         if space.colour == enemy_colour

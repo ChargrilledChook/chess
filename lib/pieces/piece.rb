@@ -23,14 +23,14 @@ class Piece
         col = starting.last
         row += move.first
         col += move.last
-        current = board.grid[row][col]
+        current = board[row][col]
         while valid?(row, col, current)
           res << [row, col]
           row += move.first
           col += move.last
-          current = board.grid[row][col] if valid?(row, col, current)
+          current = board[row][col] if valid?(row, col, current)
         end
-        res << [row, col] if board.grid[row][col].colour == enemy_colour
+        res << [row, col] if board[row][col].colour == enemy_colour
       rescue NoMethodError
         next
       end
