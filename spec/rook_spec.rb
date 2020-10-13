@@ -113,4 +113,22 @@ describe Rook do
       end
     end
   end
+
+  describe "#to_s" do
+    context "when rook is white" do
+      subject(:white_rook) { described_class.new(colour: :white) }
+
+      it "returns the correct icon" do
+        expect(white_rook.to_s).to match "\u2656"
+      end
+    end
+
+    context "when rook is black" do
+      subject(:black_rook) { described_class.new(colour: :black) }
+
+      it "returns the correct icon" do
+        expect(black_rook.to_s).to match "\u265C"
+      end
+    end
+  end
 end
