@@ -1,4 +1,4 @@
-require_relative "./lib/referee"
+require_relative "../lib/referee"
 
 describe Referee do
   subject(:ref) { described_class.new }
