@@ -42,11 +42,11 @@ class Piece
     raise NotImplementedError
   end
 
-  private
-
   def enemy_colour
     colour == :white ? :black : :white
   end
+
+  private
 
   # HACK: This currently knows too much about board but is fine for now
   def valid?(row, col, current)
