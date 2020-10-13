@@ -7,14 +7,71 @@ require_relative "../lib/pieces/bishop"
 describe Bishop do
   subject(:bishop) { described_class.new(colour: :white) }
   let(:empty)      { double("empty", colour: :none) }
+  let(:board)      { Array.new(5) { Array.new(5, empty) } }
 
   describe "#move_list" do
     context "on an empty board" do
+      it "is correct in the centre" do
+        board[2][2] = bishop
+        bishop_moves = bishop.move_list(board, [2, 2])
+        expected = [0, 0], [1, 1], [3, 3], [4, 4],
+                   [4, 0], [3, 1], [1, 3], [0, 4]
 
+        expect(bishop_moves).to match_array(expected)
+      end
+      it "is correct from a left corner" do
+        board[4][0] = bishop
+        bishop_moves = bishop.move_list(board, [4, 0])
+        expected = [3, 1], [2, 2], [1, 3], [0, 4]
+
+        expect(bishop_moves).to match_array(expected)
+      end
+      it "is correct from a right corner" do
+        board[4][4] = bishop
+        bishop_moves = bishop.move_list(board, [4, 4])
+        expected = [3, 3], [2, 2], [1, 1], [0, 0]
+
+        expect(bishop_moves).to match_array(expected)
+      end
+      it "is correct from a top corner" do
+        board[0][0] = bishop
+        bishop_moves = bishop.move_list(board, [0, 0])
+        expected = [3, 3], [2, 2], [1, 1], [4, 4]
+
+        expect(bishop_moves).to match_array(expected)
+      end
     end
 
     context "with friendly pieces" do
+      let(:friend) { double("friend", colour: :white) }
 
+      it "is correct at a distance" do
+        board[2][2] = bishop
+        board[0][0] = friend
+        board[4][0] = friend
+        bishop_moves = bishop.move_list(board, [2, 2])
+        expected = [1, 1], [3, 3], [4, 4],
+                   [3, 1], [1, 3], [0, 4]
+
+        expect(bishop_moves).to match_array(expected)
+      end
+      it "is correct when adjacaent" do
+        board[2][2] = bishop
+        board[1][1] = friend
+        board[3][1] = friend
+        bishop_moves = bishop.move_list(board, [2, 2])
+        expected = [1, 3], [0, 4], [3, 3], [4, 4]
+
+        expect(bishop_moves).to match_array(expected)
+      end
+      it "is correct when blocked" do
+        board[4][4] = bishop
+        board[3][3] = friend
+        bishop_moves = bishop.move_list(board, [4, 4])
+        expected = []
+
+        expect(bishop_moves).to match_array(expected)
+      end
     end
 
     context "with enemy pieces" do
