@@ -14,7 +14,7 @@ describe Rook do
         board[4][5] = rook
         rook_moves = rook.move_list(board, [4, 5])
         expected = [3, 5], [2, 5], [1, 5], [0, 5], [5, 5], [6, 5], [7, 5],
-                  [4, 4], [4, 3], [4, 2], [4, 1], [4, 0], [4, 6], [4, 7]
+                   [4, 4], [4, 3], [4, 2], [4, 1], [4, 0], [4, 6], [4, 7]
         expect(rook_moves).to match_array(expected)
       end
       it "is correct in the corners" do
