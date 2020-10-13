@@ -75,11 +75,53 @@ describe Bishop do
     end
 
     context "with enemy pieces" do
+      let(:enemy) { double("friend", colour: :black) }
 
+      it "is correct at a distance" do
+        board[2][2] = bishop
+        board[0][0] = enemy
+        board[4][0] = enemy
+        bishop_moves = bishop.move_list(board, [2, 2])
+        expected = [0, 0], [1, 1], [3, 3], [4, 4],
+                   [4, 0], [3, 1], [1, 3], [0, 4]
+
+        expect(bishop_moves).to match_array(expected)
+      end
+      it "is correct when adjacaent" do
+        board[2][2] = bishop
+        board[1][1] = enemy
+        board[3][1] = enemy
+        bishop_moves = bishop.move_list(board, [2, 2])
+        expected = [1, 3], [0, 4], [3, 3], [4, 4], [1, 1], [3, 1]
+
+        expect(bishop_moves).to match_array(expected)
+      end
+      it "is correct when blocked" do
+        board[4][4] = bishop
+        board[3][3] = enemy
+        bishop_moves = bishop.move_list(board, [4, 4])
+        expected = [[3, 3]]
+
+        expect(bishop_moves).to match_array(expected)
+      end
     end
 
     context "with enemies and friends" do
+      subject(:bishop) { described_class.new(colour: :black) }
+      let(:enemy)      { double("enemy", colour: :white) }
+      let(:friend)     { double("friend", colour: :black) }
 
+      it "works correctly" do
+        board[3][1] = bishop
+        board[4][0] = friend
+        board[1][3] = friend
+        board[0][4] = enemy
+        board[2][0] = enemy
+        bishop_moves = bishop.move_list(board, [3, 1])
+        expected = [2, 0], [4, 2], [2, 2]
+
+        expect(bishop_moves).to match_array(expected)
+      end
     end
   end
 
