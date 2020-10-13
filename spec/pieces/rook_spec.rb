@@ -1,6 +1,6 @@
-require_relative "../lib/pieces/piece_icons"
-require_relative "../lib/pieces/piece"
-require_relative "../lib/pieces/rook"
+require_relative "../../lib/pieces/piece_icons"
+require_relative "../../lib/pieces/piece"
+require_relative "../../lib/pieces/rook"
 
 describe Rook do
   subject(:rook) { described_class.new(colour: :white) }
