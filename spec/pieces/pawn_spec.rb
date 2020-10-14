@@ -4,7 +4,8 @@ require_relative "../../lib/pieces/pawn"
 
 # TODO:
 # * En passant
-# * Double move bug
+# * Double move jump bug
+# * Unsuccessful double move bug
 # * Promotion
 
 describe Pawn do
