@@ -2,7 +2,10 @@ require_relative "../../lib/pieces/piece_icons"
 require_relative "../../lib/pieces/piece"
 require_relative "../../lib/pieces/pawn"
 
-# Temporary file to help with boilerplate for piece tests
+# TODO:
+# * En passant
+# * Double move bug
+# * Promotion
 
 describe Pawn do
   subject(:pawn) { described_class.new(colour: :white) }
