@@ -39,15 +39,76 @@ describe Queen do
     end
 
     context "with friendly pieces" do
+      let(:friend) { double("friend", colour: :white) }
 
+      it "is correct at a distance" do
+        board[3][1] = queen
+        board[1][1] = friend
+        board[1][3] = friend
+        queen_moves = queen.move_list(board, [3, 1])
+        expected = [3, 0], [4, 0], [4, 1], [3, 2],
+                   [3, 3], [3, 4], [2, 1], [2, 2],
+                   [4, 2], [2, 0]
+
+        expect(queen_moves).to match_array(expected)
+      end
+      it "is correct when blocked" do
+        board[0][4] = queen
+        board[0][3] = friend
+        board[1][3] = friend
+        board[1][4] = friend
+        queen_moves = queen.move_list(board, [0, 4])
+        expected = []
+
+        expect(queen_moves).to match_array(expected)
+      end
     end
 
     context "with enemy pieces" do
+      let(:enemy) { double("enemy", colour: :black) }
+
+      it "is correct at a distance" do
+        board[3][1] = queen
+        board[1][1] = enemy
+        board[1][3] = enemy
+        queen_moves = queen.move_list(board, [3, 1])
+        expected = [3, 0], [4, 0], [4, 1], [3, 2],
+                   [3, 3], [3, 4], [2, 1], [2, 2],
+                   [4, 2], [2, 0], [1, 1], [1, 3]
+
+        expect(queen_moves).to match_array(expected)
+      end
+      it "is correct when adjacaent" do
+        board[0][4] = queen
+        board[0][3] = enemy
+        board[1][3] = enemy
+        board[1][4] = enemy
+        queen_moves = queen.move_list(board, [0, 4])
+        expected = [0, 3], [1, 3], [1, 4]
+
+        expect(queen_moves).to match_array(expected)
+      end
 
     end
 
     context "with enemies and friends" do
+      subject(:queen) { described_class.new(colour: :black) }
+      let(:enemy)     { double("enemy", colour: :white) }
+      let(:friend)    { double("friend", colour: :black) }
 
+      it "works correctly" do
+        board[2][2] = queen
+        board[1][1] = enemy
+        board[4][4] = enemy
+        board[1][3] = friend
+        board[4][2] = friend
+        queen_moves = queen.move_list(board, [2, 2])
+        expected = [0, 2], [1, 2], [3, 2], [1, 1],
+                   [2, 0], [2, 1], [2, 3], [2, 4],
+                   [4, 0], [3, 1], [3, 3], [4, 4]
+
+        expect(queen_moves).to match_array(expected)
+      end
     end
   end
 
