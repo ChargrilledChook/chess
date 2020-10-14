@@ -19,14 +19,14 @@ describe Knight do
 
         expect(knight_moves).to match_array(expected)
       end
-      xit "works on the side" do
+      it "works on the side" do
         board[2][0] = knight
-        knight_moves = knight.move_list(board, [2, 1])
+        knight_moves = knight.move_list(board, [2, 0])
         expected = [0, 1], [1, 2], [3, 2], [4, 1]
 
         expect(knight_moves).to match_array(expected)
       end
-      xit "works on a corner" do
+      it "works on a corner" do
         board[0][0] = knight
         knight_moves = knight.move_list(board, [0, 0])
         expected = [1, 2], [2, 1]

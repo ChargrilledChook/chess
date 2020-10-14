@@ -13,6 +13,7 @@ class Knight < Piece
   # OPTIMISE: This code is currently duplicated in King. Probably a better way to deal with nil ranks
   def move_list(board, starting)
     list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
+    list = list.select { |move| valid_move?(board, move) }
     list.reject do |move|
       begin
         board[move.first][move.last].colour == colour
@@ -24,5 +25,12 @@ class Knight < Piece
 
   def to_s
     colour == :white ? white_knight : black_knight
+  end
+
+  private
+
+ # OPTIMISE: See #move_list
+  def valid_move?(board, move)
+    move.first.between?(0, board.size) && move.last.between?(0, board.size)
   end
 end
