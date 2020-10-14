@@ -7,9 +7,39 @@ require_relative "../../lib/pieces/knight"
 describe Knight do
   subject(:knight) { described_class.new(colour: :white) }
   let(:empty)      { double("empty", colour: :none) }
+  let(:board)      { Array.new(5) { Array.new(5, empty) } }
 
   describe "#move_list" do
     context "on an empty board" do
+      it "works in the centre" do
+        board[2][2] = Knight
+        knight_moves = knight.move_list(board, [2, 2])
+        expected = [0, 1], [0, 3], [1, 4], [3, 4],
+                   [4, 3], [4, 1], [3, 0], [1, 0]
+
+        expect(knight_moves).to match_array(expected)
+      end
+      xit "works on the side" do
+        board[2][0] = knight
+        knight_moves = knight.move_list(board, [2, 1])
+        expected = [0, 1], [1, 2], [3, 2], [4, 1]
+
+        expect(knight_moves).to match_array(expected)
+      end
+      xit "works on a corner" do
+        board[0][0] = knight
+        knight_moves = knight.move_list(board, [0, 0])
+        expected = [1, 2], [2, 1]
+
+        expect(knight_moves).to match_array(expected)
+      end
+      it "works on another corner" do
+        board[4][4] = knight
+        knight_moves = knight.move_list(board, [4, 4])
+        expected = [2, 3], [3, 2]
+
+        expect(knight_moves).to match_array(expected)
+      end
 
     end
 
