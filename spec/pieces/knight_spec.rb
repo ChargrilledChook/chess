@@ -40,19 +40,57 @@ describe Knight do
 
         expect(knight_moves).to match_array(expected)
       end
-
     end
 
     context "with friendly pieces" do
+      let(:friend) { double("friend", colour: :white) }
 
+      it "works correctly" do
+        board[2][2] = Knight
+        board[0][1] = friend
+        board[3][4] = friend
+        board[1][4] = friend
+        knight_moves = knight.move_list(board, [2, 2])
+        expected = [0, 3], [4, 3], [4, 1], [3, 0], [1, 0]
+
+        expect(knight_moves).to match_array(expected)
+      end
     end
 
     context "with enemy pieces" do
+      let(:enemy) { double("enemy", colour: :black) }
 
+      it "works correctly" do
+        board[2][2] = Knight
+        board[0][1] = enemy
+        board[3][4] = enemy
+        board[1][4] = enemy
+        knight_moves = knight.move_list(board, [2, 2])
+        expected = [0, 1], [0, 3], [1, 4], [3, 4],
+                   [4, 3], [4, 1], [3, 0], [1, 0]
+
+        expect(knight_moves).to match_array(expected)
+      end
     end
 
     context "with enemies and friends" do
+      subject(:knight) { described_class.new(colour: :black) }
+      let(:enemy)      { double("enemy", colour: :white) }
+      let(:friend)     { double("friend", colour: :black) }
 
+      it "works correctly" do
+        board[2][2] = Knight
+        board[4][1] = enemy
+        board[1][0] = enemy
+        board[1][3] = enemy
+        board[0][3] = friend
+        board[1][4] = friend
+        board[3][0] = friend
+        knight_moves = knight.move_list(board, [2, 2])
+        expected = [0, 1], [3, 4], [4, 3], [4, 1], [1, 0]
+
+        expect(knight_moves).to match_array(expected)
+      end
     end
   end
 
