@@ -17,14 +17,14 @@ describe King do
 
         expect(king_moves).to match_array(expected)
       end
-      xit "works in a corner" do
+      it "works in a corner" do
         board[4][0] = king
         king_moves = king.move_list(board, [4, 0])
         expected = [3, 0], [3, 1], [4, 1]
 
         expect(king_moves).to match_array(expected)
       end
-      xit "works in another corner" do
+      it "works in another corner" do
         board[0][4] = king
         king_moves = king.move_list(board, [0, 4])
         expected = [0, 3], [1, 3], [1, 4]
