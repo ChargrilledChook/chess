@@ -14,13 +14,7 @@ class King < Piece
   def move_list(board, starting)
     list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
     list = list.select { |move| valid_move?(board, move) }
-    list.reject do |move|
-      begin
-        board[move.first][move.last].colour == colour
-      rescue NoMethodError
-        true
-      end
-    end
+    list.reject { |move| check_if_own_colour(board, move) }
   end
 
   def to_s
@@ -34,13 +28,9 @@ class King < Piece
     move.first.between?(0, board.size) && move.last.between?(0, board.size)
   end
 
-  # TODO: In progress
-  def on_board?(move)
-    begin
-      board[move.first][move.last].colour == colour
-    rescue NoMethodError
-      true
-    end
+  def check_if_own_colour(board, move)
+    board[move.first][move.last].colour == colour
+  rescue NoMethodError
+    true
   end
 end
-
