@@ -27,6 +27,20 @@ describe InsertPieceHere do
   end
 
   describe "#to_s" do
+    context "when x is white" do
+      subject(:white_) { described_class.new(colour: :white) }
 
+      it "returns the correct icon" do
+        expect(white_.to_s).to match  ""
+      end
+    end
+
+    context "when x is black" do
+      subject(:black_) { described_class.new(colour: :black) }
+
+      it "returns the correct icon" do
+        expect(black_.to_s).to match  ""
+      end
+    end
   end
 end
