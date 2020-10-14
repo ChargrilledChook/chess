@@ -31,7 +31,6 @@ describe King do
 
         expect(king_moves).to match_array(expected)
       end
-
     end
 
     context "with friendly pieces" do

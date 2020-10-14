@@ -88,7 +88,6 @@ describe Queen do
 
         expect(queen_moves).to match_array(expected)
       end
-
     end
 
     context "with enemies and friends" do
