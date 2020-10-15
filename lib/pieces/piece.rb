@@ -69,7 +69,7 @@ class Piece
     false
   end
 
-  def own_colour?(board, move)
+  def friend?(board, move)
     board[move.first][move.last].colour == colour
   rescue NoMethodError
     true

@@ -13,7 +13,7 @@ class King < Piece
   # OPTIMISE: See Knight
   def move_list(board, starting)
     list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
-    list.select { |move| valid_move?(board, move) && !own_colour?(board, move) }
+    list.select { |move| valid_move?(board, move) && !friend?(board, move) }
   end
 
   def to_s
