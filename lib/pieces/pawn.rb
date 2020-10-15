@@ -5,8 +5,7 @@ class Pawn < Piece
     @first_move = true
   end
 
-  # BUG: Unsuccessful move eats first move bonus
-  # BUG: Double move can jump
+  # BUG: Unsuccessful move eats first move bonus => Solution likely involves pushing the responsiblity elsewhere
   def move_list(board, starting)
     move_map(board, starting) + attack_map(board, starting)
   end
@@ -38,18 +37,25 @@ class Pawn < Piece
     end
   end
 
-  # OPTIMIZE: Extract logic into helper methods
   def move_map(board, starting)
-    single = single_move.map { |move| [starting.first + move.first, starting.last + move.last] }
-    single.select! { |move| valid_move?(board, move) && empty?(board, move) }
+    single = single_map(board, starting)
     return single if single.empty? || !first_move
 
-    double = double_move.map { |move| [starting.first + move.first, starting.last + move.last] }
-    single + double.select { |move| valid_move?(board, move) && empty?(board, move) }
+    single + double_map(board, starting)
   end
 
   def attack_map(board, move)
     list = attacks.map { |atk| [move.first + atk.first, move.last + atk.last] }
     list.select { |atk| valid_move?(board, atk) && enemy?(board, atk) }
+  end
+
+  def single_map(board, starting)
+    single = single_move.map { |move| [starting.first + move.first, starting.last + move.last] }
+    single.select { |move| valid_move?(board, move) && empty?(board, move) }
+  end
+
+  def double_map(board, starting)
+    double = double_move.map { |move| [starting.first + move.first, starting.last + move.last] }
+    double.select { |move| valid_move?(board, move) && empty?(board, move) }
   end
 end
