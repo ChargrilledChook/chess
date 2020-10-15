@@ -10,6 +10,7 @@ class Referee
     return false unless own_piece?(starting, board, player) && allowed_moves(piece, board, starting).include?(ending)
 
     #check?(board, [7, 4]) == false
+    true
   end
 
   private
