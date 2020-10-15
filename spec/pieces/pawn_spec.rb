@@ -52,7 +52,7 @@ describe Pawn do
 
             expect(pawn_moves).to match_array(expected)
           end
-          xit "is correct when face to face" do
+          it "is correct when face to face" do
             board[3][2] = pawn
             board[2][2] = friend
             pawn_moves = pawn.move_list(board, [3, 2])
@@ -90,7 +90,7 @@ describe Pawn do
 
             expect(pawn_moves).to match_array(expected)
           end
-          xit "is correct when face to face" do
+          it "is correct when face to face" do
             board[3][2] = pawn
             board[2][2] = enemy
             pawn_moves = pawn.move_list(board, [3, 2])
@@ -216,7 +216,7 @@ describe Pawn do
 
             expect(pawn_moves).to match_array(expected)
           end
-          xit "is correct when face to face" do
+          it "is correct when face to face" do
             board[1][2] = pawn
             board[2][2] = friend
             pawn_moves = pawn.move_list(board, [1, 2])
@@ -254,7 +254,7 @@ describe Pawn do
 
             expect(pawn_moves).to match_array(expected)
           end
-          xit "is correct when face to face" do
+          it "is correct when face to face" do
             board[1][2] = pawn
             board[2][2] = enemy
             pawn_moves = pawn.move_list(board, [1, 2])
