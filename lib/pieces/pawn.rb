@@ -13,9 +13,7 @@ class Pawn < Piece
     moves.each do |move|
       begin
         space = board[starting.first + move.first][starting.last + move.last]
-        if space.colour == :none
-          res << [starting.first + move.first, starting.last + move.last]
-        end
+        res << [starting.first + move.first, starting.last + move.last] if space.colour == :none
       rescue NoMethodError
         next
       end
@@ -26,9 +24,7 @@ class Pawn < Piece
         space = board[starting.first + atk.first][starting.last + atk.last]
         next if space.colour == :none
 
-        if space.colour == enemy_colour
-          res << [starting.first + atk.first, starting.last + atk.last]
-        end
+        res << [starting.first + atk.first, starting.last + atk.last] if space.colour == enemy_colour
       rescue NoMethodError
         next
       end
