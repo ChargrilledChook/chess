@@ -52,4 +52,26 @@ class Piece
   def valid?(row, col, current)
     row.between?(0, 7) && col.between?(0, 7) && current.colour == :none
   end
+
+  def valid_move?(board, move)
+    move.first.between?(0, board.size) && move.last.between?(0, board.size)
+  end
+
+  def enemy?(board, move)
+    board[move.first][move.last].colour == enemy_colour
+  rescue NoMethodError
+    false
+  end
+
+  def empty?(board, move)
+    board[move.first][move.last].colour == :none
+  rescue NoMethodError
+    false
+  end
+
+  def own_colour?(board, move)
+    board[move.first][move.last].colour == colour
+  rescue NoMethodError
+    true
+  end
 end
