@@ -182,7 +182,7 @@ describe Pawn do
         subject(:pawn) { described_class.new(colour: :black) }
 
         context "on an empty board" do
-          it "works in the cenntre" do
+          it "works in the centre" do
             board[1][2] = pawn
             pawn_moves = pawn.move_list(board, [1, 2])
             expected = [2, 2], [3, 2]
