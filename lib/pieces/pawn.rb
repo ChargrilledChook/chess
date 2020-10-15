@@ -1,8 +1,8 @@
 class Pawn < Piece
   attr_reader :first_move
 
-  def post_initialize
-    @first_move = true
+  def post_initialize(first_move: true)
+    @first_move = first_move
   end
 
   # BUG: Unsuccessful move eats first move bonus
