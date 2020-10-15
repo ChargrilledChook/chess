@@ -21,12 +21,12 @@ class Pawn < Piece
 
   private
 
-  def moves
-    if first_move
-      colour == :white ? [[-1, 0], [-2, 0]] : [[1, 0], [2, 0]]
-    else
-      colour == :white ? [[-1, 0]] : [[1, 0]]
-    end
+  def single_move
+    colour == :white ? [[-1, 0]] : [[1, 0]]
+  end
+
+  def double_move
+    colour == :white ? [[-2, 0]] : [[2, 0]]
   end
 
   def attacks
@@ -38,9 +38,14 @@ class Pawn < Piece
     end
   end
 
+  # OPTIMIZE: Extract logic into helper methods
   def move_map(board, starting)
-    list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
-    list.select { |move| valid_move?(board, move) && empty?(board, move) }
+    single = single_move.map { |move| [starting.first + move.first, starting.last + move.last] }
+    single.select! { |move| valid_move?(board, move) && empty?(board, move) }
+    return single if single.empty? || !first_move
+
+    double = double_move.map { |move| [starting.first + move.first, starting.last + move.last] }
+    single + double.select { |move| valid_move?(board, move) && empty?(board, move) }
   end
 
   def attack_map(board, move)
