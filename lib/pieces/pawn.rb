@@ -9,28 +9,7 @@ class Pawn < Piece
   # BUG: Double move can jump
   # HACK: This code sucks refactor it
   def move_list(board, starting)
-    res = []
-    moves.each do |move|
-      begin
-        space = board[starting.first + move.first][starting.last + move.last]
-        res << [starting.first + move.first, starting.last + move.last] if space.colour == :none
-      rescue NoMethodError
-        next
-      end
-    end
-
-    attacks.each do |atk|
-      begin
-        space = board[starting.first + atk.first][starting.last + atk.last]
-        next if space.colour == :none
-
-        res << [starting.first + atk.first, starting.last + atk.last] if space.colour == enemy_colour
-      rescue NoMethodError
-        next
-      end
-    end
-    @first_move = false
-    res
+    move_map(board, starting) + attack_map(board, starting)
   end
 
   def toggle_first_move
@@ -45,7 +24,7 @@ class Pawn < Piece
 
   def moves
     if first_move
-      colour == :white ? [[-2, 0], [-1, 0]] : [[2, 0], [1, 0]]
+      colour == :white ? [[-1, 0], [-2, 0]] : [[1, 0], [2, 0]]
     else
       colour == :white ? [[-1, 0]] : [[1, 0]]
     end
@@ -58,5 +37,15 @@ class Pawn < Piece
     when :black
       [[1, -1], [1, 1]]
     end
+  end
+
+  def move_map(board, starting)
+    list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
+    list.select { |move| valid_move?(board, move) && empty?(board, move) }
+  end
+
+  def attack_map(board, move)
+    list = attacks.map { |atk| [move.first + atk.first, move.last + atk.last] }
+    list.select { |atk| valid_move?(board, atk) && enemy?(board, atk) }
   end
 end
