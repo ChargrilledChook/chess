@@ -7,7 +7,6 @@ class Pawn < Piece
 
   # BUG: Unsuccessful move eats first move bonus
   # BUG: Double move can jump
-  # HACK: This code sucks refactor it
   def move_list(board, starting)
     move_map(board, starting) + attack_map(board, starting)
   end
