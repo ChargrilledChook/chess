@@ -2,8 +2,6 @@ require_relative "../../lib/pieces/piece_icons"
 require_relative "../../lib/pieces/piece"
 require_relative "../../lib/pieces/knight"
 
-# Temporary file to help with boilerplate for piece tests
-
 describe Knight do
   subject(:knight) { described_class.new(colour: :white) }
   let(:empty)      { double("empty", colour: :none) }
