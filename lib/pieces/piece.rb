@@ -26,7 +26,7 @@ class Piece
           row += move.first
           col += move.last
         end
-        res << open_attack?(board, row, col)
+        res << open_attack(board, row, col)
       rescue NoMethodError
         next
       end
@@ -48,7 +48,7 @@ class Piece
     valid_move?(board, move) && empty?(board, move)
   end
 
-  def open_attack?(board, row, col)
+  def open_attack(board, row, col)
     [row, col] if board[row][col].colour == enemy_colour
   end
 
