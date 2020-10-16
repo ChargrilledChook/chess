@@ -15,39 +15,24 @@ class Piece
   # HACK: Inefficent and ugly. Needs tests to refactor safely. It's possible some of these calculations
   # ie not being able to move through another piece don't belong here at all. This method may know too
   # much about other objects
-
   def move_list(board, starting)
     res = []
     moves.each do |move|
       begin
         row = starting.first + move.first
         col = starting.last + move.last
-        while valid_move?(board, [row, col]) && empty?(board, [row, col])
+        while open_square?(board, [row, col])
           res << [row, col]
           row += move.first
           col += move.last
         end
-        res << [row, col] if board[row][col].colour == enemy_colour
+        res << open_attack?(board, row, col)
       rescue NoMethodError
         next
       end
     end
-    res
+    res.compact
   end
-
-  # Protoype / experiment
-  # def move_map(board, starting, move)
-  #   row = starting.first + move.first
-  #   col = starting.last + move.last
-  #   while valid_move?(board, [row, col]) && empty?(board, [row, col])
-  #     res << [row, col]
-  #     row += move.first
-  #     col += move.last
-  #   end
-  #   res << [row, col] if board[row][col].colour == enemy_colour
-  # rescue NoMethodError
-  #   next
-  # end
 
   def moves
     raise NotImplementedError
@@ -58,6 +43,14 @@ class Piece
   end
 
   private
+
+  def open_square?(board, move)
+    valid_move?(board, move) && empty?(board, move)
+  end
+
+  def open_attack?(board, row, col)
+    [row, col] if board[row][col].colour == enemy_colour
+  end
 
   def valid_move?(board, move)
     move.first.between?(0, board.size) && move.last.between?(0, board.size)
@@ -80,6 +73,4 @@ class Piece
   rescue NoMethodError
     true
   end
-
-
 end
