@@ -1,4 +1,3 @@
-#require_relative "../../lib/pieces/piece_icons"
 require_relative "../../lib/pieces/piece"
 
 # Unsure of the value of these tests but implementing as per the
