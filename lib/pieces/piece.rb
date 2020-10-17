@@ -12,30 +12,15 @@ class Piece
   # This is a hook method that can be overridden by children. Currently only needed for pawns.
   def post_initialize; end
 
-  # HACK: Inefficent and ugly. Needs tests to refactor safely. It's possible some of these calculations
-  # ie not being able to move through another piece don't belong here at all. This method may know too
-  # much about other objects
   def move_list(board, starting)
-    res = []
-    moves.each do |move|
-      begin
-        row = starting.first + move.first
-        col = starting.last + move.last
-        while open_square?(board, [row, col])
-          res << [row, col]
-          row += move.first
-          col += move.last
-        end
-        res << open_attack(board, row, col)
-      rescue NoMethodError
-        next
+    moves.each_with_object([]) do |move, res|
+      pos = update_pos(move, starting)
+      while open_square?(board, pos)
+        res << pos
+        pos = update_pos(move, pos)
       end
+      res << open_attack(board, pos) if open_attack(board, pos)
     end
-    res.compact
-  end
-
-  def moves
-    raise NotImplementedError
   end
 
   def enemy_colour
@@ -44,12 +29,22 @@ class Piece
 
   private
 
+  def moves
+    raise NotImplementedError
+  end
+
+  def update_pos(move, pos)
+    [move.first + pos.first, move.last + pos.last]
+  end
+
   def open_square?(board, move)
     valid_move?(board, move) && empty?(board, move)
   end
 
-  def open_attack(board, row, col)
-    [row, col] if board[row][col].colour == enemy_colour
+  def open_attack(board, pos)
+    [pos.first, pos.last] if board[pos.first][pos.last].colour == enemy_colour
+  rescue NoMethodError
+    nil
   end
 
   def valid_move?(board, move)
