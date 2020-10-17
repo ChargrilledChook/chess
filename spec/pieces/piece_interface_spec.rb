@@ -11,7 +11,6 @@ describe Piece do
     it { is_expected.to respond_to :colour }
     it { is_expected.to respond_to :post_initialize }
     it { is_expected.to respond_to :move_list }
-    it { is_expected.to respond_to :moves }
     it { is_expected.to respond_to :enemy_colour }
   end
 end
