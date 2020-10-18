@@ -37,6 +37,10 @@ class Piece
     [move.first + pos.first, move.last + pos.last]
   end
 
+  def valid_move?(board, move)
+    move.first.between?(0, board.size) && move.last.between?(0, board.size)
+  end
+
   def open_square?(board, move)
     valid_move?(board, move) && empty?(board, move)
   end
@@ -44,11 +48,7 @@ class Piece
   def open_attack(board, pos)
     [pos.first, pos.last] if board[pos.first][pos.last].colour == enemy_colour
   rescue NoMethodError
-    nil
-  end
-
-  def valid_move?(board, move)
-    move.first.between?(0, board.size) && move.last.between?(0, board.size)
+    false
   end
 
   def enemy?(board, move)
