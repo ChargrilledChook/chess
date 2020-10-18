@@ -9,6 +9,13 @@ Final assignment for the Ruby section of The Odin Project
 - [ ] Ref
 - [ ] Subclass
 
+### Special Movement
+- [ ] Pawn Double
+- [ ] Promotion
+- [ ] Castling
+- [ ] En passant
+- [ ] Tests
+
 ### Check
 - [ ] Red
 - [ ] Green
