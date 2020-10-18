@@ -28,3 +28,4 @@ Final assignment for the Ruby section of The Odin Project
 - [ ] Remaining refactorings
 - [ ] UI
 - [ ] UX
+- [ ] Upload to replit
