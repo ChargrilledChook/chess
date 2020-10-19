@@ -6,6 +6,7 @@ class GameLoop
     @round = round
   end
 
+  # TODO: Does draw console need to be here? Could simplify API
   def play
     round.draw_console
     round.play until round.game_over?
