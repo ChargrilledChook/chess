@@ -3,7 +3,8 @@ require_relative "../../lib/pieces/piece"
 # Unsure of the value of these tests but implementing as per the
 # inheritance testing advice of POODR. Simple enough to implement
 # and provides some documentation of the Piece API. Do they need to
-# to be run by each subclass to be useful?
+# to be run by each subclass to be useful? Shared examples may be
+# the correct way to implement this.
 describe Piece do
   subject(:piece_interface) { described_class.new(colour: :white) }
 
