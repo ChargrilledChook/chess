@@ -19,7 +19,7 @@ class Round
 
   def play
     move = check_move
-    board.place_move(move)
+    board.place_move(move.starting, move.ending)
     clear_console
     draw_console
     swap_players
