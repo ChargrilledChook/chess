@@ -8,11 +8,9 @@ class Board
     place_pieces(pieces_hash)
   end
 
-  def place_move(co_ords)
-    starting = co_ords.starting
-    ending = co_ords.ending
-    @grid[ending.first][ending.last] = @grid[starting.first][starting.last]
-    @grid[starting.first][starting.last] = @empty_cell
+  def place_move(start, fin)
+    @grid[fin.first][fin.last] = @grid[start.first][start.last]
+    @grid[start.first][start.last] = @empty_cell
   end
 
   def place_pieces(hash)
