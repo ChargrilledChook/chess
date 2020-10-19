@@ -25,8 +25,8 @@ class Round
     swap_players
   end
 
+  # TODO
   def game_over?
-    # TODO
     false
   end
 
@@ -35,11 +35,11 @@ class Round
     board.render_board
   end
 
+  private
+
   def swap_players
     @players.rotate!
   end
-
-  private
 
   # OPTIMIZE: shit name
   def check_move
