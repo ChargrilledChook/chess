@@ -27,6 +27,10 @@ class Piece
     colour == :white ? :black : :white
   end
 
+  def promotable?(_)
+    false
+  end
+
   def update; end
 
   private
