@@ -5,9 +5,12 @@ class Pawn < Piece
     @first_move = true
   end
 
-  # BUG: Unsuccessful move eats first move bonus => Solution likely involves pushing the responsiblity elsewhere
   def move_list(board, starting)
     move_map(board, starting) + attack_map(board, starting)
+  end
+
+  def update
+    toggle_first_move
   end
 
   def toggle_first_move
