@@ -4,7 +4,7 @@ Final assignment for the Ruby section of The Odin Project
 ## Remaining Milestones
 
 ### Remaining Tests
-- [ ] Board
+- [x] Board
 - [ ] Round
 - [ ] Ref
 - [ ] Subclass
