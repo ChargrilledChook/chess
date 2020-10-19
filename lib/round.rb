@@ -20,6 +20,7 @@ class Round
   def play
     move = check_move
     board.place_move(move.starting, move.ending)
+    post_move_update(move.ending)
     clear_console
     draw_console
     swap_players
@@ -36,6 +37,11 @@ class Round
   end
 
   private
+
+  def post_move_update(piece_pos)
+    piece = board.grid[piece_pos.first][piece_pos.last]
+    piece.update
+  end
 
   def swap_players
     @players.rotate!
