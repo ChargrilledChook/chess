@@ -5,17 +5,26 @@ describe Board do
 
   describe "#place_move" do
     context "with valid input" do
-      it "correctly updates the grid" do
+      it "correctly moves an empty square" do
         start = [0, 0]
         fin = [1, 1]
         end_pos = board.grid[1][1]
         board.place_move(start, fin)
         expect(end_pos).to eq(0)
       end
+      it "correctly moves rank" do
+        # TODO
+      end
+      it "correctly moves file" do
+         # TODO
+      end
     end
 
     # TODO: Error handling currently not implemented. Being handled by another class.
     context "with invalid input" do
+      it "does not move anything" do
+        # TODO
+      end
     end
   end
 
