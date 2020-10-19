@@ -34,17 +34,21 @@ class Board
     @grid.each do |line|
       print " #{counter} ".green
       line.each do |cell|
-        if black_cell
-          print cell.to_s.bg_black
-        else
-          print cell.to_s.bg_blue
-        end
+        print_cell(cell, black_cell)
         black_cell = !black_cell
       end
       print " #{counter} ".green
       counter -= 1
       black_cell = !black_cell
       print "\n"
+    end
+  end
+
+  def print_cell(cell, black_cell)
+    if black_cell
+      print cell.to_s.bg_black
+    else
+      print cell.to_s.bg_blue
     end
   end
 end
