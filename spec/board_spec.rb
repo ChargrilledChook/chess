@@ -1,22 +1,42 @@
 require_relative "../lib/board"
 
 describe Board do
-  subject(:board) { described_class.new({}, 0) }
+  subject(:board) { described_class.new(input, empty_cell) }
+  let(:empty_cell) { 0 }
+  let(:input) { { [0, 0] => 8, [4, 5] => 7 } }
 
   describe "#place_move" do
     context "with valid input" do
-      it "correctly moves an empty square" do
-        start = [0, 0]
-        fin = [1, 1]
-        end_pos = board.grid[1][1]
-        board.place_move(start, fin)
-        expect(end_pos).to eq(0)
-      end
       it "correctly moves rank" do
-        # TODO
+        start = [0, 0]
+        fin = [1, 0]
+        board.place_move(start, fin)
+
+        expect(board.grid[0][0]).to eql(empty_cell)
+        expect(board.grid[1][0]).to eql(8)
       end
       it "correctly moves file" do
-         # TODO
+        start = [0, 0]
+        fin = [0, 1]
+        board.place_move(start, fin)
+
+        expect(board.grid[0][0]).to eql(empty_cell)
+        expect(board.grid[0][1]).to eql(8)
+      end
+      it "correctly captures" do
+        start = [0, 0]
+        fin = [4, 5]
+        board.place_move(start, fin)
+
+        expect(board.grid[0][0]).to eql(empty_cell)
+        expect(board.grid[4][5]).to eql(8)
+      end
+      it "correctly 'moves' an empty square" do
+        start = [1, 1]
+        fin = [2, 2]
+        board.place_move(start, fin)
+
+        expect(board.grid[2][2]).to eq(0)
       end
     end
 
@@ -28,7 +48,32 @@ describe Board do
     end
   end
 
+  describe "#empty_grid" do
+    it "is correct after running" do
+      before =    [[8, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 7, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0]]
+      after =     [[0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 0, 0, 0, 0]]
+
+      expect { board.empty_grid }.to change { board.grid }.from(before).to(after)
+    end
+  end
+
   describe "#place_pieces" do
+    subject(:board) { described_class.new({}, empty_cell) }
+
     context "with valid input" do
       it "works with an empty hash" do
         input = {}
@@ -68,7 +113,7 @@ describe Board do
         expect(result).to eql expected
       end
       it "works with different data types" do
-        input = { [0, 0] => 1, [0, 1] => '2', [0, 2] => :three, [0, 3] => [4, 4] }
+        input = { [0, 0] => 1, [0, 1] => "2", [0, 2] => :three, [0, 3] => [4, 4] }
         result = board.grid
         expected = [[1, "2", :three, [4, 4], 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0, 0, 0],
