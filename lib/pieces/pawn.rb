@@ -21,6 +21,15 @@ class Pawn < Piece
     colour == :white ? white_pawn : black_pawn
   end
 
+  def promotable?(pos)
+    case colour
+    when :white
+      pos.first == 0
+    when :black
+      pos.first == 7
+    end
+  end
+
   private
 
   def single_move
