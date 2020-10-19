@@ -41,6 +41,12 @@ class Round
   def post_move_update(piece_pos)
     piece = board.grid[piece_pos.first][piece_pos.last]
     piece.update
+    promote(piece_pos) if piece.promotable?(piece_pos)
+  end
+
+  def promote(piece_pos)
+    colour = players.first.colour
+    board.grid[piece_pos.first][piece_pos.last] = select_promotion(colour)
   end
 
   def swap_players
@@ -55,6 +61,18 @@ class Round
     return move if ref.valid_move?(move, board.grid, players.first)
 
     check_move
+  end
+
+  def select_promotion(colour)
+    print "Select your shiny new piece [Q/K/R/B] :  "
+    choice = gets.chomp.downcase
+    case choice
+    when 'q' then Queen.new(colour: colour)
+    when 'k' then Knight.new(colour: colour)
+    when 'r' then Rook.new(colour: colour)
+    when 'b' then Bishop.new(colour: colour)
+    else select_promotion(colour)
+    end
   end
 
   def clear_console
