@@ -27,6 +27,8 @@ class Piece
     colour == :white ? :black : :white
   end
 
+  def update; end
+
   private
 
   def moves
