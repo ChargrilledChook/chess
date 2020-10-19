@@ -2,8 +2,8 @@
 class Board
   attr_reader :grid
 
-  def initialize(pieces_hash)
-    @empty_cell = EmptySquare.new
+  def initialize(pieces_hash, empty_cell = EmptySquare.new)
+    @empty_cell = empty_cell
     @grid = Array.new(8) { Array.new(8, @empty_cell) }
     place_pieces(pieces_hash)
   end
