@@ -9,12 +9,12 @@ class Pawn < Piece
     move_map(board, starting) + attack_map(board, starting)
   end
 
-  def update
+  def update(_ = nil)
     toggle_first_move
   end
 
-  def toggle_first_move
-    @first_move = false
+  def undo_update
+    @first_move = true
   end
 
   def to_s
@@ -31,6 +31,10 @@ class Pawn < Piece
   end
 
   private
+
+  def toggle_first_move
+    @first_move = false
+  end
 
   def single_move
     colour == :white ? [[-1, 0]] : [[1, 0]]
