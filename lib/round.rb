@@ -21,9 +21,17 @@ class Round
     move = check_move
     board.place_move(move.starting, move.ending)
     post_move_update(move.ending)
+    return redo_round(move.starting, move.ending) if ref.check?(board.grid, players.first)
+
     clear_console
     draw_console
     swap_players
+  end
+
+  def redo_round(starting, ending)
+    ref.restore_board(starting, ending)
+    @board.grid[starting.first][starting.last].undo_update
+    play
   end
 
   # TODO
@@ -40,7 +48,7 @@ class Round
 
   def post_move_update(piece_pos)
     piece = board.grid[piece_pos.first][piece_pos.last]
-    piece.update
+    piece.update(piece_pos)
     promote(piece_pos) if piece.promotable?(piece_pos)
   end
 
