@@ -1,7 +1,6 @@
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
   include SaveManager
-  include NotationConverter
   include PieceCollections
 
   attr_reader :players, :board, :ref
