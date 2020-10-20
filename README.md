@@ -10,25 +10,25 @@ Final assignment for the Ruby section of The Odin Project
 - [ ] Subclass
 
 ### Special Movement
-- [ ] Pawn Double
-- [ ] Promotion
+- [x] Pawn Double
+- [x] Promotion
 - [ ] Castling
 - [ ] En passant
 - [ ] Tests
 
 ### Check
-- [ ] Red
-- [ ] Green
+- [ ] Tests
+- [x] Implement
 - [ ] Refactor
 
 ### Checkmate
-- [ ] Red
-- [ ] Green
+- [ ] Tests
+- [ ] Implement
 - [ ] Refactor
 
 ### Stalemate
-- [ ] Red
-- [ ] Green
+- [ ] Tests
+- [ ] Implement
 - [ ] Refactor
 
 ### Final Polish
