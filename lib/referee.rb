@@ -9,12 +9,12 @@ class Referee
     @black_king = board.grid[0][4]
   end
 
-  def valid_move?(move, board)
+  def valid_move?(move, board, player)
     starting = move.starting
     ending = move.ending
     save_board_state(starting, ending)
     piece = board[starting.first][starting.last]
-    return false unless allowed_moves(piece, board, starting).include?(ending)
+    return false unless own_piece?(starting, board, player) && allowed_moves(piece, board, starting).include?(ending)
 
     true
   end
@@ -41,6 +41,11 @@ class Referee
   end
 
   private
+
+  def own_piece?(starting, board, player)
+    piece = board[starting.first][starting.last]
+    piece.colour == player.colour
+  end
 
   def select_king(player)
     player.colour == :white ? white_king : black_king
