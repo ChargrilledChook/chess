@@ -105,7 +105,7 @@ describe Pawn do
         subject(:pawn) { described_class.new(colour: :white) }
 
         before do
-          pawn.toggle_first_move
+          pawn.update
         end
 
         context "on an empty board" do
@@ -269,7 +269,7 @@ describe Pawn do
         subject(:pawn) { described_class.new(colour: :black) }
 
         before do
-          pawn.toggle_first_move
+          pawn.update
         end
 
         context "on an empty board" do
