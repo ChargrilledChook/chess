@@ -31,7 +31,9 @@ class Piece
     false
   end
 
-  def update; end
+  def update(_); end
+
+  def undo_update; end
 
   private
 
