@@ -21,11 +21,9 @@ class Round
     move = check_move
     board.place_move(move.starting, move.ending)
     post_move_update(move.ending)
-    return redo_round(move.starting, move.ending) if ref.check?(board.grid, players.first)
+    redo_round(move.starting, move.ending) if ref.check?(board.grid, players.first)
 
-    clear_console
-    draw_console
-    swap_players
+    end_round
   end
 
   def redo_round(starting, ending)
@@ -81,6 +79,12 @@ class Round
     when 'b' then Bishop.new(colour: colour)
     else select_promotion(colour)
     end
+  end
+
+  def end_round
+    clear_console
+    draw_console
+    swap_players
   end
 
   def clear_console
