@@ -7,7 +7,6 @@ Final assignment for the Ruby section of The Odin Project
 - [x] Board
 - [ ] Round
 - [ ] Ref
-- [ ] Subclass
 
 ### Special Movement
 - [x] Pawn Double
