@@ -3,12 +3,10 @@ module Castle
     case colour
     when :white
       grid.place_move(piece_pos[:white_king], piece_to[:w_king_long])
-      grid.place_move(piece_pos[:white_king], piece_to[:w_king_long])
+      grid.place_move(piece_pos[:w_long_rook], piece_to[:w_rook_long])
     when :black
       grid.place_move(piece_pos[:black_king], piece_to[:b_king_long])
-      grid.place_move(piece_pos[:black_king], piece_to[:b_king_long])
-    else
-
+      grid.place_move(piece_pos[:b_long_rook], piece_to[:b_rook_long])
     end
   end
 
