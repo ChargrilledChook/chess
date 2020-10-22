@@ -19,6 +19,10 @@ class Player
     input_move
   end
 
+  def format_move
+    Move.new(input_move)
+  end
+
   def valid_input?(input)
     input.downcase.match?(/^[a-h][1-8][a-h][1-8]$/) || input.downcase == "save"
   end
