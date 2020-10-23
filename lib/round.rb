@@ -31,9 +31,8 @@ class Round
     play
   end
 
-  # TODO
   def game_over?
-    false
+    ref.checkmate?(board.grid, players.first) || ref.stalemate?(board.grid, players.first)
   end
 
   def draw_console
