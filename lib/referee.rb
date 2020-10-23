@@ -35,6 +35,16 @@ class Referee
     check
   end
 
+  # TODO
+  def checkmate?(_board, _player)
+    false
+  end
+
+  # TODO
+  def stalemate?(_board, _player)
+    false
+  end
+
   def restore_board(starting, ending)
     @board.grid[starting.first][starting.last] = @previous_from
     @board.grid[ending.first][ending.last] = @previous_to
