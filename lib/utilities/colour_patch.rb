@@ -1,6 +1,8 @@
 # Monkey patches String class in order to use colourful terminal output.
 # Taken from https://stackoverflow.com/a/16363159
 
+# rubocop:disable Style/SingleLineMethods
+# rubocop:disable Layout/EmptyLineBetweenDefs
 class String
   def black;          "\e[30m#{self}\e[0m" end
   def red;            "\e[31m#{self}\e[0m" end
@@ -26,3 +28,5 @@ class String
   def blink;          "\e[5m#{self}\e[25m" end
   def reverse_color;  "\e[7m#{self}\e[27m" end
 end
+# rubocop:enable Style/SingleLineMethods
+# rubocop:enable Layout/EmptyLineBetweenDefs
