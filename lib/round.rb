@@ -18,8 +18,7 @@ class Round
 
   def play
     move = check_move
-    board.place_move(move.starting, move.ending)
-    post_move_update(move.ending)
+    update_board(move.starting, move.ending)
     redo_round(move.starting, move.ending) if ref.check?(board.grid, players.first)
 
     end_round
@@ -35,12 +34,17 @@ class Round
     ref.checkmate?(board.grid, players.first) || ref.stalemate?(board.grid, players.first)
   end
 
+  # TODO: Add move history, taken pieces, menu etc
   def draw_console
-    # TODO: Add move history, taken pieces, menu etc
     board.render_board
   end
 
   private
+
+  def update_board(from, to)
+    board.place_move(from, to)
+    post_move_update(to)
+  end
 
   def post_move_update(piece_pos)
     piece = board.grid[piece_pos.first][piece_pos.last]
