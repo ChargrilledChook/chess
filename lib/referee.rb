@@ -31,7 +31,7 @@ class Referee
         end
       end
     end
-    #binding.pry
+    # binding.pry
     check
   end
 

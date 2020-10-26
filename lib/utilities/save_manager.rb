@@ -13,7 +13,7 @@ module SaveManager
 
   def self.save_game(round)
     yaml = YAML.dump(round)
-    file = File.new(default_save, 'w+')
+    file = File.new(default_save, "w+")
     file.puts(yaml)
     file.close
     puts save_message

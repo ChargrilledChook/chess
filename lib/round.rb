@@ -75,10 +75,10 @@ class Round
     print "Select your shiny new piece [Q/K/R/B] :  "
     choice = gets.chomp.downcase
     case choice
-    when 'q' then Queen.new(colour: colour)
-    when 'k' then Knight.new(colour: colour)
-    when 'r' then Rook.new(colour: colour)
-    when 'b' then Bishop.new(colour: colour)
+    when "q" then Queen.new(colour: colour)
+    when "k" then Knight.new(colour: colour)
+    when "r" then Rook.new(colour: colour)
+    when "b" then Bishop.new(colour: colour)
     else select_promotion(colour)
     end
   end
