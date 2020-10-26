@@ -34,6 +34,6 @@ class King < Piece
      [0, 1],
      [1, -1],
      [1, 0],
-     [1, 1]]
+     [1, 1]].freeze
   end
 end

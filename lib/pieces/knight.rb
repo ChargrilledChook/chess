@@ -7,7 +7,7 @@ class Knight < Piece
      [1, -2],
      [-1, 2],
      [-1, -2],
-     [1, 2]]
+     [1, 2]].freeze
   end
 
   # OPTIMISE: This code is currently duplicated in King.
