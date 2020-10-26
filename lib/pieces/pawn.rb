@@ -21,10 +21,11 @@ class Pawn < Piece
     colour == :white ? white_pawn : black_pawn
   end
 
+  # Zero and seven represent the top and and bottom of a standard chess board.
   def promotable?(pos)
     case colour
     when :white
-      pos.first == 0
+      pos.first.zero?
     when :black
       pos.first == 7
     end
@@ -37,19 +38,19 @@ class Pawn < Piece
   end
 
   def single_move
-    colour == :white ? [[-1, 0]] : [[1, 0]]
+    colour == :white ? [[-1, 0]] : [[1, 0]].freeze
   end
 
   def double_move
-    colour == :white ? [[-2, 0]] : [[2, 0]]
+    colour == :white ? [[-2, 0]] : [[2, 0]].freeze
   end
 
   def attacks
     case colour
     when :white
-      [[-1, -1], [-1, 1]]
+      [[-1, -1], [-1, 1]].freeze
     when :black
-      [[1, -1], [1, 1]]
+      [[1, -1], [1, 1]].freeze
     end
   end
 
