@@ -1,10 +1,11 @@
 # Experimental move object
 class Move
-  attr_reader :starting, :ending
+  attr_reader :data, :starting, :ending
 
   def initialize(input)
-    @starting = convert_notation(input).first
-    @ending = convert_notation(input).last
+    @data = convert_notation(input)
+    @starting = data.first
+    @ending = data.last
   end
 
   def convert_notation(notation)
@@ -15,6 +16,8 @@ class Move
     ending = [result[3], result[2]]
     [starting, ending]
   end
+
+  private
 
   def convert_column(letter)
     letter.tr("a-h", "0-7").to_i
