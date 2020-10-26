@@ -20,25 +20,11 @@ require_relative "lib/pieces/knight"
 require_relative "lib/pieces/pawn"
 
 def new_session
-  # TODO: Extract string to display and polish implementation
-
-  puts <<~HERE
-
-    ▄████████    ▄█    █▄       ▄████████    ▄████████    ▄████████
-    ███    ███   ███    ███     ███    ███   ███    ███   ███    ███
-    ███    █▀    ███    ███     ███    █▀    ███    █▀    ███    █▀
-    ███         ▄███▄▄▄▄███▄▄  ▄███▄▄▄       ███          ███
-    ███        ▀▀███▀▀▀▀███▀  ▀▀███▀▀▀     ▀███████████ ▀███████████
-    ███    █▄    ███    ███     ███    █▄           ███          ███
-    ███    ███   ███    ███     ███    ███    ▄█    ███    ▄█    ███
-    ████████▀    ███    █▀      ██████████  ▄████████▀   ▄████████▀
-
-
-  HERE
-  puts "\nWelcome to Chess! Enter 1 for a new game or 2 to load your saved game. "
+  puts Display.title_art
+  puts Display.welcome_msg
   selection = gets.chomp.downcase
-  selection = selection == "2" ? SaveManager.load_save : Round.new
-  GameLoop.new(selection).play
+  runtime_option = selection == "2" ? SaveManager.load_save : Round.new
+  GameLoop.new(runtime_option).play
 end
 
 new_session
