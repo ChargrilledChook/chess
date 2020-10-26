@@ -1,37 +1,45 @@
 require "pry"
 
 class Referee
-  attr_reader :white_king, :black_king
+  attr_reader :white_king, :black_king, :move_tree
 
   def initialize(board)
     @board = board
     @white_king = board.grid[7][4]
     @black_king = board.grid[0][4]
+    @move_tree = MoveTree.new(board)
   end
 
-  def valid_move?(move, board, player)
+  def valid_move?(move, player)
+    moves = move_tree.build_move_lists(player.colour)
     starting = move.starting
     ending = move.ending
     save_board_state(starting, ending)
-    piece = board[starting.first][starting.last]
-    return false unless own_piece?(starting, board, player) && allowed_moves(piece, board, starting).include?(ending)
+    return false unless moves.fetch(starting, []).include?(ending)
 
     true
   end
 
+  # need to memoize build_moves somehow?
+  def check?(_board, player)
+    king = select_king(player)
+    moves = move_tree.build_move_lists(king.enemy_colour)
+    binding.pry
+    moves.any? { |move| move.include?(king.position) }
+  end
+
   # OPTIMIZE: Prototype. Refactor
-  def check?(board, player)
+  def old_check?(board, player)
     king = select_king(player)
     check = false
-    board.each_with_index do |rank, ridx|
-      rank.each_index do |file|
-        if board[ridx][file].colour == king.enemy_colour
-          piece = board[ridx][file]
-          check = true if allowed_moves(piece, board, [ridx, file]).include?(king.position)
+    board.each_with_index do |rank, rank_idx|
+      rank.each_index do |file_idx|
+        if board[rank_idx][file_idx].colour == king.enemy_colour
+          piece = board[rank_idx][file_idx]
+          check = true if allowed_moves(piece, board, [rank_idx, file_idx]).include?(king.position)
         end
       end
     end
-    # binding.pry
     check
   end
 
@@ -52,15 +60,11 @@ class Referee
 
   private
 
-  def own_piece?(starting, board, player)
-    piece = board[starting.first][starting.last]
-    piece.colour == player.colour
-  end
-
   def select_king(player)
     player.colour == :white ? white_king : black_king
   end
 
+  # TODO: Being used by check but can be factored out with new move list
   def allowed_moves(piece, board, starting)
     piece.move_list(board, starting)
   end

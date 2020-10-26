@@ -66,7 +66,7 @@ class Round
     move = players.first.input_move
     SaveManager.save_game(self) if move == "save"
     move = Move.new(move) # TODO: Move this part of the logic to player
-    return move if ref.valid_move?(move, board.grid, players.first)
+    return move if ref.valid_move?(move, players.first)
 
     check_move
   end
