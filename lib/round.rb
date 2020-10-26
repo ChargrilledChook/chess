@@ -65,7 +65,7 @@ class Round
   def check_move
     move = players.first.input_move
     SaveManager.save_game(self) if move == "save"
-    move = Move.new(move) # Should this be a class or instance level method?
+    move = Move.new(move) # TODO: Move this part of the logic to player
     return move if ref.valid_move?(move, board.grid, players.first)
 
     check_move
