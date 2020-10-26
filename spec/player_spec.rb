@@ -1,4 +1,4 @@
-require_relative "../lib/display"
+require_relative "../lib/utilities/display"
 require_relative "../lib/player"
 
 describe Player do

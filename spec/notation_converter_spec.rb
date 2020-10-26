@@ -1,4 +1,4 @@
-require_relative "../lib/notation_converter"
+require_relative "../lib/utilities/notation_converter"
 
 describe NotationConverter do
   describe "#self.convert_notation" do

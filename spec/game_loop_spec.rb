@@ -1,4 +1,4 @@
-require_relative "../lib/save_manager"
+require_relative "../lib/utilities/save_manager"
 require_relative "../lib/game_loop"
 
 describe GameLoop do
