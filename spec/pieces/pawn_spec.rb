@@ -2,12 +2,7 @@ require_relative "../../lib/pieces/piece_icons"
 require_relative "../../lib/pieces/piece"
 require_relative "../../lib/pieces/pawn"
 
-# TODO:
-# * En passant
-# * Double move jump bug
-# * Unsuccessful double move bug
-# * Promotion
-
+# TODO: En passant
 describe Pawn do
   let(:empty)    { double("empty", colour: :none) }
   let(:board)    { Array.new(5) { Array.new(5, empty) } }
