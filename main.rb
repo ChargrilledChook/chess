@@ -1,5 +1,4 @@
 require_relative "lib/utilities/display"
-require_relative "lib/utilities/notation_converter"
 require_relative "lib/utilities/colour_patch"
 require_relative "lib/utilities/save_manager"
 require_relative "lib/utilities/piece_hashes"
