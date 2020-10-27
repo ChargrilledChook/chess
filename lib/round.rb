@@ -3,35 +3,66 @@ class Round
   include SaveManager
   include PieceCollections
 
-  attr_reader :players, :board, :ref
+  attr_reader :players, :board, :ref, :move_tree
 
   def initialize(
     players: [Player.new(colour: :white), Player.new(colour: :black)],
-    board: Board.new(default_pieces),
-    ref: Referee.new(board)
+    board: Board.new(stalemate_test),
+    ref: Referee.new(board),
+    move_tree: MoveTree.new(board)
   )
 
     @players = players
     @board = board
     @ref = ref
+    @move_tree = move_tree
   end
 
   def play
     move = check_move
-    update_board(move.starting, move.ending)
-    redo_round(move.starting, move.ending) if ref.check?(players.first)
+    update_board(move.first, move.last)
+    if ref.check?(players.first)
+      redo_round(move.first, move.last)
+      play
+    else
+      end_round
+    end
+  end
 
-    end_round
+  def fake_play(move)
+    ref.save_board_state(move.first, move.last)
+    update_board(move.first, move.last)
+    check = ref.check?(players.first)
+    redo_round(move.first, move.last)
+    check
+  end
+
+  def iterate_over_moves(colour)
+    moves = move_tree.convert_to_moves(colour)
+    moves.all? do |from, to|
+      fake_play([from, to])
+    end
   end
 
   def redo_round(starting, ending)
     ref.restore_board(starting, ending)
     @board.grid[starting.first][starting.last].undo_update
-    play
   end
 
   def game_over?
-    ref.checkmate?(board.grid, players.first) || ref.stalemate?(board.grid, players.first)
+    checkmate? || stalemate?
+  end
+
+  def checkmate?
+    return false unless ref.check?(players.first)
+
+    iterate_over_moves(players.first.colour)
+  end
+
+  def stalemate?
+    return false if ref.check?(players.first)
+
+    iterate_over_moves(players.first.colour)
   end
 
   # TODO: Add move history, taken pieces, menu etc
@@ -66,7 +97,7 @@ class Round
     move = players.first.input_move
     SaveManager.save_game(self) if move == "save"
     move = Move.new(move) # TODO: Move this part of the logic to player
-    return move if ref.valid_move?(move, players.first)
+    return move.data if ref.valid_move?(move.data, players.first)
 
     check_move
   end
