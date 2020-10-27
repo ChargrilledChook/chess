@@ -1,5 +1,5 @@
 class King < Piece
-  attr_reader :position
+  attr_reader :position, :first_move
 
   def post_initialize
     @position = colour == :white ? [7, 4] : [0, 4]

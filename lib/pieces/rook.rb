@@ -1,4 +1,6 @@
 class Rook < Piece
+  attr_reader :first_move
+
   def post_initialize
     @first_move = true
   end
