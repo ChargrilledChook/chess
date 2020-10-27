@@ -24,24 +24,25 @@ class Referee
   def check?(_board, player)
     king = select_king(player)
     moves = move_tree.build_move_lists(king.enemy_colour)
-    binding.pry
-    moves.any? { |move| move.include?(king.position) }
+    moves.values.any? { |ending| ending.include?(king.position) }
   end
 
-  # OPTIMIZE: Prototype. Refactor
-  def old_check?(board, player)
-    king = select_king(player)
-    check = false
-    board.each_with_index do |rank, rank_idx|
-      rank.each_index do |file_idx|
-        if board[rank_idx][file_idx].colour == king.enemy_colour
-          piece = board[rank_idx][file_idx]
-          check = true if allowed_moves(piece, board, [rank_idx, file_idx]).include?(king.position)
-        end
-      end
-    end
-    check
-  end
+  # # OPTIMIZE: Prototype. Refactor
+  # def old_check?(board, player)
+  #   king = select_king(player)
+  #   check = false
+  #   board.each_with_index do |rank, rank_idx|
+  #     rank.each_index do |file_idx|
+  #       if board[rank_idx][file_idx].colour == king.enemy_colour
+  #         piece = board[rank_idx][file_idx]
+  #         check = true if allowed_moves(piece, board, [rank_idx, file_idx]).include?(king.position)
+  #       end
+  #     end
+  #   end
+  #   moves = move_tree.build_move_lists(king.colour)
+  #   #binding.pry
+  #   check
+  # end
 
   # TODO
   def checkmate?(_board, _player)
