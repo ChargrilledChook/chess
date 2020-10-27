@@ -1,5 +1,3 @@
-require "pry"
-
 class Referee
   attr_reader :white_king, :black_king, :move_tree
 
