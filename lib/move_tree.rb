@@ -3,6 +3,7 @@
 class MoveTree
   attr_reader :board
 
+  # TODO: Might not need these self methods
   def self.build_tree(board, colour)
     board.grid.each_with_index.flat_map do |line, rank_idx|
       line.each_index.filter_map do |file_idx|
