@@ -49,4 +49,12 @@ module PieceCollections
       [6, 6] => Pawn.new(colour: :white),
       [6, 7] => Pawn.new(colour: :white) }
   end
+
+  def stalemate_test
+    { [0, 4] => King.new(colour: :black),
+      [7, 4] => King.new(colour: :white),
+      [6, 3] => Rook.new(colour: :white),
+      [1, 7] => Rook.new(colour: :white),
+      [6, 5] => Rook.new(colour: :white) }
+  end
 end
