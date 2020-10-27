@@ -19,7 +19,7 @@ class Round
   def play
     move = check_move
     update_board(move.starting, move.ending)
-    redo_round(move.starting, move.ending) if ref.check?(board.grid, players.first)
+    redo_round(move.starting, move.ending) if ref.check?(players.first)
 
     end_round
   end

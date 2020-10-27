@@ -21,7 +21,7 @@ class Referee
   end
 
   # need to memoize build_moves somehow?
-  def check?(_board, player)
+  def check?(player)
     king = select_king(player)
     moves = move_tree.build_move_lists(king.enemy_colour)
     moves.values.any? { |ending| ending.include?(king.position) }
