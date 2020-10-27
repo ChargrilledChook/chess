@@ -12,8 +12,8 @@ class Referee
 
   def valid_move?(move, player)
     moves = move_tree.build_move_lists(player.colour)
-    starting = move.starting
-    ending = move.ending
+    starting = move.first
+    ending = move.last
     save_board_state(starting, ending)
     return false unless moves.fetch(starting, []).include?(ending)
 
@@ -26,23 +26,6 @@ class Referee
     moves = move_tree.build_move_lists(king.enemy_colour)
     moves.values.any? { |ending| ending.include?(king.position) }
   end
-
-  # # OPTIMIZE: Prototype. Refactor
-  # def old_check?(board, player)
-  #   king = select_king(player)
-  #   check = false
-  #   board.each_with_index do |rank, rank_idx|
-  #     rank.each_index do |file_idx|
-  #       if board[rank_idx][file_idx].colour == king.enemy_colour
-  #         piece = board[rank_idx][file_idx]
-  #         check = true if allowed_moves(piece, board, [rank_idx, file_idx]).include?(king.position)
-  #       end
-  #     end
-  #   end
-  #   moves = move_tree.build_move_lists(king.colour)
-  #   #binding.pry
-  #   check
-  # end
 
   # TODO
   def checkmate?(_board, _player)
@@ -59,6 +42,11 @@ class Referee
     @board.grid[ending.first][ending.last] = @previous_to
   end
 
+  def save_board_state(starting, ending)
+    @previous_from = @board.grid[starting.first][starting.last]
+    @previous_to = @board.grid[ending.first][ending.last]
+  end
+
   private
 
   def select_king(player)
@@ -68,10 +56,5 @@ class Referee
   # TODO: Being used by check but can be factored out with new move list
   def allowed_moves(piece, board, starting)
     piece.move_list(board, starting)
-  end
-
-  def save_board_state(starting, ending)
-    @previous_from = @board.grid[starting.first][starting.last]
-    @previous_to = @board.grid[ending.first][ending.last]
   end
 end
