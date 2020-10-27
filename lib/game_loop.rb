@@ -10,6 +10,16 @@ class GameLoop
   def play
     round.draw_console
     round.play until round.game_over?
-    puts "#{round.players.last.colour.capitalize} wins by checkmate!" # TODO: TEMPORARY FOR TESTING ONLY
+    post_game
+  end
+
+  def post_game
+    if round.checkmate?
+      puts "#{round.players.last.colour.capitalize} wins by checkmate!"
+    elsif round.stalemate?
+      puts "Stalemate!"
+    else
+      puts "Whoops, something went wrong."
+    end
   end
 end
