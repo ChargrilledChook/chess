@@ -14,6 +14,7 @@ class MoveTree
       end
     end
   rescue NoMethodError
+    # This only exists for replit compatibility. Ruby 2.5 doesn't have #filter_map
     backwards_compat_build_tree(colour)
   end
 
