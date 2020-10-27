@@ -73,6 +73,7 @@ describe Rook do
 
         expect(rook_moves).to match_array(expected)
       end
+
     end
     context "with enemy pieces" do
       let(:mini_board) { Array.new(4) { Array.new(4, empty) } }
@@ -119,6 +120,17 @@ describe Rook do
         board[2][5] = enemy
         rook_moves = rook.move_list(board, [2, 2])
         expected = [1, 2], [3, 2], [2, 3], [2, 4], [2, 5]
+
+        expect(rook_moves).to match_array(expected)
+      end
+
+      it "is correct when an enemy is wrapped " do
+        board[0][0] = rook
+        board[0][1] = friend
+        board[1][0] = friend
+        board[7][0] = enemy
+        rook_moves = rook.move_list(board, [0, 0])
+        expected = []
 
         expect(rook_moves).to match_array(expected)
       end

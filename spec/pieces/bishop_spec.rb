@@ -120,6 +120,15 @@ describe Bishop do
 
         expect(bishop_moves).to match_array(expected)
       end
+      it "is correct when an enemy is wrapped " do
+        board[0][0] = bishop
+        board[1][1] = friend
+        board[4][4] = enemy
+        bishop_moves = bishop.move_list(board, [0, 0])
+        expected = []
+
+        expect(bishop_moves).to match_array(expected)
+      end
     end
   end
 

@@ -108,6 +108,17 @@ describe Queen do
 
         expect(queen_moves).to match_array(expected)
       end
+      it "is correct when an enemy is wrapped " do
+        board[0][0] = queen
+        board[0][1] = friend
+        board[1][0] = friend
+        board[1][1] = friend
+        board[4][0] = enemy
+        queen_moves = queen.move_list(board, [0, 0])
+        expected = []
+
+        expect(queen_moves).to match_array(expected)
+      end
     end
   end
 
