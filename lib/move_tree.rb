@@ -3,22 +3,6 @@
 class MoveTree
   attr_reader :board
 
-  # TODO: Might not need these self methods
-  def self.build_tree(board, colour)
-    board.grid.each_with_index.flat_map do |line, rank_idx|
-      line.each_index.filter_map do |file_idx|
-        [rank_idx, file_idx] if board.grid[rank_idx][file_idx].colour == colour
-      end
-    end
-  end
-
-  def self.build_move_lists(board, colour)
-    pieces = build_tree(colour)
-    pieces.each_with_object({}) do |piece, res|
-      res[piece] = board.grid[piece.first][piece.last].move_list(board.grid, [piece.first, piece.last])
-    end
-  end
-
   def initialize(board)
     @board = board
   end
@@ -29,6 +13,13 @@ class MoveTree
         [rank_idx, file_idx] if board.grid[rank_idx][file_idx].colour == colour
       end
     end
+  rescue NoMethodError
+    res = board.grid.each_with_index.flat_map do |line, rank_idx|
+      line.each_index.map do |file_idx|
+        [rank_idx, file_idx] if board.grid[rank_idx][file_idx].colour == colour
+      end
+    end
+    res.compact
   end
 
   def build_move_lists(colour)
@@ -43,5 +34,21 @@ class MoveTree
     move_list.flat_map do |key, values|
       values.map { |value| [key, value] }
     end
+  end
+
+  def build_move_lists2(colour)
+    pieces = build_tree_no_filmap(colour)
+    pieces.each_with_object({}) do |piece, res|
+      res[piece] = board.grid[piece.first][piece.last].move_list(board.grid, [piece.first, piece.last])
+    end
+  end
+
+  def build_tree_no_filmap(colour)
+    res = board.grid.each_with_index.flat_map do |line, rank_idx|
+      line.each_index.map do |file_idx|
+        [rank_idx, file_idx] if board.grid[rank_idx][file_idx].colour == colour
+      end
+    end
+    res.compact
   end
 end
