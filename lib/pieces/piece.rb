@@ -19,7 +19,7 @@ class Piece
         res << pos
         pos = update_pos(move, pos)
       end
-      res << open_attack(board, pos) if open_attack(board, pos)
+      res << open_attack(board, pos) if open_attack(board, pos) && valid_move?(board, pos)
     end
   end
 
@@ -46,7 +46,7 @@ class Piece
   end
 
   def valid_move?(board, move)
-    move.first.between?(0, board.size) && move.last.between?(0, board.size)
+    move.first.between?(0, board.size - 1) && move.last.between?(0, board.size - 1)
   end
 
   def open_square?(board, move)
