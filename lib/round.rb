@@ -29,6 +29,7 @@ class Round
     end
   end
 
+  # TODO: Fix this name
   def fake_play(move)
     ref.save_board_state(move.first, move.last)
     update_board(move.first, move.last)
@@ -37,6 +38,7 @@ class Round
     check
   end
 
+  # TODO: Fix this name
   def iterate_over_moves(colour)
     moves = move_tree.convert_to_moves(colour)
     moves.all? do |from, to|
