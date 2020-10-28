@@ -1,4 +1,4 @@
-require "pry"
+#require "pry"
 
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
