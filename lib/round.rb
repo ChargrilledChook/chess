@@ -1,5 +1,8 @@
+require "pry"
+
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
+  include Castle
   include SaveManager
   include PieceCollections
 
@@ -7,7 +10,7 @@ class Round
 
   def initialize(
     players: [Player.new(colour: :white), Player.new(colour: :black)],
-    board: Board.new(default_pieces),
+    board: Board.new(castle_test),
     ref: Referee.new(board),
     move_tree: MoveTree.new(board)
   )
@@ -19,11 +22,13 @@ class Round
   end
 
   def play
+    #inding.pry
     move = check_move
+    return castle_round if move == "castle"
+
     update_board(move.first, move.last)
     if ref.check?(players.first)
       redo_round(move.first, move.last)
-      play
     else
       end_round
     end
@@ -98,6 +103,8 @@ class Round
   def check_move
     move = players.first.input_move
     SaveManager.save_game(self) if move == "save"
+    return move if move == "castle"
+
     move = Move.new(move) # TODO: Move this part of the logic to player
     return move.data if ref.valid_move?(move.data, players.first)
 
