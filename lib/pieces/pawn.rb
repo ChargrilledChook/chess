@@ -75,4 +75,33 @@ class Pawn < Piece
     double = double_move.map { |move| [starting.first + move.first, starting.last + move.last] }
     double.select { |move| valid_move?(board, move) && empty?(board, move) }
   end
+
+  # OPTIMISE: More succint way to express this idea
+  def en_passant(board, starting)
+    colour == :white ? passant_white(board, starting) : passant_black(board, starting)
+  end
+
+  def passant_white
+    res = []
+    [1, -1].each do |move|
+      piece = board[starting.first][starting.last + move]
+      next unless piece.colour == enemy_colour?
+      next unless piece.passable?
+
+      res << [starting.first - 1, starting.last + move]
+    end
+    res
+  end
+
+  def passant_black
+    res = []
+    [1, -1].each do |move|
+      piece = board[starting.first][starting.last + move]
+      next unless piece.colour == enemy_colour?
+      next unless piece.passable?
+
+      res << [starting.first + 1, starting.last + move]
+    end
+    res
+  end
 end
