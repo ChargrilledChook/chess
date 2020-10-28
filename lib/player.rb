@@ -20,6 +20,12 @@ class Player
   end
 
   def valid_input?(input)
-    input.downcase.match?(/^[a-h][1-8][a-h][1-8]$/) || input.downcase == "save"
+    input.downcase.match?(/^[a-h][1-8][a-h][1-8]$/) || keywords.include?(input.downcase)
+  end
+
+  private
+
+  def keywords
+    %w[save castle]
   end
 end
