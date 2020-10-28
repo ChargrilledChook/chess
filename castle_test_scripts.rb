@@ -1,4 +1,8 @@
-module Castle
+module CastleScripts
+  def white_short
+    [[[7, 4], [7, 5]], [[7, 5], [7, 6]], [[7, 7], [7, 5]]]
+  end
+
   def castle_long_white(grid)
     grid.place_move(piece_pos[:white_king], piece_to[:w_king_long])
     grid.place_move(piece_pos[:w_long_rook], piece_to[:w_long_rook])
