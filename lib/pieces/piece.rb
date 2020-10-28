@@ -35,6 +35,10 @@ class Piece
 
   def undo_update; end
 
+  def king?
+    false
+  end
+
   private
 
   def moves
