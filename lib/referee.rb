@@ -49,9 +49,4 @@ class Referee
   def correct_king?(rank_idx, file_idx, colour)
     board.grid[rank_idx][file_idx].king? && board.grid[rank_idx][file_idx].colour == colour
   end
-
-  # TODO: Being used by check but can be factored out with new move list
-  def allowed_moves(piece, board, starting)
-    piece.move_list(board, starting)
-  end
 end
