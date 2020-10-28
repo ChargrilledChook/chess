@@ -12,19 +12,33 @@ class Round
     board: Board.new(default_pieces),
     ref: Referee.new(board),
     move_tree: MoveTree.new(board),
-    players: [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+    player_types:
     # 2 AI :
-    # ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)
+    # players: [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
     # 1 Each:
     # players: [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
     # 2 human:
     # players: [Player.new(colour: :white), Player.new(colour: :black)]
   )
 
-    @players = players
     @board = board
     @ref = ref
     @move_tree = move_tree
+    post_initialize(player_types)
+  end
+
+  def post_initialize(player_types)
+    case player_types
+    when "1"
+      @players = two_humans
+    when "2"
+      @players = one_human_one_ai
+    when "3"
+      @players = two_ai
+    else
+      puts "Something went wrong when initialising players. Please try again."
+      exit
+    end
   end
 
   def play
@@ -33,10 +47,13 @@ class Round
   end
 
   def normal_round(move)
-    if ref.check?(players.first)
+    return end_round_no_swap unless ref.valid_move?(move, players.first)
+
+    if attempt_move(move)
       redo_round(move.first, move.last)
     else
       update_board(move.first, move.last)
+      sleep 0.5
       end_round
     end
   end
@@ -123,7 +140,7 @@ class Round
 
   def select_promotion(colour)
     print "Select your shiny new piece [Q/K/R/B] :  "
-    choice = gets.chomp.downcase
+    #choice = gets.chomp.downcase
     choice = "q" # DEBUGGING ONLY
     case choice
     when "q" then Queen.new(colour: colour)
@@ -140,7 +157,24 @@ class Round
     swap_players
   end
 
+  def end_round_no_swap
+    clear_console
+    draw_console
+  end
+
   def clear_console
     puts "\e[H\e[2J"
+  end
+
+  def two_humans
+    [Player.new(colour: :white), Player.new(colour: :black)]
+  end
+
+  def two_ai
+    [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+  end
+
+  def one_human_one_ai
+    [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
   end
 end
