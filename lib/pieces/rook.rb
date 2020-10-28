@@ -9,6 +9,14 @@ class Rook < Piece
     [[1, 0], [-1, 0], [0, 1], [0, -1]].freeze
   end
 
+  def update(_ = nil)
+    @first_move = false
+  end
+
+  def undo_update
+    @first_move = true
+  end
+
   def to_s
     colour == :white ? white_rook : black_rook
   end
