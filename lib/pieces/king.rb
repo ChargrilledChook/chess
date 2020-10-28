@@ -12,13 +12,16 @@ class King < Piece
     list.select { |move| valid_move?(board, move) && !friend?(board, move) }
   end
 
-  def update(pos)
-    @previous_pos = @position
-    @position = pos
+  def update(_ = nil)
+    @first_move = false
   end
 
   def undo_update
-    @position = @previous_pos
+    @first_move = true
+  end
+
+  def king?
+    true
   end
 
   def to_s
