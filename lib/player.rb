@@ -12,6 +12,13 @@ class Player
   # May need to add an argument to pass in type of prompt - default is normal,
   # Otherwise error message / failure - ie empty square, not your piece etc
   def input_move
+    move = user_input
+    return move if keywords.include?(move)
+
+    Move.new(move).data
+  end
+
+  def user_input
     print move_prompt_msg
     move = gets.chomp.downcase
     return move if valid_input?(move)
@@ -26,6 +33,6 @@ class Player
   private
 
   def keywords
-    %w[save castle]
+    %w[save castle exit]
   end
 end
