@@ -1,10 +1,8 @@
 class Referee
-  attr_reader :white_king, :black_king, :move_tree
+  attr_reader :move_tree, :board
 
   def initialize(board)
     @board = board
-    @white_king = board.grid[7][4]
-    @black_king = board.grid[0][4]
     @move_tree = MoveTree.new(board)
   end
 
@@ -20,19 +18,10 @@ class Referee
 
   # need to memoize build_moves somehow?
   def check?(player)
-    king = select_king(player)
+    king_pos = find_king_pos(player.colour)
+    king = board.grid[king_pos.first][king_pos.last]
     moves = move_tree.build_move_lists(king.enemy_colour)
-    moves.values.any? { |ending| ending.include?(king.position) }
-  end
-
-  # TODO
-  def checkmate?(_board, _player)
-    false
-  end
-
-  # TODO
-  def stalemate?(_board, _player)
-    false
+    moves.values.any? { |ending| ending.include?(king_pos) }
   end
 
   def restore_board(starting, ending)
@@ -47,8 +36,18 @@ class Referee
 
   private
 
-  def select_king(player)
-    player.colour == :white ? white_king : black_king
+  # OPTIMISE: Very inefficient
+  def find_king_pos(colour)
+    res = board.grid.each_with_index.flat_map do |line, rank_idx|
+      line.each_index.map do |file_idx|
+        [rank_idx, file_idx] if correct_king?(rank_idx, file_idx, colour)
+      end
+    end
+    res.compact.flatten
+  end
+
+  def correct_king?(rank_idx, file_idx, colour)
+    board.grid[rank_idx][file_idx].king? && board.grid[rank_idx][file_idx].colour == colour
   end
 
   # TODO: Being used by check but can be factored out with new move list
