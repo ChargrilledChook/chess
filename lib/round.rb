@@ -9,10 +9,16 @@ class Round
   attr_reader :players, :board, :ref, :move_tree
 
   def initialize(
-    players: [Player.new(colour: :white), Player.new(colour: :black)],
-    board: Board.new(castle_test),
+    board: Board.new(default_pieces),
     ref: Referee.new(board),
-    move_tree: MoveTree.new(board)
+    move_tree: MoveTree.new(board),
+    players: [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+    # 2 AI :
+    # ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)
+    # 1 Each:
+    # players: [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+    # 2 human:
+    # players: [Player.new(colour: :white), Player.new(colour: :black)]
   )
 
     @players = players
@@ -22,22 +28,37 @@ class Round
   end
 
   def play
-    #inding.pry
-    move = check_move
-    return castle_round if move == "castle"
+    move = players.first.input_move
+    round_type(move)
+  end
 
-    update_board(move.first, move.last)
+  def normal_round(move)
     if ref.check?(players.first)
       redo_round(move.first, move.last)
     else
+      update_board(move.first, move.last)
       end_round
     end
   end
 
+  def round_type(move)
+    case move
+    when "save"
+      SaveManager.save_game(self)
+    when "exit"
+      exit
+    when "castle"
+      castle_round
+    else
+      normal_round(move)
+    end
+  end
+
   # TODO: Fix this name
-  def fake_play(move)
+  def attempt_move(move)
     ref.save_board_state(move.first, move.last)
-    update_board(move.first, move.last)
+    #update_board(move.first, move.last)
+    board.place_move(move.first, move.last)
     check = ref.check?(players.first)
     redo_round(move.first, move.last)
     check
@@ -47,7 +68,7 @@ class Round
   def iterate_over_moves(colour)
     moves = move_tree.convert_to_moves(colour)
     moves.all? do |from, to|
-      fake_play([from, to])
+      attempt_move([from, to])
     end
   end
 
@@ -57,6 +78,7 @@ class Round
   end
 
   def game_over?
+    #binding.pry
     checkmate? || stalemate?
   end
 
@@ -99,21 +121,10 @@ class Round
     @players.rotate!
   end
 
-  # OPTIMIZE: shit name
-  def check_move
-    move = players.first.input_move
-    SaveManager.save_game(self) if move == "save"
-    return move if move == "castle"
-
-    move = Move.new(move) # TODO: Move this part of the logic to player
-    return move.data if ref.valid_move?(move.data, players.first)
-
-    check_move
-  end
-
   def select_promotion(colour)
     print "Select your shiny new piece [Q/K/R/B] :  "
     choice = gets.chomp.downcase
+    choice = "q" # DEBUGGING ONLY
     case choice
     when "q" then Queen.new(colour: colour)
     when "k" then Knight.new(colour: colour)
