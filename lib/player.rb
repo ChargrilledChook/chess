@@ -23,7 +23,7 @@ class Player
     move = gets.chomp.downcase
     return move if valid_input?(move)
 
-    input_move
+    user_input
   end
 
   def valid_input?(input)
