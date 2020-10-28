@@ -57,4 +57,15 @@ module PieceCollections
       [1, 7] => Rook.new(colour: :white),
       [6, 5] => Rook.new(colour: :white) }
   end
+
+  def castle_test
+    { [7, 0] => Rook.new(colour: :white),
+      [0, 0] => Rook.new(colour: :black),
+      [7, 3] => Queen.new(colour: :white),
+      [7, 4] => King.new(colour: :white),
+      [0, 3] => Queen.new(colour: :black),
+      [0, 4] => King.new(colour: :black),
+      [0, 7] => Rook.new(colour: :black),
+      [7, 7] => Rook.new(colour: :white) }
+  end
 end
