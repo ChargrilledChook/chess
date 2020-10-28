@@ -25,8 +25,19 @@ def new_session
   puts Display.title_art
   puts Display.welcome_msg
   selection = gets.chomp.downcase
-  runtime_option = selection == "2" ? SaveManager.load_save : Round.new
+  runtime_option = selection == "2" ? SaveManager.load_save : Round.new(player_types: select_player_types)
   GameLoop.new(runtime_option).play
+end
+
+def select_player_types
+  puts "Select what type of game: "
+  puts "1. Human vs Human"
+  puts "2. Human vs AI"
+  puts "3. AI vs AI"
+  type = gets.chomp.downcase
+  return type if (1..3).include?(type.to_i)
+
+  select_player_types
 end
 
 new_session
