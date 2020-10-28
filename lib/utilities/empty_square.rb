@@ -5,6 +5,10 @@ class EmptySquare
     :none
   end
 
+  def king?
+    false
+  end
+
   def to_s
     "   "
   end
