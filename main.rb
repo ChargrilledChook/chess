@@ -22,8 +22,14 @@ require_relative "lib/pieces/knight"
 require_relative "lib/pieces/pawn"
 
 def new_session
-  title
   menu
+  play_again
+end
+
+def play_again
+  puts "\nPlay again? [Y/n] :"
+  choice = gets.chomp.downcase
+  choice == "y" ? new_session : puts("Thanks for playing!")
 end
 
 def title
@@ -69,4 +75,5 @@ def select_runtime(option)
   GameLoop.new(runtime).play
 end
 
+title
 new_session
