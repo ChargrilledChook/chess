@@ -2,6 +2,7 @@
 
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
+  include Display
   include Castle
   include SaveManager
   include PieceCollections
@@ -114,6 +115,16 @@ class Round
   # TODO: Add move history, taken pieces, menu etc
   def draw_console
     board.render_board
+    check_message
+  end
+
+  # TODO: Extract to display
+  def check_message
+    ref.check?(players.last) ? puts("\n#{players.last.colour.capitalize} is in check!") : puts("\n\n")
+  end
+
+  def clear_console
+    Display.clear_console
   end
 
   private
@@ -160,10 +171,6 @@ class Round
   def end_round_no_swap
     clear_console
     draw_console
-  end
-
-  def clear_console
-    puts "\e[H\e[2J"
   end
 
   def two_humans
