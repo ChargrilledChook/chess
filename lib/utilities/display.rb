@@ -43,4 +43,8 @@ module Display
   def self.rules_msg
     "\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text"
   end
+
+  def help_msg
+    'List of commands goes here: notation, castle, save, exit'
+  end
 end
