@@ -65,4 +65,9 @@ module Display
       4. AI vs AI
     HEREDOC
   end
+
+  def promotion_msg
+    "\nSelect your shiny new piece [Q/K/R/B] :  "
+  end
+
 end
