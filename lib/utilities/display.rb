@@ -70,4 +70,7 @@ module Display
     "\nSelect your shiny new piece [Q/K/R/B] :  "
   end
 
+  def player_selection_error_msg
+    "\nSomething went wrong when initialising players. Please try again."
+  end
 end

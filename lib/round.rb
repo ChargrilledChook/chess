@@ -14,12 +14,6 @@ class Round
     ref: Referee.new(board),
     move_tree: MoveTree.new(board),
     player_types:
-    # 2 AI :
-    # players: [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
-    # 1 Each:
-    # players: [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
-    # 2 human:
-    # players: [Player.new(colour: :white), Player.new(colour: :black)]
   )
 
     @board = board
@@ -39,7 +33,7 @@ class Round
     when "4"
       @players = two_ai
     else
-      puts "Something went wrong when initialising players. Please try again."
+      puts player_selection_error_msg
       exit
     end
   end
