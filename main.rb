@@ -24,9 +24,6 @@ require_relative "lib/pieces/pawn"
 def new_session
   title
   menu
-  selection = gets.chomp.downcase
-  runtime_option = selection == "2" ? SaveManager.load_save : Round.new(player_types: select_player_types)
-  GameLoop.new(runtime_option).play
 end
 
 def title
@@ -39,18 +36,36 @@ end
 def menu
   Display.clear_console
   puts Display.menu_msg
+  choice = gets.chomp
+  case choice
+  when "1" then select_runtime("1")
+  when "2" then select_runtime("2")
+  when "3" then rules
+  else menu
+  end
 end
 
 def select_player_types
   puts "Select what type of game: "
   puts "1. Human vs Human"
   puts "2. Human vs AI"
-  # Add Ai vs human ie swap colours
-  puts "3. AI vs AI"
+  puts "3. AI vs Human"
+  puts "4. AI vs AI"
   type = gets.chomp.downcase
-  return type if (1..3).include?(type.to_i)
+  return type if (1..4).include?(type.to_i)
 
   select_player_types
+end
+
+def rules
+  puts Display.rules_msg
+  gets
+  menu
+end
+
+def select_runtime(option)
+  runtime = option == "2" ? SaveManager.load_save : Round.new(player_types: select_player_types)
+  GameLoop.new(runtime).play
 end
 
 new_session
