@@ -45,6 +45,7 @@ def menu
   end
 end
 
+# TODO: Extract to display
 def select_player_types
   puts "Select what type of game: "
   puts "1. Human vs Human"
