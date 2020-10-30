@@ -102,9 +102,7 @@ class Round
   end
 
   def stalemate?
-    return false if ref.check?(current_player)
-
-    iterate_over_moves(current_player.colour)
+    blocked_stalemate || kings_only_stalemate
   end
 
   # TODO: Add move history, taken pieces, menu etc
@@ -123,6 +121,16 @@ class Round
   end
 
   private
+
+  def blocked_stalemate
+    return false if ref.check?(current_player)
+
+    iterate_over_moves(current_player.colour)
+  end
+
+  def kings_only_stalemate
+    move_tree.select_pieces(current_player.colour).size == 1 && move_tree.select_pieces(players.last.colour).size == 1
+  end
 
   def update_board(from, to)
     board.place_move(from, to)
@@ -175,7 +183,8 @@ class Round
   end
 
   def two_ai
-    [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+    [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree),
+     ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
   end
 
   def one_human_one_ai
