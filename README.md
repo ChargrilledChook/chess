@@ -1,12 +1,15 @@
 # chess
 Final assignment for the Ruby section of The Odin Project
 
+View live - [replit](https://repl.it/@HappyFrog/chess#README.md)
+Solo window - [replit](https://chess.happyfrog.repl.run)
 ## Remaining Milestones
 
 ### Remaining Tests
 - [x] Board
 - [ ] Round
 - [ ] Ref
+- [ ] Audit
 
 ### Special Movement
 - [x] Pawn Double
@@ -18,20 +21,20 @@ Final assignment for the Ruby section of The Odin Project
 ### Check
 - [ ] Tests
 - [x] Implement
-- [ ] Refactor
+- [x] Refactor
 
 ### Checkmate
 - [ ] Tests
-- [ ] Implement
-- [ ] Refactor
+- [x] Implement
+- [x] Refactor
 
 ### Stalemate
 - [ ] Tests
-- [ ] Implement
-- [ ] Refactor
+- [x] Implement
+- [x] Refactor
 
 ### Final Polish
 - [ ] Remaining refactorings
 - [ ] UI
-- [ ] UX
+- [x] UX
 - [ ] Upload to replit
