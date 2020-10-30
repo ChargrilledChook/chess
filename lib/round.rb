@@ -1,4 +1,4 @@
-#require "pry"
+# require "pry"
 
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
@@ -71,7 +71,7 @@ class Round
   # TODO: Fix this name
   def attempt_move(move)
     ref.save_board_state(move.first, move.last)
-    #update_board(move.first, move.last)
+    # update_board(move.first, move.last)
     board.place_move(move.first, move.last)
     check = ref.check?(current_player)
     redo_round(move.first, move.last)
@@ -88,7 +88,7 @@ class Round
 
   def redo_round(starting, ending)
     ref.restore_board(starting, ending)
-    @board.grid[starting.first][starting.last].undo_update
+    # @board.grid[starting.first][starting.last].undo_update << This is the culprit. Check there are no other bugs caused by taking it out
   end
 
   def game_over?
