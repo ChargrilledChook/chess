@@ -25,7 +25,7 @@ module Display
   end
 
   def self.any_key_msg
-    "\n\t\t Press ANY KEY to continue"
+    "\n\t\t Press ENTER to continue"
   end
 
   def self.menu_msg
@@ -44,7 +44,25 @@ module Display
     "\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text"
   end
 
+  def self.play_again_msg
+    "\nPlay again? [Y/n] : "
+  end
+
   def help_msg
-    'List of commands goes here: notation, castle, save, exit'
+    "List of commands goes here: notation, castle, save, exit"
+  end
+
+  def thanks_exit_msg
+    "\nThanks for playing!"
+  end
+
+  def self.player_select_msg
+    <<~HEREDOC
+      \nSelect what type of game:
+      1. Human vs Human
+      2. Human vs AI
+      3. AI vs Human
+      4. AI vs AI
+    HEREDOC
   end
 end

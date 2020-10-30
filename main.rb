@@ -27,9 +27,9 @@ def new_session
 end
 
 def play_again
-  puts "\nPlay again? [Y/n] :"
+  print Display.play_again_msg
   choice = gets.chomp.downcase
-  choice == "y" ? new_session : puts("Thanks for playing!")
+  choice == "y" ? new_session : puts(Display.thanks_exit_msg)
 end
 
 def title
@@ -51,13 +51,8 @@ def menu
   end
 end
 
-# TODO: Extract to display
 def select_player_types
-  puts "Select what type of game: "
-  puts "1. Human vs Human"
-  puts "2. Human vs AI"
-  puts "3. AI vs Human"
-  puts "4. AI vs AI"
+  puts Display.player_select_msg
   type = gets.chomp.downcase
   return type if (1..4).include?(type.to_i)
 
