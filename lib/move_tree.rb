@@ -7,7 +7,7 @@ class MoveTree
     @board = board
   end
 
-  def build_tree(colour)
+  def select_pieces(colour)
     board.grid.each_with_index.flat_map do |line, rank_idx|
       line.each_index.filter_map do |file_idx|
         [rank_idx, file_idx] if board.grid[rank_idx][file_idx].colour == colour
@@ -15,11 +15,11 @@ class MoveTree
     end
   rescue NoMethodError
     # This only exists for replit compatibility. Ruby 2.5 doesn't have #filter_map
-    backwards_compat_build_tree(colour)
+    backwards_compat_select_pieces(colour)
   end
 
   def build_move_lists(colour)
-    pieces = build_tree(colour)
+    pieces = select_pieces(colour)
     pieces.each_with_object({}) do |piece, res|
       res[piece] = board.grid[piece.first][piece.last].move_list(board.grid, [piece.first, piece.last])
     end
@@ -32,7 +32,7 @@ class MoveTree
     end
   end
 
-  def backwards_compat_build_tree(colour)
+  def backwards_compat_select_pieces(colour)
     res = board.grid.each_with_index.flat_map do |line, rank_idx|
       line.each_index.map do |file_idx|
         [rank_idx, file_idx] if board.grid[rank_idx][file_idx].colour == colour
