@@ -151,9 +151,7 @@ class Round
   end
 
   def select_promotion(colour)
-    print "Select your shiny new piece [Q/K/R/B] :  "
-    #choice = gets.chomp.downcase
-    choice = "q" # DEBUGGING ONLY
+    choice = current_player.choose_promotion
     case choice
     when "q" then Queen.new(colour: colour)
     when "k" then Knight.new(colour: colour)
