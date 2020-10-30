@@ -35,6 +35,8 @@ class Round
     when "2"
       @players = one_human_one_ai
     when "3"
+      @players = one_ai_one_human
+    when "4"
       @players = two_ai
     else
       puts "Something went wrong when initialising players. Please try again."
@@ -183,5 +185,9 @@ class Round
 
   def one_human_one_ai
     [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+  end
+
+  def one_ai_one_human
+    [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), Player.new(colour: :black)]
   end
 end
