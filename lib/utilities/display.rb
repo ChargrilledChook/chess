@@ -39,4 +39,8 @@ module Display
   def self.clear_console
     puts "\e[H\e[2J"
   end
+
+  def self.rules_msg
+    "\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text"
+  end
 end
