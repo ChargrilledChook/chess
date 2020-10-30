@@ -1,11 +1,12 @@
 # A computer controlled player. Not very smart. Picks legal moves randomly.
 class ComputerPlayer
-  attr_reader :colour, :move_tree
+  attr_reader :colour, :move_tree, :ai
 
   def initialize(colour:, board:, move_tree:)
     @colour = colour
     @board = board
     @move_tree = move_tree
+    @ai = true
   end
 
   def input_move

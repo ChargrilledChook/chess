@@ -54,7 +54,7 @@ class Round
       redo_round(move.first, move.last)
     else
       update_board(move.first, move.last)
-      sleep 0.5
+      sleep 0.5 if players.first.ai
       end_round
     end
   end

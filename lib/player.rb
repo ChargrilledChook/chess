@@ -2,15 +2,13 @@
 class Player
   include Display
 
-  attr_reader :colour
+  attr_reader :colour, :ai
 
   def initialize(colour:)
     @colour = colour
+    @ai = false
   end
 
-  # HACK: Refactor. Not awful but could be more robust.
-  # May need to add an argument to pass in type of prompt - default is normal,
-  # Otherwise error message / failure - ie empty square, not your piece etc
   def input_move
     move = user_input
     return move if keywords.include?(move)
