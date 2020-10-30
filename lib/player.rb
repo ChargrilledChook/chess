@@ -28,6 +28,11 @@ class Player
     input.downcase.match?(/^[a-h][1-8][a-h][1-8]$/) || keywords.include?(input.downcase)
   end
 
+  def choose_promotion
+    print promotion_msg
+    gets.chomp.downcase[0]
+  end
+
   private
 
   def keywords

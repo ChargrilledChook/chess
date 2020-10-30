@@ -12,4 +12,8 @@ class ComputerPlayer
   def input_move
     move_tree.convert_to_moves(colour).sample
   end
+
+  def choose_promotion
+    "q"
+  end
 end
