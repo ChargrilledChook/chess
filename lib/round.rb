@@ -45,18 +45,18 @@ class Round
   end
 
   def play
-    move = players.first.input_move
+    move = current_player.input_move
     round_type(move)
   end
 
   def normal_round(move)
-    return end_round_no_swap unless ref.valid_move?(move, players.first)
+    return end_round_no_swap unless ref.valid_move?(move, current_player)
 
     if attempt_move(move)
       redo_round(move.first, move.last)
     else
       update_board(move.first, move.last)
-      sleep 0.5 if players.first.ai
+      sleep 0.5 if current_player.ai
       end_round
     end
   end
@@ -79,7 +79,7 @@ class Round
     ref.save_board_state(move.first, move.last)
     #update_board(move.first, move.last)
     board.place_move(move.first, move.last)
-    check = ref.check?(players.first)
+    check = ref.check?(current_player)
     redo_round(move.first, move.last)
     check
   end
@@ -98,20 +98,19 @@ class Round
   end
 
   def game_over?
-    #binding.pry
     checkmate? || stalemate?
   end
 
   def checkmate?
-    return false unless ref.check?(players.first)
+    return false unless ref.check?(current_player)
 
-    iterate_over_moves(players.first.colour)
+    iterate_over_moves(current_player.colour)
   end
 
   def stalemate?
-    return false if ref.check?(players.first)
+    return false if ref.check?(current_player)
 
-    iterate_over_moves(players.first.colour)
+    iterate_over_moves(current_player.colour)
   end
 
   # TODO: Add move history, taken pieces, menu etc
@@ -143,7 +142,7 @@ class Round
   end
 
   def promote(piece_pos)
-    colour = players.first.colour
+    colour = current_player.colour
     board.grid[piece_pos.first][piece_pos.last] = select_promotion(colour)
   end
 
@@ -173,6 +172,10 @@ class Round
   def end_round_no_swap
     clear_console
     draw_console
+  end
+
+  def current_player
+    players.first
   end
 
   def two_humans
