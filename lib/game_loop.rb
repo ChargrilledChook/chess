@@ -16,9 +16,9 @@ class GameLoop
 
   def post_game
     if round.checkmate?
-      puts "#{round.players.last.colour.capitalize} wins by checkmate!"
+      puts "\n#{round.players.last.colour.capitalize} wins by checkmate!"
     elsif round.stalemate?
-      puts "Stalemate!"
+      puts "\nStalemate!"
     else
       puts "Whoops, something went wrong."
     end
