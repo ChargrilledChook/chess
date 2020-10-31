@@ -32,10 +32,4 @@ class Player
     print promotion_msg
     gets.chomp.downcase[0]
   end
-
-  private
-
-  def keywords
-    %w[save castle exit]
-  end
 end

@@ -73,4 +73,8 @@ module Display
   def player_selection_error_msg
     "\nSomething went wrong when initialising players. Please try again."
   end
+
+  def keywords
+    %w[save castle exit help]
+  end
 end
