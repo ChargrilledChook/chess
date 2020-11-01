@@ -24,14 +24,10 @@ class Round
 
   def post_initialize(player_types)
     case player_types
-    when "1"
-      @players = two_humans
-    when "2"
-      @players = one_human_one_ai
-    when "3"
-      @players = one_ai_one_human
-    when "4"
-      @players = two_ai
+    when "1" then @players = two_humans
+    when "2" then @players = one_human_one_ai
+    when "3" then @players = one_ai_one_human
+    when "4" then @players = two_ai
     else
       puts player_selection_error_msg
       exit
@@ -57,16 +53,11 @@ class Round
 
   def round_type(move)
     case move
-    when "save"
-      SaveManager.save_game(self)
-    when "exit"
-      exit
-    when "castle"
-      castle_round
-    when "help"
-      puts help_msg
-    else
-      normal_round(move)
+    when "save" then SaveManager.save_game(self)
+    when "exit" then exit
+    when "castle" then castle_round
+    when "help" then puts help_msg
+    else normal_round(move)
     end
   end
 
