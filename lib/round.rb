@@ -63,6 +63,8 @@ class Round
       exit
     when "castle"
       castle_round
+    when "help"
+      puts help_msg
     else
       normal_round(move)
     end
