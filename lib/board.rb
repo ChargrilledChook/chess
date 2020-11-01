@@ -22,35 +22,57 @@ class Board
   end
 
   def render_board
-    puts %(    A  B  C  D  E  F  G  H).green
-    draw_grid
-    puts %(    A  B  C  D  E  F  G  H).green
+    puts letter_coords + draw_grid + letter_coords
   end
 
   private
 
+  def letter_coords
+    %(    A  B  C  D  E  F  G  H\n).green
+  end
   # HACK: Refactor
-  def draw_grid
-    black_cell = false
-    counter = 8
-    @grid.each do |line|
-      print " #{counter} ".green
-      line.each do |cell|
-        print_cell(cell, black_cell)
-        black_cell = !black_cell
+  # def draw_grid
+  #   black_cell = false
+  #   counter = 8
+  #   @grid.each do |line|
+  #     print " #{counter} ".green
+  #     line.each do |cell|
+  #       print_cell(cell, black_cell)
+  #       black_cell = !black_cell
+  #     end
+  #     print " #{counter} ".green
+  #     counter -= 1
+  #     black_cell = !black_cell
+  #     print "\n"
+  #   end
+  # end
+
+  # def print_cell(cell, black_cell)
+  #   if black_cell
+  #     print cell.to_s.bg_black
+  #   else
+  #     print cell.to_s.bg_blue
+  #   end
+  # end
+
+  def map_bg_colours
+    @grid.each_with_index.map do |line, idx|
+      black_cell = idx.even? ? true : false
+      line.map do |cell|
+        res = black_cell ? cell.to_s.bg_blue : cell.to_s.bg_black
+        black_cell = black_cell ? false : true
+        res
       end
-      print " #{counter} ".green
-      counter -= 1
-      black_cell = !black_cell
-      print "\n"
     end
   end
 
-  def print_cell(cell, black_cell)
-    if black_cell
-      print cell.to_s.bg_black
-    else
-      print cell.to_s.bg_blue
+  def draw_grid
+    counter = 8
+    final = map_bg_colours.map do |line|
+      res = " #{counter} ".green + line.join + " #{counter} ".green + "\n"
+      counter -= 1
+      res
     end
+    final.join
   end
 end
