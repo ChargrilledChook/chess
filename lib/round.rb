@@ -10,7 +10,7 @@ class Round
   attr_reader :players, :board, :ref, :move_tree
 
   def initialize(
-    board: Board.new(default_pieces),
+    board: Board.new(castle_test),
     ref: Referee.new(board),
     move_tree: MoveTree.new(board),
     player_types:
@@ -42,6 +42,7 @@ class Round
   def normal_round(move)
     return end_round_no_swap unless ref.valid_move?(move, current_player)
 
+    # TODO: Rename
     if attempt_move(move)
       redo_round(move.first, move.last)
     else
