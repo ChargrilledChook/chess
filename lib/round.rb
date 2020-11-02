@@ -85,6 +85,21 @@ class Round
     # @board.grid[starting.first][starting.last].undo_update << This is the culprit. Check there are no other bugs caused by taking it out
   end
 
+  # TODO: Add move history, taken pieces, menu etc
+  def draw_console
+    board.render_board
+    check_message
+  end
+
+  def clear_console
+    Display.clear_console
+  end
+
+  # TODO: Extract to display
+  def check_message
+    ref.check?(players.last) ? puts("\n#{players.last.colour.capitalize} is in check!") : puts("\n\n")
+  end
+
   def game_over?
     checkmate? || stalemate?
   end
@@ -97,21 +112,6 @@ class Round
 
   def stalemate?
     blocked_stalemate || kings_only_stalemate
-  end
-
-  # TODO: Add move history, taken pieces, menu etc
-  def draw_console
-    board.render_board
-    check_message
-  end
-
-  # TODO: Extract to display
-  def check_message
-    ref.check?(players.last) ? puts("\n#{players.last.colour.capitalize} is in check!") : puts("\n\n")
-  end
-
-  def clear_console
-    Display.clear_console
   end
 
   private
