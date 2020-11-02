@@ -16,7 +16,14 @@ class Referee
     true
   end
 
-  # need to memoize build_moves somehow?
+  def attempt_move(move, current_player)
+    save_board_state(move.first, move.last)
+    board.place_move(move.first, move.last)
+    check = check?(current_player)
+    restore_board(move.first, move.last)
+    check
+  end
+
   def check?(player)
     king_pos = find_king_pos(player.colour)
     king = board.grid[king_pos.first][king_pos.last]
@@ -24,17 +31,44 @@ class Referee
     moves.values.any? { |ending| ending.include?(king_pos) }
   end
 
+  def checkmate?(current_player)
+    return false unless check?(current_player)
+
+    iterate_over_moves(current_player)
+  end
+
+  def stalemate?(players)
+    blocked_stalemate(players.first) || kings_only_stalemate(players)
+  end
+
   def restore_board(starting, ending)
     @board.grid[starting.first][starting.last] = @previous_from
     @board.grid[ending.first][ending.last] = @previous_to
   end
+
+  private
 
   def save_board_state(starting, ending)
     @previous_from = @board.grid[starting.first][starting.last]
     @previous_to = @board.grid[ending.first][ending.last]
   end
 
-  private
+  def blocked_stalemate(current_player)
+    return false if check?(current_player)
+
+    iterate_over_moves(current_player)
+  end
+
+  def kings_only_stalemate(players)
+    move_tree.select_pieces(players.first.colour).size == 1 && move_tree.select_pieces(players.last.colour).size == 1
+  end
+
+  def iterate_over_moves(current_player)
+    moves = move_tree.convert_to_moves(current_player.colour)
+    moves.all? do |from, to|
+      attempt_move([from, to], current_player)
+    end
+  end
 
   # OPTIMISE: Very inefficient
   def find_king_pos(colour)

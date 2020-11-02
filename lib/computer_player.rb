@@ -2,10 +2,10 @@
 class ComputerPlayer
   attr_reader :colour, :move_tree, :ai
 
-  def initialize(colour:, board:, move_tree:)
+  def initialize(colour:, board:)
     @colour = colour
     @board = board
-    @move_tree = move_tree
+    @move_tree = MoveTree.new(board)
     @ai = true
   end
 

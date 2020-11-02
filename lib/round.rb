@@ -7,18 +7,16 @@ class Round
   include SaveManager
   include PieceCollections
 
-  attr_reader :players, :board, :ref, :move_tree
+  attr_reader :players, :board, :ref
 
   def initialize(
     board: Board.new(default_pieces),
     ref: Referee.new(board),
-    move_tree: MoveTree.new(board),
     player_types:
   )
 
     @board = board
     @ref = ref
-    @move_tree = move_tree
     post_initialize(player_types)
   end
 
@@ -39,19 +37,6 @@ class Round
     round_type(move)
   end
 
-  def normal_round(move)
-    return end_round_no_swap unless ref.valid_move?(move, current_player)
-
-    # TODO: Rename
-    if attempt_move(move)
-      redo_round(move.first, move.last)
-    else
-      update_board(move.first, move.last)
-      sleep 0.5 if current_player.ai
-      end_round
-    end
-  end
-
   def round_type(move)
     case move
     when "save" then SaveManager.save_game(self)
@@ -62,30 +47,34 @@ class Round
     end
   end
 
-  # TODO: Fix this name
-  def attempt_move(move)
-    ref.save_board_state(move.first, move.last)
-    # update_board(move.first, move.last)
-    board.place_move(move.first, move.last)
-    check = ref.check?(current_player)
-    redo_round(move.first, move.last)
-    check
-  end
+  def normal_round(move)
+    return end_round_no_swap unless ref.valid_move?(move, current_player)
 
-  # TODO: Fix this name
-  def iterate_over_moves(colour)
-    moves = move_tree.convert_to_moves(colour)
-    moves.all? do |from, to|
-      attempt_move([from, to])
+    # TODO: Rename
+    if ref.attempt_move(move, current_player)
+      ref.restore_board(move.first, move.last)
+    else
+      update_board(move.first, move.last)
+      sleep 0.1 if current_player.ai
+      end_round
     end
   end
 
-  def redo_round(starting, ending)
-    ref.restore_board(starting, ending)
-    # @board.grid[starting.first][starting.last].undo_update << This is the culprit. Check there are no other bugs caused by taking it out
+  def boot_game
+    clear_console
+    draw_console
   end
 
-  # TODO: Add move history, taken pieces, menu etc
+  def checkmate?
+    ref.checkmate?(current_player)
+  end
+
+  def stalemate?
+    ref.stalemate?(players)
+  end
+
+  private
+
   def draw_console
     board.render_board
     check_message
@@ -98,32 +87,6 @@ class Round
   # TODO: Extract to display
   def check_message
     ref.check?(players.last) ? puts("\n#{players.last.colour.capitalize} is in check!") : puts("\n\n")
-  end
-
-  def game_over?
-    checkmate? || stalemate?
-  end
-
-  def checkmate?
-    return false unless ref.check?(current_player)
-
-    iterate_over_moves(current_player.colour)
-  end
-
-  def stalemate?
-    blocked_stalemate || kings_only_stalemate
-  end
-
-  private
-
-  def blocked_stalemate
-    return false if ref.check?(current_player)
-
-    iterate_over_moves(current_player.colour)
-  end
-
-  def kings_only_stalemate
-    move_tree.select_pieces(current_player.colour).size == 1 && move_tree.select_pieces(players.last.colour).size == 1
   end
 
   def update_board(from, to)
@@ -177,15 +140,15 @@ class Round
   end
 
   def two_ai
-    [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree),
-     ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+    [ComputerPlayer.new(colour: :white, board: board),
+     ComputerPlayer.new(colour: :black, board: board)]
   end
 
   def one_human_one_ai
-    [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board, move_tree: move_tree)]
+    [Player.new(colour: :white), ComputerPlayer.new(colour: :black, board: board)]
   end
 
   def one_ai_one_human
-    [ComputerPlayer.new(colour: :white, board: board, move_tree: move_tree), Player.new(colour: :black)]
+    [ComputerPlayer.new(colour: :white, board: board), Player.new(colour: :black)]
   end
 end
