@@ -10,7 +10,7 @@ class Round
   attr_reader :players, :board, :ref, :move_tree
 
   def initialize(
-    board: Board.new(castle_test),
+    board: Board.new(default_pieces),
     ref: Referee.new(board),
     move_tree: MoveTree.new(board),
     player_types:
