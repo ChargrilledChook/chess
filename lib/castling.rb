@@ -1,30 +1,38 @@
 module Castle
-  Castle = Struct.new(:king_from, :king_to, :rook_from, :rook_to, :empties)
-
-  def white_short
-    Castle.new([7, 4], [7, 6], [7, 7], [7, 5], [[7, 5], [7, 6]])
-  end
-
   def pick_castle_type
-    white_short
+    print "Castle left or right? [L/r]: "
+    choice = gets.chomp.downcase
+    if current_player.colour == :white
+      choice == "r" ? white_short : white_long
+    elsif current_player.colour == :black
+      choice == "r" ? black_short : black_long
+    else
+      puts 'Something went wrong'
+    end
   end
 
   def castle_round
     moves = pick_castle_type
     return false unless can_castle?(moves)
 
-    backup = board.dup
-    castle_moves_simple(moves)
-    if ref.check?(players.first)
-      reset_board(backup) # need to undo updates on pieces too
+    if castle_moves(moves.moves)
+      successful_castle(moves)
     else
-      end_round
+      backup(moves.backup)
+    end
+  end
+
+  def castle_moves(moves)
+    moves.none? do |move|
+      board.place_move(move.first, move.last)
+      ref.check?(current_player)
     end
   end
 
   def can_castle?(moves)
-    king = board.grid[moves.king_from.first][moves.king_from.last]
-    rook = board.grid[moves.rook_from.first][moves.rook_from.last]
+    king = board.grid[moves.king_starting.first][moves.king_starting.last]
+    rook = board.grid[moves.rook_starting.first][moves.rook_starting.last]
+    return false unless rook.respond_to?(:first_move) && king.respond_to?(:first_move)
     return false unless rook.first_move && king.first_move
     return false if ref.check?(players.first)
     return false unless squares_empty?(moves.empties)
@@ -32,32 +40,96 @@ module Castle
     true
   end
 
-  def reset_board(backup)
-    self.board = backup
+  def successful_castle(moves)
+    king = board.grid[moves.king_ending.first][moves.king_ending.last]
+    rook = board.grid[moves.rook_ending.first][moves.rook_ending.last]
+    king.update
+    rook.update
+    end_round
   end
 
-  def castle_moves_simple(moves)
-    board.place_move([moves.king_from.first, moves.king_from.last], [moves.king_to.first, moves.king_to.last])
-    king = board.grid[moves.king_to.first][moves.king_to.last]
-    king.update([moves.king_to.first, moves.king_to.last])
-    board.place_move([moves.rook_from.first, moves.rook_from.last], [moves.rook_to.first, moves.rook_to.last])
+  def squares_empty?(squares)
+    squares.all? { |x, y| board.grid[x][y].colour == :none }
   end
 
+  Castle = Struct.new(:king_starting, :king_ending, :rook_starting, :rook_ending, :moves, :empties, :backup)
 
-  def castle_moves(moves, player)
-    moves.none? do |move|
-      board.place_move(move.first, move.last)
-      ref.check?(player)
+  def white_short
+    Castle.new([7, 4],
+               [7, 6],
+               [7, 7],
+               [7, 5],
+               [[[7, 4], [7, 5]], [[7, 5], [7, 6]], [[7, 7], [7, 5]]],
+               [[7, 5], [7, 6]],
+               :white_short)
+  end
+
+  def white_long
+    Castle.new([7, 4],
+              [7, 2],
+              [7, 0],
+              [7, 3],
+              [[[7, 4], [7, 3]], [[7, 3], [7, 2]], [[7, 0], [7, 3]]],
+              [[7, 1], [7, 2], [7, 3]],
+              :white_long)
+  end
+
+  def black_short
+    Castle.new([0, 4],
+               [0, 6],
+               [0, 7],
+               [0, 5],
+               [[[0, 4], [0, 5]], [[0, 5], [0, 6]], [[0, 7], [0, 5]]],
+               [[0, 5], [0, 6]],
+               :black_short)
+  end
+
+  def black_long
+    Castle.new([0, 4],
+              [0, 2],
+              [0, 0],
+              [0, 3],
+              [[[0, 4], [0, 3]], [[0, 3], [0, 2]], [[0, 0], [0, 3]]],
+              [[0, 1], [0, 2], [0, 3]],
+              :black_long)
+  end
+
+  def white_short_backup
+    board.grid[7][4] = King.new(colour: :white)
+    board.grid[7][5] = EmptySquare.new
+    board.grid[7][6] = EmptySquare.new
+    board.grid[7][7] = Rook.new(colour: :white)
+  end
+
+  def white_long_backup
+    board.grid[7][4] = King.new(colour: :white)
+    board.grid[7][1] = EmptySquare.new
+    board.grid[7][2] = EmptySquare.new
+    board.grid[7][3] = EmptySquare.new
+    board.grid[7][0] = Rook.new(colour: :white)
+  end
+
+  def black_short_backup
+    board.grid[0][4] = King.new(colour: :black)
+    board.grid[0][5] = EmptySquare.new
+    board.grid[0][6] = EmptySquare.new
+    board.grid[0][7] = Rook.new(colour: :black)
+  end
+
+  def black_long_backup
+    board.grid[0][4] = King.new(colour: :black)
+    board.grid[0][1] = EmptySquare.new
+    board.grid[0][2] = EmptySquare.new
+    board.grid[0][3] = EmptySquare.new
+    board.grid[0][0] = Rook.new(colour: :black)
+  end
+
+  def backup(type)
+    case type
+    when :white_short then white_short_backup
+    when :white_long then white_long_backup
+    when :black_short then black_short_backup
+    when :black_long then black_long_backup
     end
   end
-
-  def squares_empty?(_type)
-    board.grid[7][5].colour == :none && board.grid[7][6].colour == :none
-  end
-
-  # def white_short
-  #   [[[7, 4], [7, 5]], [[7, 5], [7, 6]], [[7, 7], [7, 5]]]
-  # end
-
-
 end
