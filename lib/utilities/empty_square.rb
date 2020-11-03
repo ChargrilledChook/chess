@@ -12,4 +12,8 @@ class EmptySquare
   def to_s
     "   "
   end
+
+  def passable
+    false
+  end
 end
