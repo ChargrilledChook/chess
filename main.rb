@@ -1,3 +1,7 @@
+# This script loads all the dependencies for the chess program, prints a title screen and allows the user to
+# select runtime options, particularly what types of players (human or ai) and whether to
+# load a serialised save or start a fresh game.
+
 require_relative "lib/utilities/display"
 require_relative "lib/utilities/colour_patch"
 require_relative "lib/utilities/save_manager"
