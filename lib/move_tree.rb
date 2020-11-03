@@ -1,5 +1,3 @@
-# MoveTree
-
 # Takes a reference to a board and is able to generate several useful adjacency list-like outputs.
 # Multiple uses, such as being used by an AI to select moves, and to iterate through possible moves
 # to test for checkmate.

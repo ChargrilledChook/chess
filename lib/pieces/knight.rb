@@ -1,6 +1,4 @@
-# King
-
-# Represents bishop piece. Contains its' allowed movement patterns and icon. Single move type
+# Represents knight piece. Contains its' allowed movement patterns and icon. Single move type
 class Knight < Piece
   def moves
     [[2, -1],

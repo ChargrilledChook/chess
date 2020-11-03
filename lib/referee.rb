@@ -1,5 +1,3 @@
-# Referee
-
 # Responsible for enforcing (most) of the rules of chess, in particular it can assess
 # whether a player is in check, checkmate or a stalemate. Also checks if individual moves are legal
 # Utilises the MoveTree to build graphs for checkmate.

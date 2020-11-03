@@ -1,5 +1,3 @@
-# Move
-
 # Converts algerbraic chess notation to 2D array co-ordinates.
 class Move
   attr_reader :data, :starting, :ending

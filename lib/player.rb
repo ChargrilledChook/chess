@@ -1,5 +1,3 @@
-# Player
-
 # Responsible for human players and getting their input. Manages inputing moves, system commands
 # and selecting pawn promotion.
 class Player

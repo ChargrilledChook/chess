@@ -1,6 +1,4 @@
-# King
-
-# Represents bishop piece. Contains its' allowed movement patterns and icon. Single move type
+# Represents king piece. Contains its' allowed movement patterns and icon. Single move type
 class King < Piece
   attr_reader :position, :first_move
 

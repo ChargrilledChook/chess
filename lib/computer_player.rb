@@ -1,5 +1,3 @@
-# ComputerPlayer
-
 # A computer controlled player. Not very smart. Picks legal moves randomly.
 # Uses the MoveTree object to generate its moves, so it needs a reference to
 # the board object.

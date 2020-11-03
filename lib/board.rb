@@ -1,5 +1,3 @@
-# Board
-
 # Main responsibility is to hold piece objects / represent the gameboard.
 # Implemented with a 2D array. Empty squares / cells are filled with an EmptySquare
 # object, so they can respond to queries from other objects.

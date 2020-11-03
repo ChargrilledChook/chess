@@ -1,5 +1,3 @@
-# Round
-
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
   include Display

@@ -1,5 +1,3 @@
-# GameLoop
-
 # Controls gameplay flow. Loops the game till it's over then prints the appropriate victory /
 # stalemate message. The main advantage of having a small looping class like this is that we
 # can inject a round object, which holds all data for gamestate. This allows for loading
