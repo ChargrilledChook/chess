@@ -2,6 +2,7 @@ require "yaml"
 
 # Saves and loads games / serializes objects
 # This implementation is from an old project and could do with a pass for best practices
+# and improved features
 module SaveManager
   def self.default_save
     "save.txt"

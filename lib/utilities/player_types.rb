@@ -1,5 +1,3 @@
-# PlayerTypes
-
 # This is a helper module for the round class that centralises all the logic for creating players
 # at the beginning of a new game. It's in a module purely for organisation / separation of responsibilites
 module PlayerTypes
