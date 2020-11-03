@@ -1,5 +1,5 @@
-# Placeholder / documentation for unicode chess piece icons
-# May make more sense to just declare this in each to_s
+# Unicode characters for each chess piece. Formatted with a single white
+# space on either side to match board formatting.
 module PieceIcons
   def white_pawn
     " \u2659 "
