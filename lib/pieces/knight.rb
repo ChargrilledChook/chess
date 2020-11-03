@@ -1,3 +1,6 @@
+# King
+
+# Represents bishop piece. Contains its' allowed movement patterns and icon. Single move type
 class Knight < Piece
   def moves
     [[2, -1],
@@ -10,10 +13,8 @@ class Knight < Piece
      [1, 2]].freeze
   end
 
-  # OPTIMISE: This code is currently duplicated in King.
   def move_list(board, starting)
-    list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
-    list.select { |move| valid_move?(board, move) && !friend?(board, move) }
+    single_move_list(board, starting)
   end
 
   def to_s

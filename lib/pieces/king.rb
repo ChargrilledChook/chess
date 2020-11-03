@@ -1,3 +1,6 @@
+# King
+
+# Represents bishop piece. Contains its' allowed movement patterns and icon. Single move type
 class King < Piece
   attr_reader :position, :first_move
 
@@ -8,8 +11,7 @@ class King < Piece
 
   # OPTIMISE: See Knight
   def move_list(board, starting)
-    list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
-    list.select { |move| valid_move?(board, move) && !friend?(board, move) }
+    single_move_list(board, starting)
   end
 
   def update(_ = nil)
