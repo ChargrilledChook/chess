@@ -139,9 +139,6 @@ class Round
   end
 
   def legal_pass
-    if ref.check?(current_player)
-      puts "Unfortunately you found a gamebreaking bug! The developers are working on it."
-      exit
-    end
+    raise StandardError.new(en_passant_error) if ref.check?(current_player)
   end
 end
