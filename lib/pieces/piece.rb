@@ -2,10 +2,11 @@
 class Piece
   include PieceIcons
 
-  attr_reader :colour
+  attr_reader :colour, :passable
 
   def initialize(colour:)
     @colour = colour
+    @passable = false
     post_initialize
   end
 
@@ -36,6 +37,10 @@ class Piece
   def undo_update; end
 
   def king?
+    false
+  end
+
+  def passer?
     false
   end
 
