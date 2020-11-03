@@ -1,3 +1,6 @@
+# Bishop
+
+# Represents bishop piece. Contains its' allowed movement patterns and icon. Standard / rolling type
 class Bishop < Piece
   def moves
     [[1, 1], [1, -1], [-1, -1], [-1, 1]].freeze

@@ -9,7 +9,6 @@ class King < Piece
     @first_move = true
   end
 
-  # OPTIMISE: See Knight
   def move_list(board, starting)
     single_move_list(board, starting)
   end

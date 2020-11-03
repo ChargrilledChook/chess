@@ -1,3 +1,6 @@
+# Rook
+
+# Represents rook piece. Contains its' allowed movement patterns and icon. Standard / rolling type
 class Rook < Piece
   attr_reader :first_move
 
