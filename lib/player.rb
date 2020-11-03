@@ -1,4 +1,7 @@
-# Responsible for user input
+# Player
+
+# Responsible for human players and getting their input. Manages inputing moves, system commands
+# and selecting pawn promotion.
 class Player
   include Display
 
@@ -9,6 +12,7 @@ class Player
     @ai = false
   end
 
+  # Keywords can be found within the display module
   def input_move
     move = user_input
     return move if keywords.include?(move)
@@ -16,6 +20,7 @@ class Player
     Move.new(move).data
   end
 
+  # TODO: These two names (this and above) are slightly ambiguous. Differentiate
   def user_input
     print move_prompt_msg
     move = gets.chomp.downcase
