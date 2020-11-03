@@ -1,4 +1,6 @@
-# Hashes of piece setups for the board class
+# Hashes of piece setups for the board class. To add new hashes,
+# use the desired board co-ordinates as the key, and the desired piece
+# as the value. The board object has a method to convert hashes in this form.
 module PieceCollections
   def default_pieces
     black = big_black_pieces.merge(black_pawns)
