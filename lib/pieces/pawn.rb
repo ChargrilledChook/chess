@@ -89,8 +89,6 @@ class Pawn < Piece
 
   #############################################################################################
 
-
-
   # OPTIMISE: More succint way to express this idea ############################################
   def en_passant(board, starting)
     colour == :white ? passant_white(board, starting) : passant_black(board, starting)

@@ -147,6 +147,6 @@ class Round
   end
 
   def legal_pass
-    raise StandardError.new(en_passant_error) if ref.check?(current_player)
+    raise StandardError, en_passant_error if ref.check?(current_player)
   end
 end

@@ -10,12 +10,13 @@ module CastleRound
   def pick_castle_type
     print "Castle left or right? [L/r]: "
     choice = gets.chomp.downcase
-    if current_player.colour == :white
+    case current_player.colour
+    when :white
       choice == "r" ? white_short : white_long
-    elsif current_player.colour == :black
+    when :black
       choice == "r" ? black_short : black_long
     else
-      puts 'Something went wrong'
+      puts "Something went wrong"
     end
   end
 
@@ -74,12 +75,12 @@ module CastleRound
 
   def white_long
     Castle.new([7, 4],
-              [7, 2],
-              [7, 0],
-              [7, 3],
-              [[[7, 4], [7, 3]], [[7, 3], [7, 2]], [[7, 0], [7, 3]]],
-              [[7, 1], [7, 2], [7, 3]],
-              :white_long)
+               [7, 2],
+               [7, 0],
+               [7, 3],
+               [[[7, 4], [7, 3]], [[7, 3], [7, 2]], [[7, 0], [7, 3]]],
+               [[7, 1], [7, 2], [7, 3]],
+               :white_long)
   end
 
   def black_short
@@ -94,12 +95,12 @@ module CastleRound
 
   def black_long
     Castle.new([0, 4],
-              [0, 2],
-              [0, 0],
-              [0, 3],
-              [[[0, 4], [0, 3]], [[0, 3], [0, 2]], [[0, 0], [0, 3]]],
-              [[0, 1], [0, 2], [0, 3]],
-              :black_long)
+               [0, 2],
+               [0, 0],
+               [0, 3],
+               [[[0, 4], [0, 3]], [[0, 3], [0, 2]], [[0, 0], [0, 3]]],
+               [[0, 1], [0, 2], [0, 3]],
+               :black_long)
   end
 
   def white_short_backup

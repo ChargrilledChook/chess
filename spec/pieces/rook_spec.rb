@@ -73,7 +73,6 @@ describe Rook do
 
         expect(rook_moves).to match_array(expected)
       end
-
     end
     context "with enemy pieces" do
       let(:mini_board) { Array.new(4) { Array.new(4, empty) } }

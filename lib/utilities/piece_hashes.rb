@@ -77,6 +77,6 @@ module PieceCollections
       [3, 1] => Pawn.new(colour: :white),
       [1, 2] => Pawn.new(colour: :black),
       [3, 3] => Queen.new(colour: :black),
-      [6, 0] => Queen.new(colour: :white)}
+      [6, 0] => Queen.new(colour: :white) }
   end
 end
