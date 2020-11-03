@@ -48,6 +48,10 @@ module Display
     "\nPlay again? [Y/n] : "
   end
 
+  def self.thanks_exit_msg
+    "\nThanks for playing!"
+  end
+
   def help_msg
     "List of commands goes here: notation, castle, save, exit"
   end
