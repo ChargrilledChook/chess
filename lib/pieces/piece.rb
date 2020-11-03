@@ -1,4 +1,7 @@
-# Domain object prototype
+# Super class for various piece implementations. Contains a post initilize hook
+# that subclasses can optionally implement. Main logic contained here is for the
+# two different types of movement patterns - single (knight and king) and rolling / standard
+# (Queen, rook, bishop - pieces who can move multiple squares along a plane.)
 class Piece
   include PieceIcons
 
@@ -13,6 +16,9 @@ class Piece
   # This is a hook method that can be overridden by children. Currently only needed for pawns.
   def post_initialize; end
 
+  # Main movevement implementation for queen, rook and bishop. Takes a board and a starting position
+  # and generates a list of positions the piece can move to. Checks for capturing, friendly pieces,
+  # and being off the board, but not game state legality (ie check etc)
   def move_list(board, starting)
     moves.each_with_object([]) do |move, res|
       pos = update_pos(move, starting)
@@ -46,6 +52,7 @@ class Piece
 
   private
 
+  # Alternate move list implementation for king and knight
   def single_move_list(board, starting)
     list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
     list.select { |move| valid_move?(board, move) && !friend?(board, move) }
