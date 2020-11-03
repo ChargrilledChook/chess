@@ -1,3 +1,4 @@
+# Represents the pawn piece. Contains its' icon and movement patterns. Unique implemenation
 class Pawn < Piece
   attr_reader :first_move
 
@@ -87,9 +88,7 @@ class Pawn < Piece
     double.select { |move| valid_move?(board, move) && empty?(board, move) }
   end
 
-  #############################################################################################
-
-  # OPTIMISE: More succint way to express this idea ############################################
+  # OPTIMISE: More succint way to express this idea
   def en_passant(board, starting)
     colour == :white ? passant_white(board, starting) : passant_black(board, starting)
   end
