@@ -1,7 +1,7 @@
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
   include Display
-  include Castle
+  include CastleRound
   include SaveManager
   include PieceCollections
   include PlayerTypes

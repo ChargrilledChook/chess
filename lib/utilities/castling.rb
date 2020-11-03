@@ -1,4 +1,12 @@
-module Castle
+# Helper module for round object, to create a special type of round. This is because castling is unique
+# in that a player moves multiple pieces in a single turn.
+#
+# This implementation overcomplicated the problem and overengineered the solution -
+# it simulates every move the king makes to make sure
+# he doesn't move into or through check, but this could have
+# been achieved by simpling seeing if the three relevant squares
+# are under attack. Prime candidate for easy refactoring
+module CastleRound
   def pick_castle_type
     print "Castle left or right? [L/r]: "
     choice = gets.chomp.downcase
