@@ -1,40 +1,28 @@
-# chess
+# Chess
 Final assignment for the Ruby section of The Odin Project
 
 View live - [replit](https://repl.it/@HappyFrog/chess#README.md)
 Solo window - [replit](https://chess.happyfrog.repl.run)
-## Remaining Milestones
 
-### Remaining Tests
-- [x] Board
-- [ ] Round
-- [ ] Ref
-- [ ] Audit
+## Demo
 
-### Special Movement
-- [x] Pawn Double
-- [x] Promotion
-- [ ] Castling
-- [ ] En passant
-- [ ] Tests
+## How to use
 
-### Check
-- [ ] Tests
-- [x] Implement
-- [x] Refactor
+## API tour
 
-### Checkmate
-- [ ] Tests
-- [x] Implement
-- [x] Refactor
+## Possible future additions
 
-### Stalemate
-- [ ] Tests
-- [x] Implement
-- [x] Refactor
+### User facing
 
-### Final Polish
-- [ ] Remaining refactorings
-- [ ] UI
-- [x] UX
-- [ ] Upload to replit
+### Internal
+
+## Known Bugs
+
+* It is possible to put yourself in check while doing an en pasasnt move, leading to an illegal board state. This will raise an exception.
+* Attempting to load a save file when none exists crashes the game.
+
+## Reflections
+
+## Licence
+
+## Contact
