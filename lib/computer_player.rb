@@ -1,4 +1,8 @@
+# ComputerPlayer
+
 # A computer controlled player. Not very smart. Picks legal moves randomly.
+# Uses the MoveTree object to generate its moves, so it needs a reference to
+# the board object.
 class ComputerPlayer
   attr_reader :colour, :move_tree, :ai
 
@@ -13,6 +17,7 @@ class ComputerPlayer
     move_tree.convert_to_moves(colour).sample
   end
 
+  # Computer will always choose a Queen
   def choose_promotion
     "q"
   end
