@@ -1,10 +1,12 @@
-# Experimental move object
+# Move
+
+# Converts algerbraic chess notation to 2D array co-ordinates.
 class Move
   attr_reader :data, :starting, :ending
 
   def initialize(input)
     @data = convert_notation(input)
-    @starting = data.first
+    @starting = data.first # TODO: Check if the starting / ending fields are still being used.
     @ending = data.last
   end
 
