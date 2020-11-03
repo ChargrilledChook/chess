@@ -1,5 +1,3 @@
-# require "pry"
-
 # Co-ordinates collaborating objects to play a single round of chess
 class Round
   include Display
@@ -8,7 +6,7 @@ class Round
   include PieceCollections
   include PlayerTypes
 
-  attr_reader :players, :board, :ref
+  attr_reader :players, :board, :ref, :pass_array
 
   def initialize(
     board: Board.new(default_pieces),
@@ -18,6 +16,8 @@ class Round
 
     @board = board
     @ref = ref
+    @pass_array = []
+
     post_initialize(player_types)
   end
 
@@ -83,9 +83,14 @@ class Round
     post_move_update(to)
   end
 
+  # HACK
   def post_move_update(piece_pos)
     piece = board.grid[piece_pos.first][piece_pos.last]
+    passing_test(piece, piece_pos)
+    pass_array.first.first.update unless pass_array.empty?
+    pass_array.clear
     piece.update(piece_pos)
+    pass_array << [piece, piece_pos] if piece.passable
     promote(piece_pos) if piece.promotable?(piece_pos)
   end
 
@@ -122,5 +127,21 @@ class Round
 
   def current_player
     players.first
+  end
+
+  def passing_test(piece, pos)
+    square = piece.colour == :white ? 1 : -1
+    passee = board.grid[pos.first + square][pos.last]
+    board.grid[pos.first + square][pos.last] = EmptySquare.new if piece.passer? && passee.passable
+    legal_pass
+  rescue NoMethodError
+    nil
+  end
+
+  def legal_pass
+    if ref.check?(current_player)
+      puts "Unfortunately you found a gamebreaking bug! The developers are working on it."
+      exit
+    end
   end
 end
