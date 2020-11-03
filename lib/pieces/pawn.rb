@@ -9,12 +9,18 @@ class Pawn < Piece
     move_map(board, starting) + attack_map(board, starting)
   end
 
+  # TODO: Check if param is still needed
   def update(_ = nil)
-    toggle_first_move
+    first_move ? toggle_first_move : toggle_passing
   end
 
+  # TODO: I think this method is cruft
   def undo_update
     @first_move = true
+  end
+
+  def passer?
+    true
   end
 
   def to_s
@@ -35,6 +41,11 @@ class Pawn < Piece
 
   def toggle_first_move
     @first_move = false
+    @passable = true
+  end
+
+  def toggle_passing
+    @passable = false
   end
 
   def single_move
@@ -56,9 +67,9 @@ class Pawn < Piece
 
   def move_map(board, starting)
     single = single_map(board, starting)
-    return single if single.empty? || !first_move
+    return single + en_passant(board, starting) if single.empty? || !first_move
 
-    single + double_map(board, starting)
+    single + double_map(board, starting) + en_passant(board, starting)
   end
 
   def attack_map(board, move)
@@ -76,31 +87,43 @@ class Pawn < Piece
     double.select { |move| valid_move?(board, move) && empty?(board, move) }
   end
 
-  # OPTIMISE: More succint way to express this idea
+  #############################################################################################
+
+
+
+  # OPTIMISE: More succint way to express this idea ############################################
   def en_passant(board, starting)
     colour == :white ? passant_white(board, starting) : passant_black(board, starting)
   end
 
-  def passant_white
+  def passant_white(board, starting)
     res = []
     [1, -1].each do |move|
-      piece = board[starting.first][starting.last + move]
-      next unless piece.colour == enemy_colour?
-      next unless piece.passable?
+      begin
+        piece = board[starting.first][starting.last + move]
+        next unless piece.colour == enemy_colour
+        next unless piece.passable
 
-      res << [starting.first - 1, starting.last + move]
+        res << [starting.first - 1, starting.last + move]
+      rescue NoMethodError
+        next
+      end
     end
     res
   end
 
-  def passant_black
+  def passant_black(board, starting)
     res = []
     [1, -1].each do |move|
-      piece = board[starting.first][starting.last + move]
-      next unless piece.colour == enemy_colour?
-      next unless piece.passable?
+      begin
+        piece = board[starting.first][starting.last + move]
+        next unless piece.colour == enemy_colour
+        next unless piece.passable
 
-      res << [starting.first + 1, starting.last + move]
+        res << [starting.first + 1, starting.last + move]
+      rescue NoMethodError
+        next
+      end
     end
     res
   end
