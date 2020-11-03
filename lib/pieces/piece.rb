@@ -46,6 +46,11 @@ class Piece
 
   private
 
+  def single_move_list(board, starting)
+    list = moves.map { |move| [starting.first + move.first, starting.last + move.last] }
+    list.select { |move| valid_move?(board, move) && !friend?(board, move) }
+  end
+
   def moves
     raise NotImplementedError
   end
