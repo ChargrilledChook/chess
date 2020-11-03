@@ -81,4 +81,8 @@ module Display
   def keywords
     %w[save castle exit help]
   end
+
+  def en_passant_error
+    "Unfortunately this move breaks the game because you put yourself in check. The dev is aware and is working on a fix."
+  end
 end
