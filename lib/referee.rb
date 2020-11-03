@@ -1,3 +1,9 @@
+# Referee
+
+# Responsible for enforcing (most) of the rules of chess, in particular it can assess
+# whether a player is in check, checkmate or a stalemate. Also checks if individual moves are legal
+# Utilises the MoveTree to build graphs for checkmate.
+# Is possibly doing too much and should be broken down into slightly smaller objects.
 class Referee
   attr_reader :move_tree, :board
 
@@ -6,6 +12,8 @@ class Referee
     @move_tree = MoveTree.new(board)
   end
 
+  # Checks if a piece is owned by the player attempting to move it,
+  # and that the piece type can move that way.
   def valid_move?(move, player)
     moves = move_tree.build_move_lists(player.colour)
     starting = move.first
@@ -16,6 +24,8 @@ class Referee
     true
   end
 
+  # Simulates a move, then sees if the resulting board state puts the moving player in check.
+  # Resets the board to original state afterwards
   def attempt_move(move, current_player)
     save_board_state(move.first, move.last)
     board.place_move(move.first, move.last)
