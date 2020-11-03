@@ -1,4 +1,12 @@
-# Co-ordinates collaborating objects to play a single round of chess
+# Co-ordinates collaborating objects to play a single round of chess. Contains all data about
+# game state, so can be serialised to save a game - including the board, object positions, their state,
+# player type and turn order. It will only update the board / turn order after a legal, successful move. It leans
+# on the referee class to help it implement the rules.
+#
+# This class as a whole is in need of refactoring. It has taken on too many responsibilites and needs to broken
+# down into smaller pieces, or implement a different approach. While it was originally lean and focused it gathered
+# a lot of cruft and bloat as various little special rules, exceptions and caveats were added. Promotion, castling,
+# and en passant logic could probably be delegated to new objects.
 class Round
   include Display
   include CastleRound
