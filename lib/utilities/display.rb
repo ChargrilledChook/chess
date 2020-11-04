@@ -51,7 +51,7 @@ module Display
 
       Letters must be between a - h and numbers between 1 - 8.
 
-      COMMANDS
+      #{"COMMANDS".bold.blue}
 
       Aside from chess notation, there are several commands available to you in game.
 
@@ -74,6 +74,8 @@ module Display
       WHITE => \u2659 \u2656 \u2657 \u2658 \u2655 \u2654
 
       BLACK => \u265F \u265C \u265D \u265E \u265B \u265A
+
+      RULES OF CHESS
 
       If you require more detailed rules about the game of chess, please visit https://www.chess.com/lessons
 
