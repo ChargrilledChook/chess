@@ -41,7 +41,44 @@ module Display
   end
 
   def self.rules_msg
-    "\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text\nPlaceholder text"
+    <<~HEREDOC
+      \nHOW TO PLAY
+
+      This game uses algerbraic chess notation to input moves. Select the square you want to move from, and the square you want to
+      move to. For instance:  a1h8
+                              c5f3
+                              d4g6
+
+      Letters must be between a - h and numbers between 1 - 8.
+
+      COMMANDS
+
+      Aside from chess notation, there are several commands available to you in game.
+
+      CASTLE - You will be prompted to select [l/r] for castling left or right. Will perform the move if legal.
+               A legal castle is not castling into, out of or through check. The rook and the king must not have
+               moved, and the spaces between them must be empty.
+
+      SAVE   - Save and exit the game. Select load game from the main menu to load your save.
+
+      EXIT   - Exit the game without saving.
+
+      VISUALS
+
+      The appearance and colours of the pieces and board depend on your system and your console settings.
+      On your device, pieces will look like this:
+
+
+               P R B N Q K
+
+      WHITE => \u2659 \u2656 \u2657 \u2658 \u2655 \u2654
+
+      BLACK => \u265F \u265C \u265D \u265E \u265B \u265A
+
+      If you require more detailed rules about the game of chess, please visit https://www.chess.com/lessons
+
+      Press ENTER to continue
+  HEREDOC
   end
 
   def self.play_again_msg
@@ -83,6 +120,6 @@ module Display
   end
 
   def en_passant_error
-    "Unfortunately this move breaks the game because you put yourself in check. The dev is aware and is working on a fix."
+    "Unfortunately this move breaks the game because you put yourself in check. I'm working on a fix!"
   end
 end
