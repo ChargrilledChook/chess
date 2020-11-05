@@ -102,7 +102,7 @@ module Display
   end
 
   def help_msg
-    "\n#{'Type HELP for rules and commands'.blue}\n"
+    "\n#{'Type HELP for commands'.blue}\n"
   end
 
   def move_prompt_msg
