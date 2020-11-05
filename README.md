@@ -6,7 +6,11 @@ Solo window - [replit](https://chess.happyfrog.repl.run)
 
 ## Demo
 
+Put a gif here
+
 ## How to use
+
+Ruby v, backwards compat, rspec
 
 ## Style Guide
 
