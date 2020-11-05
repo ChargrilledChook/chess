@@ -36,10 +36,11 @@ module Display
     <<~HEREDOC
       #{'HOW TO PLAY'.bold.blue}
 
-      This game uses algerbraic chess notation to input moves. Select the square you want to move from, and the square you want to
-      move to. For instance:  a1h8
-                              c5f3
-                              d4g6
+      This game uses algerbraic chess notation to input moves.
+      Select the square you want to move from, and the square you want to move to.
+      Examples : a1h8
+                 c5f3
+                 d4g6
 
       En passant moves are entered with standard notation, with your pawns ending point as the destination.
 
@@ -50,7 +51,7 @@ module Display
 
       Aside from chess notation, there are several commands available to you in game.
 
-      #{'CASTLE'.bold.green}  - You will be prompted to select [l/r] for castling left or right. Will perform the move if legal.
+      #{'CASTLE'.bold.green} - You will be prompted to select [l/r] for castling left or right. Will perform the move if legal.
                A legal castle is not castling into, out of or through check. The rook and the king must not have
                moved, and the spaces between them must be empty.
 
@@ -64,6 +65,7 @@ module Display
       #{'VISUALS'.bold.blue}
 
       The appearance and colours of the pieces and board depend on your system and console settings.
+      Please note on dark themes the colours can be somewhat inverted.
       On your device, pieces will look like this:
 
 
