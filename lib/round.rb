@@ -39,7 +39,7 @@ class Round
     when "save" then SaveManager.save_game(self)
     when "exit" then exit
     when "castle" then castle_round
-    when "help" then puts help_msg
+    when "help" then help
     else normal_round(move)
     end
   end
@@ -91,7 +91,8 @@ class Round
     post_move_update(to)
   end
 
-  # HACK
+  # HACK: Bloated beyond original design to accomodate en passant. There is a
+  # better solution for this but a redesign is probably preferable
   def post_move_update(piece_pos)
     piece = board.grid[piece_pos.first][piece_pos.last]
     passing_test(piece, piece_pos)
@@ -148,5 +149,12 @@ class Round
 
   def legal_pass
     raise StandardError, en_passant_error if ref.check?(current_player)
+  end
+
+  def help
+    clear_console
+    puts Display.rules_msg
+    gets
+    end_round_no_swap
   end
 end
