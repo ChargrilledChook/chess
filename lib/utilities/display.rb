@@ -28,10 +28,6 @@ module Display
     "\u265C #{'Select an option'.bold.blue} \u265C\n\n1. New Game\n2. Load Saved Game\n3. How To Play"
   end
 
-  def move_prompt_msg
-    "\n#{colour.capitalize}, it's your move: "
-  end
-
   def self.clear_console
     puts "\e[H\e[2J"
   end
@@ -45,6 +41,8 @@ module Display
                               c5f3
                               d4g6
 
+      En passant moves are entered with standard notation, with your pawns ending point as the destination.
+
       Letters must be between a - h and numbers between 1 - 8.
 
 
@@ -52,7 +50,7 @@ module Display
 
       Aside from chess notation, there are several commands available to you in game.
 
-      #{'CASTLE'.bold.green}   - You will be prompted to select [l/r] for castling left or right. Will perform the move if legal.
+      #{'CASTLE'.bold.green}  - You will be prompted to select [l/r] for castling left or right. Will perform the move if legal.
                A legal castle is not castling into, out of or through check. The rook and the king must not have
                moved, and the spaces between them must be empty.
 
@@ -65,7 +63,7 @@ module Display
 
       #{'VISUALS'.bold.blue}
 
-      The appearance and colours of the pieces and board depend on your system and your console settings.
+      The appearance and colours of the pieces and board depend on your system and console settings.
       On your device, pieces will look like this:
 
 
@@ -84,22 +82,6 @@ module Display
     HEREDOC
   end
 
-  def self.play_again_msg
-    "\nPlay again? [Y/n] : "
-  end
-
-  def self.thanks_exit_msg
-    "\nThanks for playing!"
-  end
-
-  def help_msg
-    'placeholder'
-  end
-
-  def thanks_exit_msg
-    "\nThanks for playing!"
-  end
-
   def self.player_select_msg
     <<~HEREDOC
       \u265C #{'Select what type of game:'.bold.blue} \u265C
@@ -109,6 +91,22 @@ module Display
       3. AI vs Human
       4. AI vs AI
     HEREDOC
+  end
+
+  def self.play_again_msg
+    "\nPlay again? [Y/n] : "
+  end
+
+  def self.thanks_exit_msg
+    "\nThanks for playing!"
+  end
+
+  def move_prompt_msg
+    "\n#{colour.capitalize}, it's your move: "
+  end
+
+  def thanks_exit_msg
+    "\nThanks for playing!"
   end
 
   def promotion_msg
