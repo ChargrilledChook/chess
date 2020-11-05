@@ -23,5 +23,8 @@ module SaveManager
 
   def self.load_save
     YAML.load(File.read(default_save))
+  rescue Errno::ENOENT
+    puts "No save files exist!"
+    exit
   end
 end
