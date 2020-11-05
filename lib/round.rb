@@ -74,7 +74,8 @@ class Round
 
   def draw_console
     board.render_board
-    check_message
+    puts help_msg
+    puts check_message
   end
 
   def clear_console
@@ -83,7 +84,7 @@ class Round
 
   # TODO: Extract to display
   def check_message
-    ref.check?(players.last) ? puts("\n#{players.last.colour.capitalize} is in check!") : puts("\n\n")
+    ref.check?(players.last) ? "\n#{players.last.colour.capitalize} is in check!" : "\n\n"
   end
 
   def update_board(from, to)

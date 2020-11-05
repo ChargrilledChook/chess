@@ -101,6 +101,10 @@ module Display
     "\nThanks for playing!"
   end
 
+  def help_msg
+    "\n#{'Type HELP for rules and commands'.blue}\n"
+  end
+
   def move_prompt_msg
     "\n#{colour.capitalize}, it's your move: "
   end
