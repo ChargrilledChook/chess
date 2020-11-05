@@ -2,50 +2,50 @@
 # space on either side to match board formatting.
 module PieceIcons
   def white_pawn
-    " \u2659 "
+    " \u2659 ".white
   end
 
   def black_pawn
-    " \u265F "
+    " \u265F ".black
   end
 
   def white_rook
-    " \u2656 "
+    " \u2656 ".white
   end
 
   def black_rook
-    " \u265C "
+    " \u265C ".black
   end
 
   def white_bishop
-    " \u2657 "
+    " \u2657 ".white
   end
 
   def black_bishop
-    " \u265D "
+    " \u265D ".black
   end
 
   def white_knight
-    " \u2658 "
+    " \u2658 ".white
   end
 
   def black_knight
-    " \u265E "
+    " \u265E ".black
   end
 
   def white_queen
-    " \u2655 "
+    " \u2655 ".white
   end
 
   def black_queen
-    " \u265B "
+    " \u265B ".black
   end
 
   def white_king
-    " \u2654 "
+    " \u2654 ".white
   end
 
   def black_king
-    " \u265A "
+    " \u265A ".black
   end
 end

@@ -33,16 +33,17 @@ module Display
   end
 
   def self.rules_msg
-    <<~HEREDOC
+  <<~HEREDOC
       #{'HOW TO PLAY'.bold.blue}
 
       This game uses algerbraic chess notation to input moves.
       Select the square you want to move from, and the square you want to move to.
-      Examples : a1h8
+
+      #{'EXAMPLES'.bold.green} : a1h8
                  c5f3
                  d4g6
 
-      En passant moves are entered with standard notation, with your pawns ending point as the destination.
+      En passant moves are entered with standard notation, with your pawn's ending point as the destination.
 
       Letters must be between a - h and numbers between 1 - 8.
 
@@ -62,25 +63,28 @@ module Display
       #{'EXIT'.bold.green}   - Exit the game without saving.
 
 
-      #{'VISUALS'.bold.blue}
-
-      The appearance and colours of the pieces and board depend on your system and console settings.
-      Please note on dark themes the colours can be somewhat inverted.
-      On your device, pieces will look like this:
-
-
-               #{'P R B N Q K'.bold.green}
-
-      WHITE => \u2659 \u2656 \u2657 \u2658 \u2655 \u2654
-
-      BLACK => \u265F \u265C \u265D \u265E \u265B \u265A
-
-
       #{'RULES OF CHESS'.bold.blue}
 
       If you require more detailed rules about the game of chess, please visit #{'https://www.chess.com/lessons'.bold.green}
 
       Press #{'ENTER'.bold.green} to continue
+    HEREDOC
+  end
+
+  # Removed from rules but keeping in case I change my mind
+  def visuals
+    <<~HEREDOC
+    #{'VISUALS'.bold.blue}
+
+    The appearance and colours of the pieces and board depend on your system and console settings.
+    On your device, pieces will look like this:
+
+
+             #{'P R B N Q K'.bold.green}
+
+    WHITE => \u2659 \u2656 \u2657 \u2658 \u2655 \u2654
+
+    BLACK => \u265F \u265C \u265D \u265E \u265B \u265A
     HEREDOC
   end
 

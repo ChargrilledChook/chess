@@ -39,7 +39,7 @@ class Board
     @grid.each_with_index.map do |line, idx|
       black_cell = idx.even? ? true : false
       line.map do |cell|
-        res = black_cell ? cell.to_s.bg_blue : cell.to_s.bg_black
+        res = black_cell ? cell.to_s.bg_blue : cell.to_s.bg_grayer
         black_cell = black_cell ? false : true
         res
       end
