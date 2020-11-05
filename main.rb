@@ -57,6 +57,7 @@ def menu
 end
 
 def select_player_types
+  Display.clear_console
   puts Display.player_select_msg
   type = gets.chomp.downcase
   return type if (1..4).include?(type.to_i)
@@ -65,6 +66,7 @@ def select_player_types
 end
 
 def rules
+  Display.clear_console
   puts Display.rules_msg
   gets
   menu

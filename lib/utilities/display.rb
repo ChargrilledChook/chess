@@ -16,20 +16,16 @@ module Display
     HERE
   end
 
-  def self.welcome_msg
-    "\nWelcome to Chess! Enter 1 for a new game or 2 to load your saved game. "
-  end
-
   def self.test_welcome_msg
     "\n\t\t \u2655\u2655\u2655 Welcome to Chess! \u2655\u2655\u2655"
   end
 
   def self.any_key_msg
-    "\n\t\t Press ENTER to continue"
+    "\n\t\t Press #{'ENTER'.bold.green} to continue"
   end
 
   def self.menu_msg
-    "\u265C Select an option \u265C\n\n1. New Game\n2. Load Saved Game\n3. How To Play"
+    "\u265C #{'Select an option'.bold.blue} \u265C\n\n1. New Game\n2. Load Saved Game\n3. How To Play"
   end
 
   def move_prompt_msg
@@ -42,7 +38,7 @@ module Display
 
   def self.rules_msg
     <<~HEREDOC
-      \nHOW TO PLAY
+      #{'HOW TO PLAY'.bold.blue}
 
       This game uses algerbraic chess notation to input moves. Select the square you want to move from, and the square you want to
       move to. For instance:  a1h8
@@ -51,36 +47,41 @@ module Display
 
       Letters must be between a - h and numbers between 1 - 8.
 
-      #{"COMMANDS".bold.blue}
+
+      #{'COMMANDS'.bold.blue}
 
       Aside from chess notation, there are several commands available to you in game.
 
-      CASTLE - You will be prompted to select [l/r] for castling left or right. Will perform the move if legal.
+      #{'CASTLE'.bold.green}   - You will be prompted to select [l/r] for castling left or right. Will perform the move if legal.
                A legal castle is not castling into, out of or through check. The rook and the king must not have
                moved, and the spaces between them must be empty.
 
-      SAVE   - Save and exit the game. Select load game from the main menu to load your save.
+      #{'HELP'.bold.green}   - Will display this screen in game.
 
-      EXIT   - Exit the game without saving.
+      #{'SAVE'.bold.green}   - Save and exit the game. Select load game from the main menu to load your save.
 
-      VISUALS
+      #{'EXIT'.bold.green}   - Exit the game without saving.
+
+
+      #{'VISUALS'.bold.blue}
 
       The appearance and colours of the pieces and board depend on your system and your console settings.
       On your device, pieces will look like this:
 
 
-               P R B N Q K
+               #{'P R B N Q K'.bold.green}
 
       WHITE => \u2659 \u2656 \u2657 \u2658 \u2655 \u2654
 
       BLACK => \u265F \u265C \u265D \u265E \u265B \u265A
 
-      RULES OF CHESS
 
-      If you require more detailed rules about the game of chess, please visit https://www.chess.com/lessons
+      #{'RULES OF CHESS'.bold.blue}
 
-      Press ENTER to continue
-  HEREDOC
+      If you require more detailed rules about the game of chess, please visit #{'https://www.chess.com/lessons'.bold.green}
+
+      Press #{'ENTER'.bold.green} to continue
+    HEREDOC
   end
 
   def self.play_again_msg
@@ -92,7 +93,7 @@ module Display
   end
 
   def help_msg
-    "List of commands goes here: notation, castle, save, exit"
+    'placeholder'
   end
 
   def thanks_exit_msg
@@ -101,7 +102,8 @@ module Display
 
   def self.player_select_msg
     <<~HEREDOC
-      \nSelect what type of game:
+      \u265C #{'Select what type of game:'.bold.blue} \u265C
+
       1. Human vs Human
       2. Human vs AI
       3. AI vs Human
