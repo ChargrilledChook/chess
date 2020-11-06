@@ -52,7 +52,7 @@ class Round
       ref.restore_board(move.first, move.last)
     else
       update_board(move.first, move.last)
-      sleep 0.1 if current_player.ai
+      sleep current_player.speed if current_player.ai
       end_round
     end
   end
