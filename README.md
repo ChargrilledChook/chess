@@ -11,7 +11,7 @@ Solo window - [replit](https://chess.happyfrog.repl.run)
 
 ## Demo
 
-[](./chess_demo.gif)
+<img src='chess_demo.gif' alt='fools mate'>
 
 ## Features
 
