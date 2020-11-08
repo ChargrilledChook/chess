@@ -21,6 +21,8 @@ Play online on [replit](https://repl.it/@HappyFrog/chess#README.md)
 * Gorgeous unicode graphics
 * Beautiful blue and gray chessboard
 
+\* <em>May not actually be sophisticated or intelligent</em>
+
 ## How to use
 
 To play online, go [here](https://repl.it/@HappyFrog/chess#README.md).
